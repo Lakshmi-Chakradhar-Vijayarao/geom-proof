@@ -58,9 +58,13 @@ classifier; we use it to \emph{bound} what any linear classifier can achieve.
 
 Empirically, the Gaussian approximation $\Phi(\sqrt{J}/2)$ matches linear probe
 AUROC within $\leq 2.7\%$ maximum error and $0.93\%$ mean error across five
-model sizes and two architectures (Qwen~2.5 and GPT-2).  The certificate
-predicts held-out fold AUROC within $0.93\%$ in 5-fold cross-validation,
-before any label is used for training.
+model sizes and two architectures (Qwen~2.5 and GPT-2), predicting held-out
+fold AUROC within $0.93\%$ in 5-fold cross-validation before any label is used
+for training.  Critically, the bound holds for a shallow MLP probe (64 hidden,
+ReLU) as well as the linear probe: zero bound violations across all 62
+layer--model combinations, with MLP gain over linear $\leq 0.09\%$, suggesting
+that Gaussian slack is sufficient to accommodate the tested degree of
+nonlinearity.
 
 Two principled limitations are precisely characterised.
 \textit{Label validity}: ROUGE-L and GPT-4o labels disagree at Cohen's
@@ -129,10 +133,10 @@ does not.
 \textbf{Property} & \textbf{Provided} & \textbf{Not provided} \\
 \midrule
 Predict linear probe AUROC ($\leq 2.7\%$ error) & \checkmark & \\
+Bound shallow MLP probe empirically (0 violations, §\ref{sec:mlp-probe}) & \checkmark & \\
 Select the optimal probing layer & & \texttimes \\
 Bound OOD (out-of-distribution) performance & & \texttimes \\
-Bound nonlinear probe performance & & \texttimes \\
-Formal in-distribution coverage guarantee & \checkmark & \\
+Formal in-distribution coverage guarantee ($\alpha^* = 0.07$) & \checkmark & \\
 Factual hallucination detection & & \texttimes \\
 \bottomrule
 \end{tabular}
@@ -158,6 +162,9 @@ This paper makes the following contributions:
   \item We document that the task itself is ambiguous: ROUGE-L and GPT-4o labels
     disagree at $\kappa = -0.010$ (Exp.~07), scoping all results to
     surface-form divergence.
+  \item We show that the bound holds empirically for shallow MLP probes as well
+    as linear ones: zero violations across 62 layer--model pairs, MLP gain
+    $\leq 0.09\%$ over linear (Exp.~12).
 \end{enumerate}
 
 \medskip
@@ -515,6 +522,77 @@ These comparisons establish Euclidean Fisher $J$ as the strongest of the
 three geometry-based certificates and motivate its central role in the
 analysis that follows.
 
+\subsection{Certificate Generalisation to Nonlinear Probes}
+\label{sec:mlp-probe}
+
+The Gaussian AUROC bound $\Phi(\sqrt{J}/2)$ is derived for linear classifiers
+under equal-covariance Gaussian assumptions.  A natural question is whether
+it also constrains \emph{nonlinear} probes, which can exploit higher-order
+representational structure beyond second-moment geometry.
+
+We address this directly via Exp.~12: training a shallow MLP probe
+(64 hidden units, ReLU, Adam, early stopping) on the same PCA(100)-projected
+hidden states, using the identical 5-fold stratified CV as the linear probe.
+Table~\ref{tab:mlp} reports results.
+
+\begin{table}[h]
+\centering
+\caption{Fisher certificate vs.\ linear and MLP probes (Exp.~12,
+  $n=2000$, 5-fold OOF).  The Fisher bound $\Phi(\sqrt{J}/2)$ is never
+  violated by the MLP probe across all 62 layer--model combinations.}
+\label{tab:mlp}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Bound} & \textbf{Linear} & \textbf{MLP} &
+  \textbf{Gain} & \textbf{Violations} \\
+\midrule
+Qwen 2.5 3B  & 0.9998 & 0.9903 (L22) & 0.9912 (L20) & $+0.0009$ & 0 / 37 \\
+GPT-2 Medium & 0.9998 & 0.9859 (L8)  & 0.9867 (L19) & $+0.0007$ & 0 / 25 \\
+\midrule
+\multicolumn{6}{l}{\textit{Mean bound gap (linear):} 0.0133 (Qwen),\; 0.0168 (GPT-2)} \\
+\multicolumn{6}{l}{\textit{Mean bound gap (MLP):}    0.0129 (Qwen),\; 0.0169 (GPT-2)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/12_mlp_probe_comparison.png}
+\caption{Fisher bound $\Phi(\sqrt{J}/2)$ (solid), linear probe AUROC
+  (dashed), and MLP probe AUROC (dotted) at every layer.  The shaded
+  region is the bound slack.  The bound is never violated by the MLP probe
+  on either model.}
+\label{fig:mlp}
+\end{figure}
+
+Four findings emerge.
+\textit{First}, the MLP probe outperforms the linear probe at $21/37$
+layers (Qwen) and $10/25$ layers (GPT-2), confirming that some nonlinear
+structure exists in the representations.  The margin is small:
+$+0.09\%$ and $+0.07\%$ at best layer respectively.
+\textit{Second}, the Fisher bound $\Phi(\sqrt{J}/2)$ holds across all
+$37 + 25 = 62$ layer--model combinations (zero violations).  The Gaussian
+slack is sufficient to absorb the additional nonlinear capacity.
+\textit{Third}, the mean bound gap narrows only marginally for MLP
+vs.\ linear ($0.0133 \to 0.0129$ on Qwen; essentially unchanged on GPT-2).
+The MLP does not approach the Gaussian ceiling any more closely than the
+linear probe does.
+\textit{Fourth}, the MLP and linear probes identify different optimal
+layers (Qwen: L20 vs.\ L22; GPT-2: L19 vs.\ L8), compounding the
+layer-selection failure of Section~\ref{sec:cert-layer}.
+
+\begin{remark}
+The bound holds empirically but not theoretically: the Gaussian derivation
+is specific to linear classifiers.  A tighter nonlinear certificate---one
+that accounts for higher-order moments---remains an open problem.
+What this result \emph{does} establish is that, for the shallow nonlinear
+probes tested here, the Gaussian slack is sufficient: the approximation
+$\Phi(\sqrt{J}/2)$ functions as an empirical upper bound for both linear
+and nonlinear probes on these representations.
+\end{remark}
+
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Scale Behavior}
 \label{sec:scale}
@@ -819,13 +897,13 @@ between calibration and deployment distributions.
   Fisher on Qwen but underperforms on GPT-2.  No universally superior
   distribution-free certificate exists across the models tested.
 
-\item \textbf{Nonlinear probes not evaluated.}  Every probe in this study
-  is linear; the Fisher certificate bounds achievable AUROC for linear
-  classifiers specifically.  Nonlinear probes (e.g., multi-layer perceptrons)
-  may capture higher-order geometric structure beyond pairwise class
-  separation---whether $\Phi(\sqrt{J}/2)$ constrains nonlinear probe
-  performance, or whether a tighter nonlinear certificate exists, remains
-  an open question.
+\item \textbf{Nonlinear probe bound is empirical, not theoretical.}
+  Section~\ref{sec:mlp-probe} evaluates a shallow MLP probe (64 hidden,
+  ReLU, Adam) against the Fisher certificate.  The bound holds empirically
+  across all 62 layer--model pairs (zero violations); MLP gain over linear
+  is $\leq 0.09\%$.  However, the Gaussian derivation applies strictly to
+  linear classifiers.  A principled nonlinear certificate, potentially
+  tighter than $\Phi(\sqrt{J}/2)$, remains an open theoretical question.
 
 \end{enumerate}
 

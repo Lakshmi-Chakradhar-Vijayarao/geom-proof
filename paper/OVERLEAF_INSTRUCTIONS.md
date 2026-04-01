@@ -27,7 +27,7 @@ The packages used are all standard (amsmath, booktabs, natbib, etc.).
 
 ## Page count
 
-Expected: ~9–10 pages in twocolumn 10pt layout.
+Expected: ~11–12 pages in twocolumn 10pt layout (after workshop acceptance upgrades).
 
 ## To switch to single-column
 

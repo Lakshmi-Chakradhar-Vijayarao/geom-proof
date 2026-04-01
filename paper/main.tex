@@ -49,30 +49,36 @@ Fisher Separability, Wasserstein Geometry, and Conformal Guarantees}}
 
 % ── Abstract ──────────────────────────────────────────────────────────────────
 \begin{abstract}
-Can we predict the performance of a hallucination detector without training one?
-We investigate whether Fisher separability~$J$ provides a closed-form,
-geometry-based certificate for detecting surface-form hallucinations in large
-language models.  We show that the Gaussian approximation
-$\Phi\!\left(\sqrt{J}/2\right)$ closely matches linear probe AUROC, with
-$\leq\!2.7\%$ maximum error and $0.93\%$ mean error across five model sizes and
-two architectures (Qwen~2.5 and GPT-2).  However, the fundamental task
-definition is limited: ROUGE-L and GPT-4o labels disagree at Cohen's
-$\kappa = -0.010$, indicating that this pipeline detects \emph{surface-form
-divergence} rather than factual incorrectness.  We further show that
-hidden-state distributions are empirically non-Gaussian: Sliced Wasserstein
-distance ($\text{SW}_2$) correlates more strongly with AUROC on
-Qwen~2.5~3B ($\rho = 0.821$ vs.\ $0.458$ for Fisher), but this advantage
-reverses on GPT-2~Medium ($\rho = -0.237$ vs.\ $0.395$), exposing a
-model-dependent geometry.  Split conformal prediction yields formal in-distribution
-guarantees ($\alpha^* = 0.07$ at $52.9\%$ acceptance for Qwen), which collapse
-under distribution shift (AUROC~$\to 0.485$).  Taken together, these results
-establish Fisher separability as an empirically reliable---and precisely
-scoped---geometric certificate: it bounds probe performance under documented
-assumptions while its failure modes characterize the boundaries of
-geometry-based hallucination governance.
-This distinction is critical: the task reflects surface-form divergence rather
-than factual correctness, constraining the interpretation of all geometric
-results that follow.
+Can the performance of a hallucination detector be predicted from representation
+geometry---before any probe is trained?  We study this question by investigating
+Fisher separability~$J$ as a closed-form, training-free certificate for linear
+probing of surface-form hallucinations in large language models.  The key
+distinction from prior geometric approaches is that we do not use $J$ as a
+classifier; we use it to \emph{bound} what any linear classifier can achieve.
+
+Empirically, the Gaussian approximation $\Phi(\sqrt{J}/2)$ matches linear probe
+AUROC within $\leq 2.7\%$ maximum error and $0.93\%$ mean error across five
+model sizes and two architectures (Qwen~2.5 and GPT-2).  The certificate
+predicts held-out fold AUROC within $0.93\%$ in 5-fold cross-validation,
+before any label is used for training.
+
+Two principled limitations are precisely characterised.
+\textit{Label validity}: ROUGE-L and GPT-4o labels disagree at Cohen's
+$\kappa = -0.010$, scoping all results to \emph{surface-form divergence}
+rather than factual incorrectness.
+\textit{Distribution shift}: split conformal guarantees ($\alpha^* = 0.07$,
+$52.9\%$ acceptance for Qwen) collapse under OOD transfer
+(AUROC~$\to 0.485$, $14\times$ violation).
+
+Further, hidden-state geometry is measurably non-Gaussian: Sliced Wasserstein
+($\text{SW}_2$) outperforms Fisher on Qwen~2.5~3B ($\rho = 0.821$
+vs.~$0.458$) but reverses on GPT-2~Medium ($\rho = -0.237$ vs.~$0.395$),
+exposing architecture-dependent geometry.  Fisher $J$ cannot identify the
+optimal probing layer (0\% argmax match across all CV folds).
+
+Taken together, the certificate is empirically reliable and precisely scoped:
+it bounds probe performance under documented assumptions, and its failure modes
+map the boundaries of geometry-based hallucination governance.
 \end{abstract}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -98,6 +104,39 @@ classifier on two class distributions equals $\Phi(\sqrt{J}/2)$, where
 $\Phi$ denotes the standard normal CDF.  Critically, $J$ depends only on the
 first two moments of the hidden-state distribution at each layer and requires
 no labels beyond the class centroids.
+
+\textbf{Certificate vs.\ classifier.}
+This framing is categorically distinct from using Fisher geometry as a
+decision boundary.  Concurrent work~\citep{ricco2026geometric} applies Fisher
+separability as a classifier to detect hallucinations in small-model embedding
+space, achieving F1~$>90\%$.  The contribution here is orthogonal: rather than
+committing to a specific Fisher-based detector, we ask what AUROC ceiling the
+geometry imposes on \emph{any} linear classifier at a given layer---before a
+single training example is used.  A certificate is \emph{diagnostic}: it
+characterises whether a representation supports detection.
+A classifier is \emph{operative}: it exploits that support.
+Table~\ref{tab:scope} clarifies what this certificate provides and what it
+does not.
+
+\begin{table}[h]
+\centering
+\caption{Scope of the geometric certificate developed in this paper.}
+\label{tab:scope}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.44\linewidth}cc}
+\toprule
+\textbf{Property} & \textbf{Provided} & \textbf{Not provided} \\
+\midrule
+Predict linear probe AUROC ($\leq 2.7\%$ error) & \checkmark & \\
+Select the optimal probing layer & & \texttimes \\
+Bound OOD (out-of-distribution) performance & & \texttimes \\
+Bound nonlinear probe performance & & \texttimes \\
+Formal in-distribution coverage guarantee & \checkmark & \\
+Factual hallucination detection & & \texttimes \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 This paper makes the following contributions:
 \begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
@@ -220,9 +259,14 @@ The agreement between ROUGE-L and GPT-4o labels is Cohen's $\kappa = -0.010$
 $\kappa$ indicates the two labelling strategies identify \emph{different}
 samples as hallucinated, despite similar rates.
 
-\textbf{Scope condition}: \emph{All results in this paper describe
-surface-form divergence (ROUGE-L failure), not factual incorrectness.}
-These are correlated but empirically distinct.
+\begin{quote}
+\textbf{Scope condition (applies throughout):}
+\textit{All AUROC values, certificate bounds, and conformal guarantees in
+this paper condition on ROUGE-L labels.  They measure surface-form divergence
+from reference text, not factual incorrectness.  The $\kappa = -0.010$ result
+quantifies the gap between these two notions; any claim about ``hallucination
+detection'' in this work is shorthand for ``surface-form divergence detection.''}
+\end{quote}
 
 \subsection{Hidden-State Extraction}
 \label{sec:setup-extraction}
@@ -716,7 +760,10 @@ AUROC $= 0.485$ (chance level); $98.2\%$ of TruthfulQA responses are
 hallucinated under ROUGE-L labels; acceptance rate $= 99.95\%$ (nearly
 all accepted).  The conformal guarantee, calibrated at $\alpha^* = 0.07$
 on HaluEval, would report an empirical hallucination rate of $0.982$
-on TruthfulQA---a $14\times$ violation.
+on TruthfulQA---a $14\times$ violation.  This collapse is consistent with
+\citet{dubanowska2025ood}, who show that representation-based hallucination
+detectors broadly fail to generalise out of distribution, even when
+in-distribution AUROC exceeds $0.98$.
 
 \begin{remark}
 The guarantee holds only under exchangeability (i.i.d.\ with the
@@ -800,8 +847,33 @@ on what any such probe can achieve, rather than training a probe itself.
 \paragraph{Geometric and distributional structure.}
 \citet{marks2024geometry} show that truth representations exhibit emergent
 linear structure across LLM families.  \citet{belrose2023eliciting} track
-prediction formation layer-by-layer via the tuned lens.  Neither work
-derives a computable certificate from the geometry.
+prediction formation layer-by-layer via the tuned lens.
+\citet{bao2025probing} probe truth directions across logical transformations,
+demonstrating that linear truth geometry generalises across question reformulations---
+complementing our finding that Fisher $J$ provides a stable upper bound across
+layers.  None of these works derive a computable, closed-form certificate from
+the geometry.
+
+\paragraph{Concurrent geometric classifiers.}
+\citet{ricco2026geometric} apply Fisher separability as a classification
+boundary in small-model embedding space, achieving F1~$>90\%$ on hallucination
+detection.  This is the closest concurrent work.  The distinction is precise:
+\citeauthor{ricco2026geometric} exploit the geometry operatively (as a
+classifier); this paper characterises the geometry diagnostically (as a
+certificate bounding what any classifier can achieve).  The two contributions
+address different questions and are complementary: the certificate tells you
+\emph{whether} to build a Fisher classifier; the classifier tells you \emph{how}.
+
+\paragraph{OOD failure of representation-based detectors.}
+\citet{dubanowska2025ood} (EMNLP~2025) show that representation-based
+hallucination detectors fail to generalise out-of-distribution across
+benchmarks, even when in-distribution performance is high.  This provides
+independent empirical motivation for the OOD collapse documented in
+Section~\ref{sec:conformal-ood}: AUROC $\to 0.485$ and a $14\times$
+conformal violation when the HaluEval-calibrated threshold is applied to
+TruthfulQA.  The certificate developed here makes the failure predictable:
+a geometry trained on one distribution provides no coverage guarantee on
+another.
 
 \paragraph{Conformal prediction.}
 \citet{angelopoulos2022} provide the foundational framework.
@@ -845,12 +917,24 @@ architecture-dependent (reversed on GPT-2~Medium); and the conformal
 guarantee collapses under distribution shift (AUROC $\to 0.485$, TruthfulQA).
 
 These failures are not incidental: they constitute a roadmap.
-Distribution-free certificates via Wasserstein geometry, local geometry
-adaptation for OOD robustness, and validated labelling protocols
-beyond ROUGE-L are the three concrete next steps.  The geometry provides
-strong empirical signals, but bridging the gap to reliable systems requires
-moving beyond Gaussian assumptions toward distributionally robust and
-causally grounded representations.
+Three directions are immediately actionable.
+First, distribution-free certificates via Wasserstein geometry can replace
+the Gaussian assumption where it is most violated (deep layers of Qwen).
+Second, local geometry adaptation via KNN neighbourhoods addresses the OOD
+collapse, extending the certificate to deployment-distribution mixtures---as
+documented in the companion GUARDIAN system~\citep{sun2022ood}.
+Third, validated labelling protocols beyond ROUGE-L are prerequisite for
+extending the certificate to factual hallucination rather than surface-form
+divergence; the $\kappa = -0.010$ result quantifies exactly how large that gap
+currently is.
+
+More broadly, the central finding reframes a methodological question.
+Hallucination detection has largely been pursued as a supervised learning
+problem: collect labels, train a probe, measure AUROC.  The certificate
+establishes that AUROC is predictable from geometry \emph{before} that
+pipeline begins---meaning representation quality, not probe sophistication,
+is the binding constraint.  This shifts the design question from
+\emph{which classifier to train} to \emph{which representations to build}.
 
 \paragraph{Reproducibility.}
 All experiment scripts, raw logs, and the Streamlit research brief

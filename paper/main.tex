@@ -32,9 +32,9 @@
 \setlength{\columnsep}{0.25in}
 
 % ── Title ─────────────────────────────────────────────────────────────────────
-\title{\textbf{A Geometric Certificate for Hallucination Detection\\
-in Large Language Models: Fisher Separability,\\
-Wasserstein Geometry, and Conformal Guarantees}}
+\title{\textbf{A Geometric Certificate for Linear Probing of\\
+Surface-Form Hallucinations in Large Language Models:\\
+Fisher Separability, Wasserstein Geometry, and Conformal Guarantees}}
 
 \author{
   Lakshmi Chakradhar Vijayarao \\
@@ -70,6 +70,9 @@ establish Fisher separability as an empirically reliable---and precisely
 scoped---geometric certificate: it bounds probe performance under documented
 assumptions while its failure modes characterize the boundaries of
 geometry-based hallucination governance.
+This distinction is critical: the task reflects surface-form divergence rather
+than factual correctness, constraining the interpretation of all geometric
+results that follow.
 \end{abstract}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -86,7 +89,9 @@ An appealing alternative is a \emph{geometry-based certificate}: a quantity
 computable from hidden-state statistics alone that predicts, before any probe
 is trained, whether a linear detector can achieve a given AUROC.  If such a
 certificate exists, it becomes possible to assess model reliability at deployment
-time without ground-truth labels or supervised training.
+time without ground-truth labels or supervised training.  This would shift
+hallucination detection from a supervised learning problem to a
+representation-level property that can be evaluated without training.
 
 Fisher separability $J$ is a natural candidate.  Under Gaussian equal-covariance
 assumptions, the maximum AUROC achievable by any linear classifier on two class
@@ -317,8 +322,9 @@ $\Phi(\sqrt{J}/2) \geq \text{AUROC}_\text{actual}$ holds in every case,
 consistent with the Gaussian assumption overestimating separation.
 
 Figure~\ref{fig:central} shows the central result: actual AUROC vs.\
-bound across all layers and both models.  All points lie below the identity
-line (bound $\geq$ actual), and $97\%$ lie within a $0.02$ band.
+bound across all layers and both models.  All points lie below the identity line (bound $\geq$ actual),
+confirming it as an empirically tight upper approximation under Gaussian
+assumptions; $97\%$ of points lie within a $0.02$ band.
 
 \begin{figure}[h]
 \centering
@@ -394,8 +400,9 @@ higher-order moments.  High $J$ implies high \emph{achievable} AUROC; it
 does not identify which layer's probe will realise that potential.
 \end{remark}
 
-The practical implication: the certificate is useful for deciding \emph{whether}
-to probe, not \emph{where}.
+This is a fundamental limitation: separability does not imply accessibility
+by simple probes.  The practical implication: the certificate is useful for
+deciding \emph{whether} to probe, not \emph{where}.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Scale Behavior}
@@ -764,8 +771,10 @@ distribution shift (AUROC $\to 0.485$, TruthfulQA).
 These failures are not incidental: they constitute a roadmap.
 Distribution-free certificates via Wasserstein geometry, local geometry
 adaptation for OOD robustness, and validated labelling protocols
-beyond ROUGE-L are the three concrete next steps.  The geometry works;
-the Gaussian assumption is the limiting factor.
+beyond ROUGE-L are the three concrete next steps.  The geometry provides
+strong empirical signals, but bridging the gap to reliable systems requires
+moving beyond Gaussian assumptions toward distributionally robust and
+causally grounded representations.
 
 \paragraph{Reproducibility.}
 All experiment scripts, raw logs, and the Streamlit research brief

@@ -1,0 +1,55 @@
+{
+  "fit": {
+    "a": 8.617052356299926,
+    "b": -69.10181898845353,
+    "r_squared": 0.9993064033742927,
+    "residuals": {
+      "GPT-2 117M": -2.4298500234110065e-07,
+      "GPT-2 Medium 345M": 7.783210329015411e-06,
+      "Qwen 2.5 3B": -0.00830450100421587
+    },
+    "fitted_values": {
+      "GPT-2 117M": 0.6040002429850023,
+      "GPT-2 Medium 345M": 0.988671216789671,
+      "Qwen 2.5 3B": 0.9999965010042159
+    }
+  },
+  "data_points": {
+    "GPT-2 117M": {
+      "params": 117000000.0,
+      "auroc": 0.604
+    },
+    "GPT-2 Medium 345M": {
+      "params": 345000000.0,
+      "auroc": 0.988679
+    },
+    "Qwen 2.5 3B": {
+      "params": 3000000000.0,
+      "auroc": 0.991692
+    }
+  },
+  "predictions": {
+    "Mistral 7B": {
+      "n_params": 7000000000.0,
+      "point_estimate": 0.9999998531576717,
+      "ci_lower": 0.9999987800402704,
+      "ci_upper": 0.9999998669905757,
+      "ci_level": 0.9,
+      "n_bootstrap": 10000
+    },
+    "Llama 3 8B": {
+      "n_params": 8000000000.0,
+      "point_estimate": 0.9999999109106473,
+      "ci_lower": 0.9999992068976802,
+      "ci_upper": 0.999999919654009,
+      "ci_level": 0.9,
+      "n_bootstrap": 10000
+    }
+  },
+  "methodological_caveats": {
+    "n_data_points": 3,
+    "architecture_confound": "Data points span two different architectures (GPT-2 and Qwen), different tokenizers, different training data, and different RLHF. Scale is confounded with architecture. Use Exp 11 (controlled Qwen family) for architecture-controlled scaling.",
+    "extrapolation_warning": "Predictions for 7B\u20138B (Mistral, LLaMA) extrapolate beyond the 3B training range. R^2=0.9993 is trivially achievable by fitting a 2-parameter sigmoid to 3 points. Predictions near AUROC=0.9999 are not credible \u2014 the sigmoid saturates at 1.0 and any model at 7B+ will be predicted near-perfect.",
+    "valid_use": "The scale curve shows AUROC increases monotonically with parameter count within this range. The precise functional form and 7B predictions should not be taken as quantitative claims."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "experiment": "06_boundary_conditions",
+  "boundary_analysis": {
+    "Qwen 2.5 3B": {
+      "best_layer": 25,
+      "best_J": 52.15010303717306,
+      "best_bound": 0.99984734440662,
+      "best_actual": 0.989763,
+      "best_error": 0.010084344406620094,
+      "mean_error_all_layers": 0.011588411916698124,
+      "max_error_all_layers": 0.026556187799423925,
+      "worst_layer": 0,
+      "worst_error": 0.026556187799423925,
+      "layers_within_005": 37,
+      "layers_within_010": 37,
+      "total_layers": 37
+    },
+    "GPT-2 Medium 345M": {
+      "best_layer": 19,
+      "best_J": 49.33382739094124,
+      "best_bound": 0.9997775441287801,
+      "best_actual": 0.9855049999999999,
+      "best_error": 0.014272544128780207,
+      "mean_error_all_layers": 0.013989496038327802,
+      "max_error_all_layers": 0.020140176989493108,
+      "worst_layer": 0,
+      "worst_error": 0.020140176989493108,
+      "layers_within_005": 25,
+      "layers_within_010": 25,
+      "total_layers": 25
+    }
+  },
+  "bound_looseness_analysis": {
+    "finding": "Fisher AUROC bounds (Phi(sqrt(J)/2)) are systematically > actual probe AUROC across all layers. This positive bias occurs because the Gaussian equal-covariance assumption is violated: the within-class covariance matrices differ between correct and hallucinated samples, causing J to overestimate the true Mahalanobis separation.",
+    "practical_implication": "Bounds provide a valid upper guarantee (actual AUROC <= bound) but are too loose to be useful. A bound of 0.9999 when actual is 0.991 tells us the probe works but gives no discriminative information. For the bound to be useful, it would need to distinguish layers (e.g., bound=0.99 vs bound=0.50). Fisher J varies from ~45 to ~52 across Qwen layers, producing near-identical bounds throughout."
+  }
+}

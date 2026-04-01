@@ -1,0 +1,72 @@
+{
+  "family": "Qwen 2.5",
+  "architecture": "Transformer (same tokenizer, training distribution)",
+  "models": {
+    "Qwen2.5-0.5B": {
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "n_params": 494000000.0,
+      "best_auroc": 0.8134566326530613,
+      "best_layer": 7,
+      "best_depth_fraction": 0.2916666666666667,
+      "best_J": 24.46853352687241,
+      "auroc_bound": 0.9933061133213329,
+      "n_samples": 400,
+      "n_layers": 25,
+      "d": 896,
+      "gamma": 2.24
+    },
+    "Qwen2.5-1.5B": {
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "n_params": 1540000000.0,
+      "best_auroc": 0.9791666666666667,
+      "best_layer": 15,
+      "best_depth_fraction": 0.5357142857142857,
+      "best_J": 125.0947595680379,
+      "auroc_bound": 0.999999988795193,
+      "n_samples": 400,
+      "n_layers": 29,
+      "d": 1536,
+      "gamma": 3.84
+    },
+    "Qwen2.5-3B": {
+      "model_id": "Qwen/Qwen2.5-3B-Instruct",
+      "n_params": 3090000000.0,
+      "best_auroc": 0.991692,
+      "best_layer": 36,
+      "best_depth_fraction": 1.0,
+      "best_J": 51.81565406497697,
+      "auroc_bound": 0.9998403732928713,
+      "n_samples": 2000,
+      "n_layers": 37,
+      "d": 2048,
+      "gamma": 1.024,
+      "n_samples_original": 2000,
+      "n_samples_controlled": 400,
+      "best_auroc_original": 0.991692,
+      "best_auroc_controlled_n400": 0.991875,
+      "best_layer_controlled": 28
+    }
+  },
+  "scale_fit": {
+    "a": 4.700849823043904,
+    "b": -39.394860294912434,
+    "r_squared": 0.9995032883188162
+  },
+  "prediction_7b": {
+    "point_estimate": 0.998978506084677,
+    "ci_lower": 0.9985428726258708,
+    "ci_upper": 0.9991277612263904,
+    "ci_level": 0.9,
+    "n_bootstrap": 5000
+  },
+  "note": "Controlled n=400 subsample of Qwen 3B added. Original 2000-sample result preserved. Scale curve fit on 3 points is interpolation only; R\u00b2 near 1.0 is trivially achievable with 3 points and 2 parameters.",
+  "controlled_scale_fit": {
+    "note": "All models evaluated at n=400 samples for fair comparison",
+    "a": 4.707046669242366,
+    "b": -39.448758300939545,
+    "r_squared": 0.9995561369007626,
+    "pred_7b_controlled": 0.9989857363675184,
+    "caveat_n_points": "Fit on only 3 data points \u2014 predictions are extrapolations, not scaling laws",
+    "caveat_aspect_ratio": "Qwen 0.5B gamma=2.24 and 1.5B gamma=3.84 violate Gaussian assumption (d>n)"
+  }
+}

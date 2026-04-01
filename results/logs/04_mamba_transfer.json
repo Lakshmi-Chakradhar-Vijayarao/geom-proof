@@ -1,0 +1,32 @@
+{
+  "experiment": "04_mamba_transfer",
+  "model": "state-spaces/mamba-130m",
+  "architecture": "Mamba (State Space Model)",
+  "n_params": 130000000.0,
+  "n_samples": 400,
+  "n_layers": 25,
+  "d": 768,
+  "hall_rate": 1.0,
+  "n_correct": 0,
+  "n_hall": 400,
+  "rouge_threshold": 0.1,
+  "fisher_computed": false,
+  "probe_auroc": null,
+  "degenerate_case": true,
+  "degenerate_reason": "Mamba-130m is a base language model (not instruction-tuned). It generates text continuations, not factual question-answering responses. ROUGE-L scores against TruthfulQA reference answers are universally below 0.1 (threshold tested: 0.4, 0.1). All 400 samples labeled as hallucinated. Single-class label distribution makes Fisher certificate and linear probe analysis vacuous. Architecture transfer requires instruction-tuned SSM variants.",
+  "finding": "SSM architecture transfer cannot be evaluated with base Mamba-130m on TruthfulQA. Future work: test with instruction-tuned Mamba variants (e.g., MambaChat) or evaluate on next-token prediction tasks where base LM behavior is expected.",
+  "hidden_states_available": true,
+  "hidden_states_path": "results/hidden_states/04_mamba_hidden_states.npz",
+  "hidden_states_shape": [
+    400,
+    25,
+    768
+  ],
+  "spectral_analysis_note": "Spectral analysis (Exp 09) runs on Mamba hidden states without labels. Results show high KL divergence from Marchenko-Pastur throughout all layers (consistent with high aspect ratio \u03b3=d/n=1.92).",
+  "failure_analysis": {
+    "root_cause": "Mamba-2 130M (state-spaces/mamba2-130m) is a base language model trained on Pile, not instruction-tuned. When given TruthfulQA questions, it generates text continuations (next-token predictions), not factual answers. ROUGE-L scores against reference answers are universally < 0.1. With ROUGE threshold 0.4 (and even 0.1), all 400 samples are labeled hallucinated (hall_rate=1.0). Single-class labels make Fisher certificate and probe AUROC undefined.",
+    "pre_registration_mismatch": "Pre-registration predicted AUROC 0.47 \u00b1 0.05 based on scale curve extrapolation. This assumed instruction-following capability that base Mamba lacks. The pre-registration was technically for Mamba-1 (mamba-130m-hf), not Mamba-2.",
+    "path_forward": "Three viable fixes: (1) Use MambaChat (instruction-tuned Mamba) \u2014 exists on HuggingFace, GPU required. (2) Use internal activations on a classification task with fixed labels (not ROUGE). (3) Use the HaluEval dataset directly (pre-labeled correct/hallucinated pairs) rather than generating responses. Option 3 is fastest: load Mamba hidden states on HaluEval QA pairs directly (already done in Exp 08/09), bypassing the generation+ROUGE labeling failure.",
+    "hidden_states_are_valid": "Despite labeling failure, 04_mamba_hidden_states.npz contains valid hidden states extracted on TruthfulQA input prompts. These are used in Exp 09 (spectral analysis, no labels needed). For hallucination detection, new labels from HaluEval are needed."
+  }
+}

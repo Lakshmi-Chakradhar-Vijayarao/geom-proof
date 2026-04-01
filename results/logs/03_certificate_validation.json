@@ -1,0 +1,247 @@
+{
+  "experiment": "03_certificate_validation",
+  "method": "pca",
+  "n_components": 100,
+  "n_splits": 5,
+  "fold_results": [
+    {
+      "fold": 1,
+      "train_size": 1600,
+      "test_size": 400,
+      "predicted_best_layer": 25,
+      "predicted_J": 56.58296549249631,
+      "predicted_auroc_bound": 0.9999154101836835,
+      "predicted_depth_fraction": 0.6944444444444444,
+      "actual_auroc_at_predicted_layer": 0.984475,
+      "oracle_best_layer": 29,
+      "oracle_auroc": 0.9860749999999999,
+      "oracle_depth_fraction": 0.8055555555555556,
+      "bound_error": 0.015440410183683473,
+      "layer_match": false
+    },
+    {
+      "fold": 2,
+      "train_size": 1600,
+      "test_size": 400,
+      "predicted_best_layer": 25,
+      "predicted_J": 58.72024215990951,
+      "predicted_auroc_bound": 0.9999363066054628,
+      "predicted_depth_fraction": 0.6944444444444444,
+      "actual_auroc_at_predicted_layer": 0.984725,
+      "oracle_best_layer": 10,
+      "oracle_auroc": 0.9884,
+      "oracle_depth_fraction": 0.2777777777777778,
+      "bound_error": 0.015211306605462882,
+      "layer_match": false
+    },
+    {
+      "fold": 3,
+      "train_size": 1600,
+      "test_size": 400,
+      "predicted_best_layer": 25,
+      "predicted_J": 51.414921868967134,
+      "predicted_auroc_bound": 0.9998315964353297,
+      "predicted_depth_fraction": 0.6944444444444444,
+      "actual_auroc_at_predicted_layer": 0.99295,
+      "oracle_best_layer": 36,
+      "oracle_auroc": 0.9962,
+      "oracle_depth_fraction": 1.0,
+      "bound_error": 0.0068815964353297066,
+      "layer_match": false
+    },
+    {
+      "fold": 4,
+      "train_size": 1600,
+      "test_size": 400,
+      "predicted_best_layer": 26,
+      "predicted_J": 52.319382664520504,
+      "predicted_auroc_bound": 0.9998507549764888,
+      "predicted_depth_fraction": 0.7222222222222222,
+      "actual_auroc_at_predicted_layer": 0.9934999999999999,
+      "oracle_best_layer": 35,
+      "oracle_auroc": 0.995825,
+      "oracle_depth_fraction": 0.9722222222222222,
+      "bound_error": 0.006350754976488848,
+      "layer_match": false
+    },
+    {
+      "fold": 5,
+      "train_size": 1600,
+      "test_size": 400,
+      "predicted_best_layer": 25,
+      "predicted_J": 48.75874675816601,
+      "predicted_auroc_bound": 0.9997597277314035,
+      "predicted_depth_fraction": 0.6944444444444444,
+      "actual_auroc_at_predicted_layer": 0.99735,
+      "oracle_best_layer": 33,
+      "oracle_auroc": 0.998325,
+      "oracle_depth_fraction": 0.9166666666666666,
+      "bound_error": 0.002409727731403577,
+      "layer_match": false
+    }
+  ],
+  "summary": {
+    "mean_bound_error": 0.009258759186473698,
+    "std_bound_error": 0.005189648406778159,
+    "max_bound_error": 0.015440410183683473,
+    "mean_actual_auroc": 0.9905999999999999,
+    "mean_predicted_bound": 0.9998587591864736,
+    "layer_match_rate": 0.0,
+    "mean_depth_fraction": 0.7,
+    "certificate_valid": true
+  },
+  "layer_selection_strategies": {
+    "argmax_J": {
+      "fold_results": [
+        {
+          "layer": 25,
+          "auroc": 0.984475,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.984725,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.99295,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.990725,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.99735,
+          "match": false
+        }
+      ],
+      "layer_match_rate": 0.0,
+      "mean_test_auroc": 0.990045
+    },
+    "top3_ensemble": {
+      "fold_results": [
+        {
+          "layer": 25,
+          "auroc": 0.984475,
+          "match": false
+        },
+        {
+          "layer": 26,
+          "auroc": 0.9847999999999999,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.99295,
+          "match": false
+        },
+        {
+          "layer": 26,
+          "auroc": 0.9934999999999999,
+          "match": false
+        },
+        {
+          "layer": 26,
+          "auroc": 0.997525,
+          "match": false
+        }
+      ],
+      "layer_match_rate": 0.0,
+      "mean_test_auroc": 0.9906500000000001
+    },
+    "depth_weighted_J": {
+      "fold_results": [
+        {
+          "layer": 35,
+          "auroc": 0.981725,
+          "match": false
+        },
+        {
+          "layer": 35,
+          "auroc": 0.98395,
+          "match": false
+        },
+        {
+          "layer": 35,
+          "auroc": 0.99605,
+          "match": false
+        },
+        {
+          "layer": 35,
+          "auroc": 0.995825,
+          "match": true
+        },
+        {
+          "layer": 35,
+          "auroc": 0.9975749999999999,
+          "match": false
+        }
+      ],
+      "layer_match_rate": 0.2,
+      "mean_test_auroc": 0.9910249999999999
+    },
+    "smoothed_J": {
+      "fold_results": [
+        {
+          "layer": 25,
+          "auroc": 0.984475,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.984725,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.99295,
+          "match": false
+        },
+        {
+          "layer": 24,
+          "auroc": 0.992275,
+          "match": false
+        },
+        {
+          "layer": 25,
+          "auroc": 0.99735,
+          "match": false
+        }
+      ],
+      "layer_match_rate": 0.0,
+      "mean_test_auroc": 0.9903549999999999
+    },
+    "oracle": {
+      "layer_match_rate": 1.0,
+      "mean_test_auroc": 0.9929650000000001,
+      "fold_results": [
+        {
+          "layer": 29,
+          "auroc": 0.9860749999999999
+        },
+        {
+          "layer": 10,
+          "auroc": 0.9884
+        },
+        {
+          "layer": 36,
+          "auroc": 0.9962
+        },
+        {
+          "layer": 35,
+          "auroc": 0.995825
+        },
+        {
+          "layer": 33,
+          "auroc": 0.998325
+        }
+      ]
+    }
+  },
+  "best_layer_selection_strategy": "depth_weighted_J",
+  "fix_note": "Original argmax(J) had 0% layer match. Tested 4 strategies. Best: depth_weighted_J. Fisher J plateau is flat across L20-L36 for Qwen 3B, making single-layer selection unreliable."
+}

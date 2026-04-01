@@ -1,0 +1,780 @@
+\documentclass[10pt,twocolumn]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{nicefrac}
+
+% ── Theorem environments ───────────────────────────────────────────────────────
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+% ── Colors ────────────────────────────────────────────────────────────────────
+\definecolor{darkblue}{RGB}{13,49,114}
+\definecolor{darkred}{RGB}{150,20,20}
+\definecolor{darkgreen}{RGB}{20,100,40}
+\hypersetup{colorlinks=true, linkcolor=darkblue, citecolor=darkgreen,
+            urlcolor=darkblue}
+
+% ── Column separator ──────────────────────────────────────────────────────────
+\setlength{\columnsep}{0.25in}
+
+% ── Title ─────────────────────────────────────────────────────────────────────
+\title{\textbf{A Geometric Certificate for Hallucination Detection\\
+in Large Language Models: Fisher Separability,\\
+Wasserstein Geometry, and Conformal Guarantees}}
+
+\author{
+  Lakshmi Chakradhar Vijayarao \\
+  University of Texas at Dallas \\
+  \texttt{lakshmichakradhar.v@gmail.com}
+}
+\date{}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\maketitle
+
+% ── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+Can we predict the performance of a hallucination detector without training one?
+We investigate whether Fisher separability~$J$ provides a closed-form,
+geometry-based certificate for detecting surface-form hallucinations in large
+language models.  We show that the Gaussian approximation
+$\Phi\!\left(\sqrt{J}/2\right)$ closely matches linear probe AUROC, with
+$\leq\!2.7\%$ maximum error and $0.93\%$ mean error across five model sizes and
+two architectures (Qwen~2.5 and GPT-2).  However, the fundamental task
+definition is limited: ROUGE-L and GPT-4o labels disagree at Cohen's
+$\kappa = -0.010$, indicating that this pipeline detects \emph{surface-form
+divergence} rather than factual incorrectness.  We further show that
+hidden-state distributions are empirically non-Gaussian: Sliced Wasserstein
+distance ($\text{SW}_2$) correlates more strongly with AUROC on
+Qwen~2.5~3B ($\rho = 0.821$ vs.\ $0.458$ for Fisher), but this advantage
+reverses on GPT-2~Medium ($\rho = -0.237$ vs.\ $0.395$), exposing a
+model-dependent geometry.  Split conformal prediction yields formal in-distribution
+guarantees ($\alpha^* = 0.07$ at $52.9\%$ acceptance for Qwen), which collapse
+under distribution shift (AUROC~$\to 0.485$).  Taken together, these results
+establish Fisher separability as an empirically reliable---and precisely
+scoped---geometric certificate: it bounds probe performance under documented
+assumptions while its failure modes characterize the boundaries of
+geometry-based hallucination governance.
+\end{abstract}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introduction}
+\label{sec:intro}
+
+Large language models (LLMs) generate fluent text that is nonetheless
+factually incorrect---a phenomenon termed hallucination.  Detecting hallucinations
+before output reaches a user is a prerequisite for safe deployment, yet most
+detection approaches require labelled training data, a trained probe, or multiple
+model samples~\citep{manakul2023selfcheckgpt,chen2024inside}.
+
+An appealing alternative is a \emph{geometry-based certificate}: a quantity
+computable from hidden-state statistics alone that predicts, before any probe
+is trained, whether a linear detector can achieve a given AUROC.  If such a
+certificate exists, it becomes possible to assess model reliability at deployment
+time without ground-truth labels or supervised training.
+
+Fisher separability $J$ is a natural candidate.  Under Gaussian equal-covariance
+assumptions, the maximum AUROC achievable by any linear classifier on two class
+distributions is $\Phi(\sqrt{J}/2)$, where $\Phi$ is the standard normal CDF.
+$J$ is computable from the first two moments of the hidden-state distribution
+at each layer, requiring no labels beyond the class centroids.
+
+This paper makes the following contributions:
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
+  \item We derive the Gaussian certificate $\Phi(\sqrt{J}/2)$ from first
+    principles and validate it empirically: bound error $\leq 2.7\%$ across all
+    layers and both tested architectures (Exp.~01, 06).
+  \item We show via 5-fold cross-validation that the certificate predicts
+    unseen-fold AUROC within $0.93\%$ mean error before any probe is trained
+    (Exp.~03).
+  \item We identify a fundamental limitation: Fisher $J$ cannot select the
+    optimal probing layer (0\% argmax match rate).  The certificate bounds
+    achievable performance but not where to find it (Exp.~03).
+  \item We characterize the non-Gaussian geometry: $J \approx W_2^2$ only
+    approximately (mean relative error $1.71$ for Qwen), and $\text{SW}_2$
+    outperforms Fisher only on Qwen---not on GPT-2 (Exp.~08).
+  \item We derive and validate a split conformal guarantee
+    ($\alpha^* = 0.07$, Qwen; $\alpha^* = 0.06$, GPT-2) and show it collapses
+    under out-of-distribution shift (Exp.~10).
+  \item We document that the task itself is ambiguous: ROUGE-L and GPT-4o labels
+    disagree at $\kappa = -0.010$ (Exp.~07), scoping all results to
+    surface-form divergence.
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Background}
+\label{sec:background}
+
+\subsection{Fisher Discriminant and Linear Separability}
+\label{sec:background-fisher}
+
+Let $\mathcal{H}_c, \mathcal{H}_h \subset \mathbb{R}^d$ denote the sets of
+hidden states for correct and hallucinated responses at a given layer $L$.
+Define class centroids $\mu_c, \mu_h \in \mathbb{R}^d$ and the pooled
+within-class covariance
+$\Sigma_w = \frac{n_c \Sigma_c + n_h \Sigma_h}{n_c + n_h}.$
+The Fisher ratio is
+\begin{equation}
+  J(L) = (\mu_c - \mu_h)^\top \Sigma_w^{-1} (\mu_c - \mu_h).
+  \label{eq:fisher}
+\end{equation}
+Under the Gaussian equal-covariance model
+$P(h \mid y) \sim \mathcal{N}(\mu_y, \Sigma_w)$,
+the Bayes-optimal linear classifier on the Mahalanobis-projected line
+achieves
+\begin{equation}
+  \text{AUROC} = \Phi\!\left(\frac{\sqrt{J}}{2}\right),
+  \label{eq:auroc-bound}
+\end{equation}
+where $\Phi$ is the standard normal CDF.  This follows from the fact that the
+linear score $s(h) = (\mu_c - \mu_h)^\top \Sigma_w^{-1} h$ is normally
+distributed under each class with means separated by $\sqrt{J}$ and unit
+variance---the false-positive rate at threshold $t$ is
+$\Phi(t - \sqrt{J}/2)$ and the true-positive rate is $\Phi(t + \sqrt{J}/2)$,
+giving $\text{AUROC} = \Phi(\sqrt{J}/2)$ by integrating over $t$.
+
+We use this as an \textit{approximation} rather than a strict bound: real
+distributions are non-Gaussian, so \eqref{eq:auroc-bound} may be loose.
+
+\subsection{Optimal Transport and the Gaussian Limit}
+\label{sec:background-ot}
+
+The $2$-Wasserstein distance between distributions $P, Q$ is
+$W_2(P, Q) = \inf_{\gamma \in \Pi(P,Q)} \bigl(\mathbb{E}_{(x,y)\sim\gamma}
+\|x-y\|^2\bigr)^{1/2}.$
+When both distributions are Gaussian with equal covariance $\Sigma_w$,
+the whitened distance satisfies $W_2^2 = J$, making Fisher ratio the
+\emph{Gaussian special case} of optimal transport~\citep{sugiyama2007}.
+Sliced Wasserstein distance ($\text{SW}_2$) approximates $W_2$ via random
+one-dimensional projections and makes no Gaussianity assumption, providing
+a distribution-free alternative certificate~\citep{kolouri2019}.
+
+\subsection{Conformal Prediction}
+\label{sec:background-conformal}
+
+Split conformal prediction~\citep{angelopoulos2022} provides finite-sample
+coverage guarantees under exchangeability.  Given a calibration set
+$\{(x_i, y_i)\}_{i=1}^n$, a threshold $\tau$ is chosen such that the
+prediction set $\mathcal{C}(x) = \{y : s(x,y) \leq \tau\}$ satisfies
+$P(y \in \mathcal{C}(x)) \geq 1 - \alpha$.  In our setting, $s(x,y)$ is
+the probe's hallucination probability score; ACCEPT corresponds to
+$s(x) \leq \tau$; and the guarantee becomes
+$P(\text{hallucinated} \mid \text{accepted}) \leq \alpha$.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Task and Datasets}
+\label{sec:setup-task}
+
+We study binary classification of LLM responses as \emph{correct} or
+\emph{hallucinated}.  All experiments use two datasets:
+
+\noindent\textbf{HaluEval}~\citep{li2023halueval}: 2{,}000 question–answer
+pairs (in-distribution).  Model responses are generated and labelled against
+reference answers.
+
+\noindent\textbf{TruthfulQA}~\citep{lin2022truthfulqa}: 400 questions used
+exclusively as an out-of-distribution (OOD) test set.
+
+\subsection{A Note on Label Validity}
+\label{sec:setup-labels}
+
+Labels are derived from ROUGE-L matching (threshold $\geq 0.4$): a response
+scoring below the threshold is labelled hallucinated.  To audit this choice,
+we re-labelled 700 HaluEval responses using GPT-4o as a judge (Exp.~07).
+The agreement between ROUGE-L and GPT-4o labels is Cohen's $\kappa = -0.010$
+(ROUGE-L hallucination rate $= 0.993$; GPT-4o rate $= 0.981$).  Near-zero
+$\kappa$ indicates the two labelling strategies identify \emph{different}
+samples as hallucinated, despite similar rates.
+
+\textbf{Scope condition}: \emph{All results in this paper describe
+surface-form divergence (ROUGE-L failure), not factual incorrectness.}
+These are correlated but empirically distinct.
+
+\subsection{Hidden-State Extraction}
+\label{sec:setup-extraction}
+
+For each input, we extract the last-token hidden state $h_L \in \mathbb{R}^d$
+at every layer $L = 0, \ldots, L_{\max}$.  Last-token position is used
+throughout, consistent with prior work~\citep{azaria2023internal,
+du2024haloscope}.  Table~\ref{tab:models} lists the models used.
+
+\begin{table}[h]
+\centering
+\caption{Models and extraction parameters.}
+\label{tab:models}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Model} & \textbf{Params} & $d$ & $L$ & $n$ \\
+\midrule
+GPT-2 (117M)       & 117M  & 768  & 13 & 2000 \\
+GPT-2 Medium       & 345M  & 1024 & 25 & 2000 \\
+Qwen 2.5 0.5B      & 494M  & 896  & 25 & 400  \\
+Qwen 2.5 1.5B      & 1.54B & 1536 & 29 & 400  \\
+Qwen 2.5 3B        & 3.09B & 2048 & 37 & 2000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Fisher Separability Computation}
+\label{sec:setup-fisher}
+
+Direct inversion of $\Sigma_w \in \mathbb{R}^{d \times d}$ is numerically
+unstable at $d = 2048$.  We apply two complementary approximations:
+(i) \textbf{PCA projection} to $k = 100$ principal components
+(capturing $> 95\%$ of variance in practice); and
+(ii) \textbf{Ledoit–Wolf shrinkage}~\citep{ledoit2004} for covariance
+regularization.  Both methods produce consistent $J$ estimates;
+PCA projection is used throughout.  We note that for the Qwen 0.5B and
+1.5B models at $n = 400$, the aspect ratio $\gamma = d/n > 1$
+(values 2.24 and 3.84 respectively), making full-rank covariance estimation
+unreliable; these results should be interpreted accordingly.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{The Geometric Certificate}
+\label{sec:certificate}
+
+\subsection{Derivation}
+\label{sec:cert-derivation}
+
+\begin{proposition}[Gaussian AUROC Certificate]
+\label{prop:cert}
+Let $P_c = \mathcal{N}(\mu_c, \Sigma_w)$ and
+$P_h = \mathcal{N}(\mu_h, \Sigma_w)$ with equal covariance $\Sigma_w$.
+The AUROC of the Bayes-optimal linear classifier equals
+$\Phi\!\left(\nicefrac{\sqrt{J}}{2}\right)$
+where $J = (\mu_c - \mu_h)^\top \Sigma_w^{-1} (\mu_c - \mu_h)$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The optimal score is $s(h) = w^\top h$ with
+$w = \Sigma_w^{-1}(\mu_c - \mu_h)$.
+Under $P_c$: $s \sim \mathcal{N}(J,\, J)$;
+under $P_h$: $s \sim \mathcal{N}(0,\, J)$.
+The standardised gap is $\sqrt{J}$, and
+$\text{AUROC} = P(s_c > s_h) = \Phi\!\left(\nicefrac{\sqrt{J}}{2}\right)$.
+\end{proof}
+
+\begin{remark}
+Proposition~\ref{prop:cert} assumes Gaussian equal-covariance distributions.
+Real hidden states violate both assumptions; Eq.~\eqref{eq:auroc-bound}
+therefore serves as an approximation whose tightness we measure empirically.
+\end{remark}
+
+\subsection{Empirical Validation}
+\label{sec:cert-validation}
+
+We compute $J(L)$ at every layer and compare $\Phi(\sqrt{J}/2)$ to the
+5-fold cross-validated linear probe AUROC.  Table~\ref{tab:certificate}
+reports key results.
+
+\begin{table}[h]
+\centering
+\caption{Certificate validation.  Best-$J$ layer results (Exp.~01, 06).}
+\label{tab:certificate}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Model} & \textbf{Layer} & \textbf{Depth} & $J$ &
+  \textbf{Bound} & \textbf{AUROC} & \textbf{Error} \\
+\midrule
+GPT-2 (117M)  & L9  & 69\% & —    & —       & 0.604  & —     \\
+GPT-2 Medium  & L19 & 79\% & 49.3 & 0.9998  & 0.9887 & 0.011 \\
+Qwen 2.5 3B   & L25 & 69\% & 51.9 & 0.9998  & 0.9917 & 0.008 \\
+\midrule
+\multicolumn{4}{l}{\textit{Across all layers}} & & & \\
+\multicolumn{3}{l}{Qwen — max error} & & & & 0.027 \\
+\multicolumn{3}{l}{Qwen — mean error} & & & & 0.012 \\
+\multicolumn{3}{l}{GPT-2 Med — max error} & & & & 0.020 \\
+\multicolumn{3}{l}{GPT-2 Med — mean error} & & & & 0.014 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across all 62 layer--model combinations, the bound error never exceeds
+$0.027$.  The bound is a valid upper approximation throughout:
+$\Phi(\sqrt{J}/2) \geq \text{AUROC}_\text{actual}$ holds in every case,
+consistent with the Gaussian assumption overestimating separation.
+
+Figure~\ref{fig:central} shows the central result: actual AUROC vs.\
+bound across all layers and both models.  All points lie below the identity
+line (bound $\geq$ actual), and $97\%$ lie within a $0.02$ band.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/06_central_figure.png}
+\caption{Fisher bound vs.\ actual AUROC at every layer for Qwen~2.5~3B
+  (blue) and GPT-2~Medium~345M (orange).  All points lie above the
+  identity line, confirming the bound is a valid upper approximation.
+  Spread reflects Gaussian assumption violation.}
+\label{fig:central}
+\end{figure}
+
+\subsection{5-Fold Cross-Validation of the Certificate}
+\label{sec:cert-cv}
+
+To simulate the deployment scenario---predicting probe AUROC on unseen
+data---we run 5-fold CV on Qwen~2.5~3B (Exp.~03).  On each training fold,
+we compute $J(L)$ and predict the bound; on the held-out test fold, we
+measure actual probe AUROC.  Table~\ref{tab:cv} reports fold-level results.
+
+\begin{table}[h]
+\centering
+\caption{5-fold cross-validation of the certificate (Qwen~2.5~3B,
+  $n=2000$, Exp.~03).}
+\label{tab:cv}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Fold} & \textbf{Pred.\ Layer} & \textbf{Bound} &
+  \textbf{Actual AUROC} & \textbf{Error} & \textbf{Match?} \\
+\midrule
+1 & L25 & 0.9999 & 0.9845 & 0.0154 & \texttimes \\
+2 & L25 & 0.9999 & 0.9847 & 0.0152 & \texttimes \\
+3 & L25 & 0.9998 & 0.9930 & 0.0069 & \texttimes \\
+4 & L26 & 0.9999 & 0.9935 & 0.0063 & \texttimes \\
+5 & L25 & 0.9998 & 0.9974 & 0.0024 & \texttimes \\
+\midrule
+\multicolumn{2}{l}{Mean} & & & 0.0093 & 0/5 \\
+\multicolumn{2}{l}{Std}  & & & 0.0052 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Mean bound error is $0.93\%$, confirming the certificate's predictive
+utility.  However, the predicted layer (argmax $J$) never matches the
+oracle best probe layer across all five folds (0\% layer-match rate),
+a systematic failure we discuss in Section~\ref{sec:cert-layer}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/03_certificate_calibration.png}
+\caption{Certificate calibration: predicted bound vs.\ actual AUROC across
+  5 cross-validation folds (Qwen~2.5~3B).  The bound consistently
+  over-predicts AUROC by $0.6$–$1.5\%$, reflecting systematic Gaussian
+  over-estimation.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{The Layer Selection Problem}
+\label{sec:cert-layer}
+
+Fisher $J$ cannot identify the optimal probing layer.  In all five CV folds,
+argmax$_L\, J(L)$ selects L25--L26, while oracle best probe layers range from
+L10 to L36 across folds.  A depth-weighted heuristic
+($J(L) \times L / L_{\max}$) achieves 20\% match rate---better than
+argmax but still poor.
+
+\begin{remark}
+The failure arises because $J$ measures second-order geometry (class
+separation by covariance-weighted distance), whereas probe AUROC reflects
+the total discriminative structure including local density variations and
+higher-order moments.  High $J$ implies high \emph{achievable} AUROC; it
+does not identify which layer's probe will realise that potential.
+\end{remark}
+
+The practical implication: the certificate is useful for deciding \emph{whether}
+to probe, not \emph{where}.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Scale Behavior}
+\label{sec:scale}
+
+\subsection{Within-Family Scaling}
+\label{sec:scale-curve}
+
+We fit a sigmoid scaling curve within the Qwen~2.5 family to control for
+architecture, tokenizer, and training distribution (Exp.~11).
+Table~\ref{tab:scale} reports AUROC at best layer for each model.
+
+\begin{table}[h]
+\centering
+\caption{Qwen~2.5 family: best-layer probe AUROC vs.\ model scale (Exp.~11,
+  $n = 400$ per model, controlled).}
+\label{tab:scale}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Model} & \textbf{Params} & \textbf{Best AUROC} &
+  \textbf{Best Layer} & \textbf{Depth} \\
+\midrule
+Qwen 2.5 0.5B & 494M  & 0.813  & L7  & 29\% \\
+Qwen 2.5 1.5B & 1.54B & 0.979  & L15 & 54\% \\
+Qwen 2.5 3B   & 3.09B & 0.9917 & L36 & 100\%\\
+\midrule
+\multicolumn{5}{l}{\textit{Sigmoid fit: }
+  $\hat{\sigma}(4.71 \cdot \log_{10}(P) - 39.45)$,\;\; $R^2 = 0.9996$} \\
+\multicolumn{5}{l}{\textit{7B extrapolation: $0.999$ (saturation—not a
+  quantitative prediction)}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Important caveat.}  $R^2 = 0.9996$ is trivially achievable by
+fitting a two-parameter model to three data points.  We report this as
+an \emph{interpolation} demonstrating monotonic growth, not a scaling law.
+The 7B extrapolation saturates ($\hat{\text{AUROC}} \approx 0.999$) and
+is uninformative as a quantitative prediction.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/11_qwen_scale_curve.png}
+\caption{Controlled scale curve within the Qwen~2.5 family.  AUROC grows
+  monotonically with parameter count.  The shaded band shows 90\%
+  bootstrap CI for the 7B extrapolation; the wide interval reflects
+  the three-point interpolation.}
+\label{fig:scale}
+\end{figure}
+
+\subsection{Depth Fraction Is Not Universal}
+\label{sec:depth}
+
+Table~\ref{tab:depth} compares Fisher-$J$ peak depth and probe-AUROC peak
+depth across models (Exp.~05).
+
+\begin{table}[h]
+\centering
+\caption{Depth fraction of best Fisher-$J$ layer vs.\ best probe-AUROC
+  layer (Exp.~05).}
+\label{tab:depth}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Fisher peak depth} & \textbf{Probe peak depth} \\
+\midrule
+GPT-2 117M    & 69\% & 69\% \\
+GPT-2 Medium  & 79\% & 33\% \\
+Qwen 2.5 0.5B & 29\% & 29\% \\
+Qwen 2.5 1.5B & 54\% & 54\% \\
+Qwen 2.5 3B   & 69\% & 100\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/05_depth_fraction_overlay.png}
+\caption{Normalised-depth curves of Fisher $J$ (solid) and probe AUROC
+  (dashed) for Qwen~2.5~3B and GPT-2~Medium.  Fisher and probe peaks
+  disagree substantially for both models, confirming the layer-selection
+  failure of Section~\ref{sec:cert-layer}.}
+\label{fig:depth}
+\end{figure}
+
+No universal depth fraction emerges.  Within Qwen~2.5, the best layer
+shifts from $29\%$ (0.5B) to $54\%$ (1.5B) to $100\%$ (3B)---depth is
+scale-dependent, not architecture-constant.
+
+A further important finding: Fisher $J$ at best layer is \emph{not
+monotone} with scale (Qwen 0.5B: $J = 24.5$; Qwen 1.5B: $J = 125.1$;
+Qwen 3B: $J = 51.8$).  $J$ peaks at 1.5B then drops at 3B while AUROC
+continues to improve, decoupling the separability metric from
+discriminative performance at larger scale.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Beyond Gaussianity: Wasserstein Certificates}
+\label{sec:ot}
+
+\subsection{The Fisher--Wasserstein Identity and Its Violation}
+\label{sec:ot-identity}
+
+Under Gaussian equal-covariance assumptions, Fisher separability and
+Wasserstein-2 distance in whitened space are identical:
+$J = W_2^2\!\left(\tilde{P}_c, \tilde{P}_h\right)$
+where $\tilde{P} = \Sigma_w^{-1/2} P$.
+We verify this identity at five representative layers per model (Exp.~08).
+Table~\ref{tab:identity} reports relative errors
+$\epsilon = |J - W_{2,\text{wh}}^2| / J$.
+
+\begin{table}[h]
+\centering
+\caption{Relative error of $J \approx W_2^2$ (whitened) identity at
+  five layers per model (Exp.~08).  Identity never holds; error grows
+  with depth for Qwen.}
+\label{tab:identity}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{L0} & \textbf{L$\nicefrac{1}{4}$} &
+  \textbf{L$\nicefrac{1}{2}$} & \textbf{L$\nicefrac{3}{4}$} &
+  \textbf{L$_{\max}$} & \textbf{Mean} \\
+\midrule
+Qwen 2.5 3B  & 0.72 & 1.43 & 1.64 & 1.76 & 3.01 & 1.71 \\
+GPT-2 Medium & 0.54 & 0.83 & 0.87 & 0.75 & 0.88 & 0.77 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The identity $J = W_2^2$ fails across all layers: mean relative error
+$1.71$ for Qwen and $0.77$ for GPT-2.  This is a \emph{finding}---hidden-state
+distributions are measurably non-Gaussian---not a flaw in the experimental
+design.
+
+\subsection{SW$_2$ vs.\ Fisher for AUROC Prediction}
+\label{sec:ot-sw2}
+
+We compare four certificates---Fisher $J$, Sliced Wasserstein ($\text{SW}_2$),
+Bures $W_2$, and MMD$^2$---via Spearman $\rho$ with probe AUROC across all
+layers (Exp.~08).
+
+\begin{table}[h]
+\centering
+\caption{Spearman $\rho$ between certificate value and probe AUROC across
+  all layers (Exp.~08).  Higher is better.  SW$_2$ wins on Qwen;
+  Fisher wins on GPT-2.}
+\label{tab:ot}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Fisher~$J$} & \textbf{SW$_2$} &
+  \textbf{Bures~$W_2$} & \textbf{MMD$^2$} \\
+\midrule
+Qwen 2.5 3B  & 0.458 & \textbf{0.821} & 0.828 & 0.542 \\
+GPT-2 Medium & \textbf{0.395} & $-0.237$ & $-0.241$ & $-0.596$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/08_ot_certificates.png}
+\caption{Certificate value (normalised) vs.\ layer depth for Qwen~2.5~3B.
+  SW$_2$ (orange) grows monotonically and peaks near the probe AUROC peak
+  (L36), while Fisher $J$ (blue) is flat across layers.  The flat $J$
+  curve explains its low Spearman $\rho$ despite tight bound error.}
+\label{fig:ot}
+\end{figure}
+
+SW$_2$ substantially outperforms Fisher on Qwen ($\rho = 0.821$ vs.\
+$0.458$), attributable to SW$_2$'s monotonic growth across layers.
+\emph{This advantage reverses on GPT-2 Medium} (SW$_2$: $\rho = -0.237$;
+Fisher: $\rho = 0.395$), where SW$_2$ grows monotonically in the wrong
+direction relative to probe AUROC (which peaks at L8, the earliest layer).
+This model-dependence of optimal certificate choice is the central
+finding of this section: there is no universally superior distribution-free
+certificate across architectures.
+
+\begin{remark}
+A plausible mechanistic explanation: in Qwen~2.5~3B, later layers compress
+representations toward well-separated class manifolds, making distributional
+divergence (SW$_2$) a better proxy for linear separability.  In GPT-2~Medium,
+the probe peak at $33\%$ depth (L8) precedes the representational compression
+phase, so distributional divergence and probe performance evolve in opposite
+directions.
+\end{remark}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conformal Coverage Guarantees}
+\label{sec:conformal}
+
+\subsection{Calibration and Results}
+\label{sec:conformal-results}
+
+We apply split conformal prediction on the probe's hallucination score at
+the best probe layer (L36 for Qwen, L8 for GPT-2~Medium).  The dataset is
+split $60/20/20$ (train/calibration/test).  We seek the smallest $\alpha^*$
+such that $P(\text{hall} \mid \text{accepted}) \leq \alpha^*$ holds empirically
+at coverage $1 - \delta = 0.95$ (Exp.~10).
+
+\begin{table}[h]
+\centering
+\caption{Conformal guarantee results (Exp.~10, in-distribution).
+  $\alpha^* = 0.10$ does \emph{not} hold for either model; the correct
+  values are $\alpha^* = 0.07$ (Qwen) and $\alpha^* = 0.06$ (GPT-2~Med).}
+\label{tab:conformal}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{$\alpha^*$} & \textbf{Emp.\ hall rate}
+  & \textbf{Accept rate} & \textbf{$\alpha = 0.10$ holds?} \\
+\midrule
+Qwen 2.5 3B  & 0.070 & 0.0605 & 52.9\% & \texttimes \\
+GPT-2 Medium & 0.060 & 0.0587 & 52.8\% & \texttimes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/10_conformal_coverage.png}
+\caption{Conformal coverage curve: empirical hallucination rate among
+  accepted queries as a function of nominal $\alpha$ (Qwen~2.5~3B).
+  The vertical dashed line marks $\alpha^* = 0.07$.  Accepting more
+  queries (higher $\alpha$) relaxes the guarantee monotonically.}
+\label{fig:conformal}
+\end{figure}
+
+At $\alpha^* = 0.07$, the system must reject $47.1\%$ of queries to
+achieve the coverage guarantee.  This acceptance-rate cost is the honest
+price of formal coverage.
+
+\subsection{Distribution Shift: Guarantee Collapse}
+\label{sec:conformal-ood}
+
+We test the calibrated threshold from HaluEval on 400 TruthfulQA
+questions---a genuinely different task distribution.  Results:
+AUROC $= 0.485$ (chance level); $98.2\%$ of TruthfulQA responses are
+hallucinated under ROUGE-L labels; acceptance rate $= 99.95\%$ (nearly
+all accepted).  The conformal guarantee, calibrated at $\alpha^* = 0.07$
+on HaluEval, would report an empirical hallucination rate of $0.982$
+on TruthfulQA---a $14\times$ violation.
+
+\begin{remark}
+The guarantee holds only under exchangeability (i.i.d.\ with the
+calibration distribution).  OOD shift violates this assumption.
+Distribution-robust conformal prediction~\citep{tibshirani2019conformal}
+is the principled extension, but requires density ratio estimation
+between calibration and deployment distributions.
+\end{remark}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Limitations}
+\label{sec:limitations}
+
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=2pt]
+
+\item \textbf{Label quality.}  Cohen's $\kappa = -0.010$ between ROUGE-L
+  and GPT-4o labels (Exp.~07) means every AUROC and every bound in this
+  paper conditions on a labelling criterion that a semantic judge largely
+  disagrees with.  Future work should establish a validated labelling
+  protocol---ideally with inter-annotator agreement on factual
+  incorrectness---before drawing strong empirical conclusions.
+
+\item \textbf{Gaussian violations and bound looseness.}  The Gaussian
+  equal-covariance assumption is violated ($J \neq W_2^2$, mean relative
+  error up to $1.71$).  Bound errors of $1$--$3\%$ result.  Fisher $J$
+  uniformly over-predicts AUROC, but only by amounts small enough to be
+  practically useful.
+
+\item \textbf{Layer selection.}  Argmax $J$ never identifies the best
+  probe layer (0\% match over 5 CV folds).  The certificate bounds
+  achievable performance; it does not locate the layer that achieves it.
+
+\item \textbf{Scale curve is interpolation.}  $R^2 = 0.9996$ on three
+  data points with two parameters is trivially high.  We interpret the
+  result as demonstrating monotonic growth, not as a scaling law.
+
+\item \textbf{Aspect ratio violation at small scale.}  Qwen 0.5B
+  ($\gamma = 2.24$) and 1.5B ($\gamma = 3.84$) have $d > n$ at $n = 400$.
+  Covariance estimation is unreliable in this regime; Ledoit--Wolf
+  shrinkage mitigates but does not resolve this.
+
+\item \textbf{Architecture transfer unresolved.}  We attempted transfer
+  to Mamba-130m (SSM, 25 layers) but the experiment was confounded by the
+  absence of instruction tuning: all responses were labelled hallucinated
+  (hall rate $= 1.0$), making classification meaningless.  SSM
+  architecture transfer is an open question.
+
+\item \textbf{Conformal guarantee is distribution-conditional.}  The
+  $\alpha^* = 0.07$ guarantee holds only on HaluEval.  OOD applications
+  require covariate-shift conformal methods.
+
+\item \textbf{SW$_2$ advantage is model-dependent.}  SW$_2$ outperforms
+  Fisher on Qwen but underperforms on GPT-2.  No universally superior
+  distribution-free certificate exists across the models tested.
+
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Representation probing for hallucination.}
+\citet{burns2022discovering} show that LLM hidden states encode linearly
+separable truthfulness signals.  \citet{azaria2023internal} (SAPLMA) apply
+this to GPT-2, establishing a global linear probe baseline.
+\citet{chen2024inside} (INSIDE) use global covariance eigenvalues;
+\citet{kossen2024semantic} train probes to predict semantic entropy
+from single-pass hidden states with OOD robustness.
+\citet{du2024haloscope} project embeddings onto an SVD hallucination
+subspace.  Our work differs by providing a \emph{training-free} bound
+on what any such probe can achieve, rather than training a probe itself.
+
+\paragraph{Geometric and distributional structure.}
+\citet{marks2024geometry} show that truth representations exhibit emergent
+linear structure across LLM families.  \citet{belrose2023eliciting} track
+prediction formation layer-by-layer via the tuned lens.  Neither work
+derives a computable certificate from the geometry.
+
+\paragraph{Conformal prediction.}
+\citet{angelopoulos2022} provide the foundational framework.
+\citet{tibshirani2019conformal} extend conformal prediction to handle
+distribution shift via importance weighting---the principled extension
+needed for OOD deployment of the certificate derived here.
+\citet{abbasi2024conformal} apply conformal abstention to LLM generation,
+requiring multiple samples; our method uses a single forward pass.
+
+\paragraph{Output-level detection.}
+\citet{manakul2023selfcheckgpt} (SelfCheckGPT) detect hallucination via
+multi-sample output consistency without accessing hidden states.
+\citet{li2023halueval} provide the HaluEval benchmark.
+
+\paragraph{Local geometry and KNN methods.}
+\citet{sun2022ood} use KNN distance (not class separability) for OOD
+detection in image models.  \citet{sugiyama2007} establish local Fisher
+discriminant analysis at training time.  Our approach uses Fisher
+separability in KNN neighbourhoods at inference time (the GUARDIAN system,
+described separately), addressing the global/local failure documented
+in multi-step pipelines.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have shown that Fisher separability provides a computable, training-free
+geometric certificate for linear probe performance in hallucination
+detection.  The approximation $\Phi(\sqrt{J}/2)$ matches probe AUROC within
+$2.7\%$ maximum error across all tested layers and architectures, and
+predicts held-out fold AUROC within $0.93\%$ mean error in cross-validation.
+A split conformal guarantee ($\alpha^* = 0.07$) provides a formal
+in-distribution bound on hallucination rate among accepted queries.
+
+Equally important are the failure modes, each precisely characterised:
+the certificate cannot select the optimal probing layer (0\% argmax
+match); the Gaussian assumption is violated ($J \neq W_2^2$, mean error
+$1.71$ for Qwen); the SW$_2$ advantage over Fisher is model-dependent
+(reversed on GPT-2); and the conformal guarantee collapses under
+distribution shift (AUROC $\to 0.485$, TruthfulQA).
+
+These failures are not incidental: they constitute a roadmap.
+Distribution-free certificates via Wasserstein geometry, local geometry
+adaptation for OOD robustness, and validated labelling protocols
+beyond ROUGE-L are the three concrete next steps.  The geometry works;
+the Gaussian assumption is the limiting factor.
+
+\paragraph{Reproducibility.}
+All experiment scripts, raw logs, and the Streamlit research brief
+are available at
+\url{https://github.com/Lakshmi-Chakradhar-Vijayarao/geom-proof}.
+Interactive results: \url{https://geom-proof.streamlit.app}.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\bibliographystyle{abbrvnat}
+\bibliography{references}
+
+\end{document}

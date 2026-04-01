@@ -79,25 +79,25 @@ results that follow.
 \section{Introduction}
 \label{sec:intro}
 
-Large language models (LLMs) generate fluent text that is nonetheless
-factually incorrect---a phenomenon termed hallucination.  Detecting hallucinations
-before output reaches a user is a prerequisite for safe deployment, yet most
-detection approaches require labelled training data, a trained probe, or multiple
-model samples~\citep{manakul2023selfcheckgpt,chen2024inside}.
+Fluent text and factual correctness are distinct properties of language model
+output---a mismatch exploited by the hallucination phenomenon.  Intercepting
+hallucinated responses before they reach a user is a prerequisite for safe
+deployment, yet prevailing detection methods depend on labelled training data,
+a supervised probe, or repeated sampling~\citep{manakul2023selfcheckgpt,chen2024inside}.
 
-An appealing alternative is a \emph{geometry-based certificate}: a quantity
-computable from hidden-state statistics alone that predicts, before any probe
-is trained, whether a linear detector can achieve a given AUROC.  If such a
-certificate exists, it becomes possible to assess model reliability at deployment
-time without ground-truth labels or supervised training.  This would shift
-hallucination detection from a supervised learning problem to a
-representation-level property that can be evaluated without training.
+A qualitatively different approach is a \emph{geometry-based certificate}: a
+scalar computable from hidden-state statistics alone that predicts, before any
+probe is trained, whether a linear detector can achieve a target AUROC.
+Availability of such a certificate would recast hallucination detection as a
+representation-level property assessable at deployment time---without
+ground-truth labels or supervised training.
 
-Fisher separability $J$ is a natural candidate.  Under Gaussian equal-covariance
-assumptions, the maximum AUROC achievable by any linear classifier on two class
-distributions is $\Phi(\sqrt{J}/2)$, where $\Phi$ is the standard normal CDF.
-$J$ is computable from the first two moments of the hidden-state distribution
-at each layer, requiring no labels beyond the class centroids.
+Fisher separability $J$ is the natural candidate.  Under Gaussian
+equal-covariance assumptions, the maximum AUROC achievable by any linear
+classifier on two class distributions equals $\Phi(\sqrt{J}/2)$, where
+$\Phi$ denotes the standard normal CDF.  Critically, $J$ depends only on the
+first two moments of the hidden-state distribution at each layer and requires
+no labels beyond the class centroids.
 
 This paper makes the following contributions:
 \begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
@@ -120,6 +120,17 @@ This paper makes the following contributions:
     disagree at $\kappa = -0.010$ (Exp.~07), scoping all results to
     surface-form divergence.
 \end{enumerate}
+
+\medskip
+\noindent\textbf{Central thesis.}
+Detection performance is a property of representation geometry, not of the
+probe.  Fisher separability is a classical discriminant criterion; what has
+not been systematically examined is whether it constitutes a \emph{predictive,
+training-free certificate} for linear probe performance specifically in large
+language models.  This paper provides that examination---with quantitative
+validation across architectures, failure-mode characterisation, and a formal
+coverage guarantee.  The classifier is, in this framing, merely a
+\emph{measurement instrument} reading a signal already encoded in the geometry.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Background}
@@ -403,6 +414,62 @@ does not identify which layer's probe will realise that potential.
 This is a fundamental limitation: separability does not imply accessibility
 by simple probes.  The practical implication: the certificate is useful for
 deciding \emph{whether} to probe, not \emph{where}.
+
+\subsection{Competing Geometric Certificates}
+\label{sec:cert-competing}
+
+To assess Fisher $J$ relative to alternative geometry-based certificates,
+Exp.~01 also evaluates two competitors on the same hidden-state extractions:
+\textbf{Local Intrinsic Dimensionality} (LID), which measures the local
+manifold dimension around each sample; and \textbf{Causal Fisher}, which
+first projects hidden states through the causal residual-stream path before
+computing $J$.  Table~\ref{tab:competing} summarises the results.
+
+\begin{table}[h]
+\centering
+\caption{Competing geometric certificates (Exp.~01). LID peaks at the
+  embedding layer (L0) for both models, indicating that intrinsic
+  dimensionality does not locate separability structure.
+  Causal Fisher reduces $J$ by $25\%$ on Qwen and fails entirely on
+  GPT-2~Medium.}
+\label{tab:competing}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Model} & \textbf{Certificate} & \textbf{Peak Layer} &
+  \textbf{Value} & \textbf{Notes} \\
+\midrule
+\multirow{3}{*}{Qwen 2.5 3B}
+  & Fisher $J$ (Euclidean) & L25 & $J = 52.15$ & reference \\
+  & Causal Fisher          & L25 & $J = 39.13$ & $-25\%$ vs.\ Euclidean \\
+  & LID                    & L0  & AUROC $= 0.949$ & embedding layer \\
+\midrule
+\multirow{3}{*}{GPT-2 Medium}
+  & Fisher $J$ (Euclidean) & L19 & $J = 49.33$ & reference \\
+  & Causal Fisher          & ---  & \textit{failed} & projection collapses \\
+  & LID                    & L0  & AUROC $= 0.959$ & embedding layer \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three findings follow.
+\textit{First}, LID peaks at layer~0 for both models.  The embedding layer
+carries high intrinsic dimensionality, but this reflects vocabulary-space
+geometry rather than hallucination class structure---LID AUROC at L0 is
+$0.949$ (Qwen) and $0.959$ (GPT-2), driven by surface-form statistics rather
+than separability.  As a certificate, LID points to the wrong layer.
+\textit{Second}, Causal Fisher reduces $J$ from $52.15$ to $39.13$
+on Qwen~2.5~3B.  The causal projection removes correlated non-causal
+dimensions that nonetheless carry discriminative information;
+the certificate is stricter but less tight.
+\textit{Third}, Causal Fisher fails entirely on GPT-2~Medium, where
+the smaller residual-stream dimensionality collapses the causal projection
+to a near-degenerate subspace.
+
+These comparisons establish Euclidean Fisher $J$ as the strongest of the
+three geometry-based certificates and motivate its central role in the
+analysis that follows.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Scale Behavior}
@@ -705,6 +772,14 @@ between calibration and deployment distributions.
   Fisher on Qwen but underperforms on GPT-2.  No universally superior
   distribution-free certificate exists across the models tested.
 
+\item \textbf{Nonlinear probes not evaluated.}  Every probe in this study
+  is linear; the Fisher certificate bounds achievable AUROC for linear
+  classifiers specifically.  Nonlinear probes (e.g., multi-layer perceptrons)
+  may capture higher-order geometric structure beyond pairwise class
+  separation---whether $\Phi(\sqrt{J}/2)$ constrains nonlinear probe
+  performance, or whether a tighter nonlinear certificate exists, remains
+  an open question.
+
 \end{enumerate}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -753,20 +828,21 @@ in multi-step pipelines.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that Fisher separability provides a computable, training-free
-geometric certificate for linear probe performance in hallucination
-detection.  The approximation $\Phi(\sqrt{J}/2)$ matches probe AUROC within
-$2.7\%$ maximum error across all tested layers and architectures, and
-predicts held-out fold AUROC within $0.93\%$ mean error in cross-validation.
-A split conformal guarantee ($\alpha^* = 0.07$) provides a formal
+Fisher separability constitutes a computable, training-free geometric
+certificate for linear probe performance in hallucination detection.
+The approximation $\Phi(\sqrt{J}/2)$ matches probe AUROC within $2.7\%$
+maximum error across all tested layers and architectures, and anticipates
+held-out fold AUROC within $0.93\%$ mean error in cross-validation---before
+a single label is used for training.  A split conformal guarantee
+($\alpha^* = 0.07$) then converts this certificate into a formal
 in-distribution bound on hallucination rate among accepted queries.
 
-Equally important are the failure modes, each precisely characterised:
-the certificate cannot select the optimal probing layer (0\% argmax
-match); the Gaussian assumption is violated ($J \neq W_2^2$, mean error
-$1.71$ for Qwen); the SW$_2$ advantage over Fisher is model-dependent
-(reversed on GPT-2); and the conformal guarantee collapses under
-distribution shift (AUROC $\to 0.485$, TruthfulQA).
+The failure modes are equally informative, and each is precisely scoped:
+the certificate cannot identify the optimal probing layer (0\% argmax
+match across five folds); the Gaussian assumption is violated ($J \neq W_2^2$,
+mean error $1.71$ for Qwen); the SW$_2$ advantage over Fisher is
+architecture-dependent (reversed on GPT-2~Medium); and the conformal
+guarantee collapses under distribution shift (AUROC $\to 0.485$, TruthfulQA).
 
 These failures are not incidental: they constitute a roadmap.
 Distribution-free certificates via Wasserstein geometry, local geometry

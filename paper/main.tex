@@ -1,6 +1,8 @@
 \documentclass[10pt,twocolumn]{article}
 
 % ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
@@ -133,7 +135,7 @@ does not.
 \textbf{Property} & \textbf{Provided} & \textbf{Not provided} \\
 \midrule
 Predict linear probe AUROC ($\leq 2.7\%$ error) & \checkmark & \\
-Bound shallow MLP probe empirically (0 violations, §\ref{sec:mlp-probe}) & \checkmark & \\
+Bound shallow MLP probe empirically (0 violations, \S\ref{sec:mlp-probe}) & \checkmark & \\
 Select the optimal probing layer & & \texttimes \\
 Bound OOD (out-of-distribution) performance & & \texttimes \\
 Formal in-distribution coverage guarantee ($\alpha^* = 0.07$) & \checkmark & \\
@@ -249,7 +251,7 @@ $P(\text{hallucinated} \mid \text{accepted}) \leq \alpha$.
 We study binary classification of LLM responses as \emph{correct} or
 \emph{hallucinated}.  All experiments use two datasets:
 
-\noindent\textbf{HaluEval}~\citep{li2023halueval}: 2{,}000 question–answer
+\noindent\textbf{HaluEval}~\citep{li2023halueval}: 2{,}000 question--answer
 pairs (in-distribution).  Model responses are generated and labelled against
 reference answers.
 
@@ -310,7 +312,7 @@ Direct inversion of $\Sigma_w \in \mathbb{R}^{d \times d}$ is numerically
 unstable at $d = 2048$.  We apply two complementary approximations:
 (i) \textbf{PCA projection} to $k = 100$ principal components
 (capturing $> 95\%$ of variance in practice); and
-(ii) \textbf{Ledoit–Wolf shrinkage}~\citep{ledoit2004} for covariance
+(ii) \textbf{Ledoit--Wolf shrinkage}~\citep{ledoit2004} for covariance
 regularization.  Both methods produce consistent $J$ estimates;
 PCA projection is used throughout.  We note that for the Qwen 0.5B and
 1.5B models at $n = 400$, the aspect ratio $\gamma = d/n > 1$
@@ -368,13 +370,13 @@ reports key results.
 \textbf{Model} & \textbf{Layer} & \textbf{Depth} & $J$ &
   \textbf{Bound} & \textbf{AUROC} & \textbf{Error} \\
 \midrule
-GPT-2 (117M)$^\dagger$ & L9  & 69\% & —    & —       & 0.604  & —     \\
+GPT-2 (117M)$^\dagger$ & L9  & 69\% & ---    & ---       & 0.604  & ---     \\
 GPT-2 Medium           & L19 & 79\% & 49.3 & 0.9998  & 0.9887 & 0.011 \\
 Qwen 2.5 3B            & L25 & 69\% & 51.9 & 0.9998  & 0.9917 & 0.008 \\
 \midrule
 \multicolumn{4}{l}{\textit{All layers, Qwen 3B + GPT-2 Med:}} & & & \\
-\multicolumn{3}{l}{Qwen — max / mean error} & & & & 0.027 / 0.012 \\
-\multicolumn{3}{l}{GPT-2 Med — max / mean error} & & & & 0.020 / 0.014 \\
+\multicolumn{3}{l}{Qwen --- max / mean error} & & & & 0.027 / 0.012 \\
+\multicolumn{3}{l}{GPT-2 Med --- max / mean error} & & & & 0.020 / 0.014 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -443,7 +445,7 @@ a systematic failure we discuss in Section~\ref{sec:cert-layer}.
 \includegraphics[width=\linewidth]{figures/03_certificate_calibration.png}
 \caption{Certificate calibration: predicted bound vs.\ actual AUROC across
   5 cross-validation folds (Qwen~2.5~3B).  The bound consistently
-  over-predicts AUROC by $0.6$–$1.5\%$, reflecting systematic Gaussian
+  over-predicts AUROC by $0.6$--$1.5\%$, reflecting systematic Gaussian
   over-estimation.}
 \label{fig:calibration}
 \end{figure}
@@ -628,7 +630,7 @@ Qwen 2.5 3B   & 3.09B & 0.9917 & L36 & 100\%\\
 \midrule
 \multicolumn{5}{l}{\textit{Sigmoid fit: }
   $\hat{\sigma}(4.71 \cdot \log_{10}(P) - 39.45)$,\;\; $R^2 = 0.9996$} \\
-\multicolumn{5}{l}{\textit{7B extrapolation: $0.999$ (saturation—not a
+\multicolumn{5}{l}{\textit{7B extrapolation: $0.999$ (saturation---not a
   quantitative prediction)}} \\
 \bottomrule
 \end{tabular}

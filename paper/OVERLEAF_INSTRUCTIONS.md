@@ -14,6 +14,7 @@ figures/
   08_ot_certificates.png
   10_conformal_coverage.png
   11_qwen_scale_curve.png
+  12_mlp_probe_comparison.png   ← NEW (Exp 12, added in final version)
 ```
 
 ## Compiler setting

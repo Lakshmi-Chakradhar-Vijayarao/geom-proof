@@ -57,10 +57,10 @@ distinction from prior geometric approaches is that we do not use $J$ as a
 classifier; we use it to \emph{bound} what any linear classifier can achieve.
 
 Empirically, the Gaussian approximation $\Phi(\sqrt{J}/2)$ matches linear probe
-AUROC within $\leq 2.7\%$ maximum error and $0.93\%$ mean error across five
-model sizes and two architectures (Qwen~2.5 and GPT-2), predicting held-out
-fold AUROC within $0.93\%$ in 5-fold cross-validation before any label is used
-for training.  Critically, the bound holds for a shallow MLP probe (64 hidden,
+AUROC within $\leq 2.7\%$ maximum error and $1.2$--$1.4\%$ mean error across
+two fully-analysed architectures (Qwen~2.5~3B and GPT-2~Medium); 5-fold
+cross-validation on Qwen~2.5~3B alone yields $0.93\%$ mean error before any
+label is used for training.  Critically, the bound holds for a shallow MLP probe (64 hidden,
 ReLU) as well as the linear probe: zero bound violations across all 62
 layer--model combinations, with MLP gain over linear $\leq 0.09\%$, suggesting
 that Gaussian slack is sufficient to accommodate the tested degree of
@@ -145,11 +145,12 @@ Factual hallucination detection & & \texttimes \\
 This paper makes the following contributions:
 \begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
   \item We derive the Gaussian certificate $\Phi(\sqrt{J}/2)$ from first
-    principles and validate it empirically: bound error $\leq 2.7\%$ across all
-    layers and both tested architectures (Exp.~01, 06).
+    principles and validate it empirically: bound error $\leq 2.7\%$ maximum,
+    $1.2$--$1.4\%$ mean, across all layers for Qwen~2.5~3B and GPT-2~Medium
+    (Exp.~01, 06).
   \item We show via 5-fold cross-validation that the certificate predicts
-    unseen-fold AUROC within $0.93\%$ mean error before any probe is trained
-    (Exp.~03).
+    unseen-fold AUROC within $0.93\%$ mean error on Qwen~2.5~3B before any
+    probe is trained (Exp.~03).
   \item We identify a fundamental limitation: Fisher $J$ cannot select the
     optimal probing layer (0\% argmax match rate).  The certificate bounds
     achievable performance but not where to find it (Exp.~03).
@@ -356,7 +357,9 @@ reports key results.
 
 \begin{table}[h]
 \centering
-\caption{Certificate validation.  Best-$J$ layer results (Exp.~01, 06).}
+\caption{Certificate validation at best-$J$ layer (Exp.~01, 06).
+  $^\dagger$GPT-2~117M: AUROC from prior extraction; $J$ not recomputed.
+  Mean/max errors are across all layers for the two fully-analysed models.}
 \label{tab:certificate}
 \small
 \setlength{\tabcolsep}{3pt}
@@ -365,15 +368,13 @@ reports key results.
 \textbf{Model} & \textbf{Layer} & \textbf{Depth} & $J$ &
   \textbf{Bound} & \textbf{AUROC} & \textbf{Error} \\
 \midrule
-GPT-2 (117M)  & L9  & 69\% & —    & —       & 0.604  & —     \\
-GPT-2 Medium  & L19 & 79\% & 49.3 & 0.9998  & 0.9887 & 0.011 \\
-Qwen 2.5 3B   & L25 & 69\% & 51.9 & 0.9998  & 0.9917 & 0.008 \\
+GPT-2 (117M)$^\dagger$ & L9  & 69\% & —    & —       & 0.604  & —     \\
+GPT-2 Medium           & L19 & 79\% & 49.3 & 0.9998  & 0.9887 & 0.011 \\
+Qwen 2.5 3B            & L25 & 69\% & 51.9 & 0.9998  & 0.9917 & 0.008 \\
 \midrule
-\multicolumn{4}{l}{\textit{Across all layers}} & & & \\
-\multicolumn{3}{l}{Qwen — max error} & & & & 0.027 \\
-\multicolumn{3}{l}{Qwen — mean error} & & & & 0.012 \\
-\multicolumn{3}{l}{GPT-2 Med — max error} & & & & 0.020 \\
-\multicolumn{3}{l}{GPT-2 Med — mean error} & & & & 0.014 \\
+\multicolumn{4}{l}{\textit{All layers, Qwen 3B + GPT-2 Med:}} & & & \\
+\multicolumn{3}{l}{Qwen — max / mean error} & & & & 0.027 / 0.012 \\
+\multicolumn{3}{l}{GPT-2 Med — max / mean error} & & & & 0.020 / 0.014 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -383,18 +384,20 @@ $0.027$.  The bound is a valid upper approximation throughout:
 $\Phi(\sqrt{J}/2) \geq \text{AUROC}_\text{actual}$ holds in every case,
 consistent with the Gaussian assumption overestimating separation.
 
-Figure~\ref{fig:central} shows the central result: actual AUROC vs.\
-bound across all layers and both models.  All points lie below the identity line (bound $\geq$ actual),
-confirming it as an empirically tight upper approximation under Gaussian
-assumptions; $97\%$ of points lie within a $0.02$ band.
+Figure~\ref{fig:central} shows the central result: actual AUROC (x-axis) vs.\
+bound (y-axis) across all layers and both models.  All points lie \emph{above}
+the identity line ($\text{bound} \geq \text{actual}$ everywhere), confirming
+the approximation as a valid upper bound under Gaussian assumptions;
+$97\%$ of points lie within a $0.02$ band of the diagonal.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/06_central_figure.png}
-\caption{Fisher bound vs.\ actual AUROC at every layer for Qwen~2.5~3B
-  (blue) and GPT-2~Medium~345M (orange).  All points lie above the
-  identity line, confirming the bound is a valid upper approximation.
-  Spread reflects Gaussian assumption violation.}
+\caption{Actual probe AUROC (x-axis) vs.\ Fisher bound $\Phi(\sqrt{J}/2)$
+  (y-axis) at every layer for Qwen~2.5~3B (blue) and GPT-2~Medium (orange).
+  All points lie above the identity line ($\text{bound} \geq \text{actual}$),
+  confirming the approximation as a valid upper bound.
+  Vertical spread reflects Gaussian assumption violation at high-AUROC layers.}
 \label{fig:central}
 \end{figure}
 
@@ -539,7 +542,10 @@ Table~\ref{tab:mlp} reports results.
 \centering
 \caption{Fisher certificate vs.\ linear and MLP probes (Exp.~12,
   $n=2000$, 5-fold OOF).  The Fisher bound $\Phi(\sqrt{J}/2)$ is never
-  violated by the MLP probe across all 62 layer--model combinations.}
+  violated by the MLP probe across all 62 layer--model combinations.
+  Linear AUROC values differ slightly from Table~\ref{tab:certificate}
+  (Exp.~01) due to stochastic variation in 5-fold CV fold assignment;
+  both use identical hyperparameters and preprocessing.}
 \label{tab:mlp}
 \small
 \setlength{\tabcolsep}{3pt}
@@ -653,7 +659,8 @@ depth across models (Exp.~05).
 \begin{table}[h]
 \centering
 \caption{Depth fraction of best Fisher-$J$ layer vs.\ best probe-AUROC
-  layer (Exp.~05).}
+  layer (Exp.~05).  Probe peak depth can vary $\pm$2--14 layers across
+  independent CV runs; values reflect Exp.~05 fold assignment.}
 \label{tab:depth}
 \small
 \begin{tabular}{lcc}
@@ -791,8 +798,12 @@ directions.
 \label{sec:conformal-results}
 
 We apply split conformal prediction on the probe's hallucination score at
-the best probe layer (L36 for Qwen, L8 for GPT-2~Medium).  The dataset is
-split $60/20/20$ (train/calibration/test).  We seek the smallest $\alpha^*$
+the best probe layer identified in Exp.~10 (L36 for Qwen, L8 for
+GPT-2~Medium; note that the best probe layer varies by $\pm$2--14 layers
+across experiments due to stochastic CV fold assignment, but the conformal
+guarantee is independent of which specific layer is used---the guarantee
+holds at any fixed, pre-specified layer).  The dataset is split
+$60/20/20$ (train/calibration/test).  We seek the smallest $\alpha^*$
 such that $P(\text{hall} \mid \text{accepted}) \leq \alpha^*$ holds empirically
 at coverage $1 - \delta = 0.95$ (Exp.~10).
 

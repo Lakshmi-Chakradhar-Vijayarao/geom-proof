@@ -35,7 +35,7 @@ class Certificate:
     layer : int
     n_layers : int
     J : float — Fisher ratio
-    auroc_predicted : float — Phi(sqrt(J)/2)
+    auroc_predicted : float — Phi(sqrt(J/2)), the binormal-model AUROC identity
     method : str — "lda" or "pca"
     depth_fraction : float — layer / (n_layers - 1)
     """

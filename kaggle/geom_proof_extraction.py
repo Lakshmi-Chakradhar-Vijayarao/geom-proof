@@ -530,7 +530,7 @@ else:
     for L in range(H.shape[1]):
         J = fisher_ratio_pca(H[:, L, :], y)
         J_per_layer.append(J)
-        bound_per_layer.append(float(scipy_norm.cdf(np.sqrt(J) / 2)))
+        bound_per_layer.append(float(scipy_norm.cdf(np.sqrt(J / 2))))  # corrected binormal AUROC identity
 
     best_J_layer = int(np.argmax(J_per_layer))
 

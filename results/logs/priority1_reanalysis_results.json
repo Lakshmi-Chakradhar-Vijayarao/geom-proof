@@ -1,0 +1,1136 @@
+{
+  "_meta": {
+    "purpose": "Priority-1 reanalysis addressing FRONTIER_LAB_REVIEW_RESULT.md P1.1, P1.2, P1.4, P2.2 for GEOM-PROOF ('A Loose Ceiling, Not a Certificate'). All four analyses use only already-cached data (results/hidden_states/*.npz, results/logs/*.json) -- no new model inference or generation was run.",
+    "date": "2026-08-10",
+    "companion_summary": "PRIORITY1_REANALYSIS_SUMMARY.md"
+  },
+  "analysis_1_pca_rank_sensitivity_P1_1": {
+    "gpt2_117m": {
+      "n_layers": 13,
+      "d": 768,
+      "n_samples": 500,
+      "n_correct": 24,
+      "paper_reference_k100": {
+        "best_J_layer": 8,
+        "J": 7.517061446910924,
+        "bound": 0.9737306369859944,
+        "probe_auroc_at_that_layer": 0.5639005602240896,
+        "bound_error": 0.40983007676190475
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 7,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 1.6705102266146519,
+          "bound_at_argmax_layer": 0.8196213267537529,
+          "probe_auroc_at_argmax_layer": 0.6548494397759103,
+          "bound_error_at_argmax_layer": 0.16477188697784262,
+          "J_at_fixed_k100_best_layer": 1.560585971466672,
+          "bound_at_fixed_k100_best_layer": 0.8114742253403384,
+          "bound_error_at_fixed_k100_best_layer": 0.2475736651162488
+        },
+        "50": {
+          "argmax_J_layer": 8,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 3.2960597917857353,
+          "bound_at_argmax_layer": 0.9003863574893726,
+          "probe_auroc_at_argmax_layer": 0.5639005602240896,
+          "bound_error_at_argmax_layer": 0.33648579726528294,
+          "J_at_fixed_k100_best_layer": 3.2960597917857353,
+          "bound_at_fixed_k100_best_layer": 0.9003863574893726,
+          "bound_error_at_fixed_k100_best_layer": 0.33648579726528294
+        },
+        "100": {
+          "argmax_J_layer": 8,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 7.148114947243478,
+          "bound_at_argmax_layer": 0.9706556274842474,
+          "probe_auroc_at_argmax_layer": 0.5639005602240896,
+          "bound_error_at_argmax_layer": 0.40675506726015775,
+          "J_at_fixed_k100_best_layer": 7.148114947243478,
+          "bound_at_fixed_k100_best_layer": 0.9706556274842474,
+          "bound_error_at_fixed_k100_best_layer": 0.40675506726015775
+        },
+        "200": {
+          "argmax_J_layer": 9,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 17.629858714118555,
+          "bound_at_argmax_layer": 0.9985061211113503,
+          "probe_auroc_at_argmax_layer": 0.6322654061624651,
+          "bound_error_at_argmax_layer": 0.3662407149488852,
+          "J_at_fixed_k100_best_layer": 16.27444530771096,
+          "bound_at_fixed_k100_best_layer": 0.9978317171875497,
+          "bound_error_at_fixed_k100_best_layer": 0.4339311569634601
+        }
+      }
+    },
+    "gpt2_medium": {
+      "n_layers": 25,
+      "d": 1024,
+      "n_samples": 500,
+      "n_correct": 50,
+      "paper_reference_k100": {
+        "best_J_layer": 20,
+        "J": 3.974057470502181,
+        "bound": 0.9206740508837168,
+        "probe_auroc_at_that_layer": 0.5611555555555555,
+        "bound_error": 0.35951849532816127
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 10,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 1.0518185630282992,
+          "bound_at_argmax_layer": 0.7658341108951809,
+          "probe_auroc_at_argmax_layer": 0.5703555555555555,
+          "bound_error_at_argmax_layer": 0.19547855533962544,
+          "J_at_fixed_k100_best_layer": 0.7111397457913191,
+          "bound_at_fixed_k100_best_layer": 0.7245115155655125,
+          "bound_error_at_fixed_k100_best_layer": 0.163355960009957
+        },
+        "50": {
+          "argmax_J_layer": 5,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 2.1261462039938115,
+          "bound_at_argmax_layer": 0.8487423366336484,
+          "probe_auroc_at_argmax_layer": 0.5101333333333333,
+          "bound_error_at_argmax_layer": 0.33860900330031507,
+          "J_at_fixed_k100_best_layer": 1.653285073198035,
+          "bound_at_fixed_k100_best_layer": 0.8183774126537152,
+          "bound_error_at_fixed_k100_best_layer": 0.2572218570981597
+        },
+        "100": {
+          "argmax_J_layer": 9,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 4.040717234310176,
+          "bound_at_argmax_layer": 0.9223987582764721,
+          "probe_auroc_at_argmax_layer": 0.5404444444444445,
+          "bound_error_at_argmax_layer": 0.3819543138320276,
+          "J_at_fixed_k100_best_layer": 3.793510736402097,
+          "bound_at_fixed_k100_best_layer": 0.9157790266835619,
+          "bound_error_at_fixed_k100_best_layer": 0.3546234711280064
+        },
+        "200": {
+          "argmax_J_layer": 9,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 8.173498611384256,
+          "bound_at_argmax_layer": 0.9783896547030502,
+          "probe_auroc_at_argmax_layer": 0.5404444444444445,
+          "bound_error_at_argmax_layer": 0.43794521025860567,
+          "J_at_fixed_k100_best_layer": 7.724650772713494,
+          "bound_at_fixed_k100_best_layer": 0.9753090790991735,
+          "bound_error_at_fixed_k100_best_layer": 0.414153523543618
+        }
+      }
+    },
+    "qwen_0.5b": {
+      "n_layers": 25,
+      "d": 896,
+      "n_samples": 500,
+      "n_correct": 47,
+      "paper_reference_k100": {
+        "best_J_layer": 24,
+        "J": 3.6919488586972826,
+        "bound": 0.912873840566822,
+        "probe_auroc_at_that_layer": 0.5507491428303039,
+        "bound_error": 0.3621246977365181
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 24,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 0.9353683601734771,
+          "bound_at_argmax_layer": 0.7529727562210164,
+          "probe_auroc_at_argmax_layer": 0.5507491428303039,
+          "bound_error_at_argmax_layer": 0.2022236133907126,
+          "J_at_fixed_k100_best_layer": 0.9353683601734771,
+          "bound_at_fixed_k100_best_layer": 0.7529727562210164,
+          "bound_error_at_fixed_k100_best_layer": 0.2022236133907126
+        },
+        "50": {
+          "argmax_J_layer": 21,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 2.0273160631178193,
+          "bound_at_argmax_layer": 0.84298596000231,
+          "probe_auroc_at_argmax_layer": 0.4930721901272838,
+          "bound_error_at_argmax_layer": 0.34991376987502615,
+          "J_at_fixed_k100_best_layer": 1.991843046361218,
+          "bound_at_fixed_k100_best_layer": 0.8408503017826015,
+          "bound_error_at_fixed_k100_best_layer": 0.2901011589522976
+        },
+        "100": {
+          "argmax_J_layer": 23,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 3.888595873274474,
+          "bound_at_argmax_layer": 0.9183986851157477,
+          "probe_auroc_at_argmax_layer": 0.5134094218214269,
+          "bound_error_at_argmax_layer": 0.40498926329432083,
+          "J_at_fixed_k100_best_layer": 3.8496948668593207,
+          "bound_at_fixed_k100_best_layer": 0.9173383671556088,
+          "bound_error_at_fixed_k100_best_layer": 0.36658922432530494
+        },
+        "200": {
+          "argmax_J_layer": 23,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 8.499581540780893,
+          "bound_at_argmax_layer": 0.9803724167397544,
+          "probe_auroc_at_argmax_layer": 0.5134094218214269,
+          "bound_error_at_argmax_layer": 0.4669629949183275,
+          "J_at_fixed_k100_best_layer": 7.802403148347029,
+          "bound_at_fixed_k100_best_layer": 0.9758742069336386,
+          "bound_error_at_fixed_k100_best_layer": 0.4251250641033347
+        }
+      }
+    },
+    "qwen_1.5b": {
+      "n_layers": 29,
+      "d": 1536,
+      "n_samples": 500,
+      "n_correct": 60,
+      "paper_reference_k100": {
+        "best_J_layer": 22,
+        "J": 2.250839402446936,
+        "bound": 0.8556227810745163,
+        "probe_auroc_at_that_layer": 0.5392045454545454,
+        "bound_error": 0.31641823561997084
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 28,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 0.7661866144641857,
+          "bound_at_argmax_layer": 0.7320238088085969,
+          "probe_auroc_at_argmax_layer": 0.534280303030303,
+          "bound_error_at_argmax_layer": 0.1977435057782938,
+          "J_at_fixed_k100_best_layer": 0.5915394775649354,
+          "bound_at_fixed_k100_best_layer": 0.7067266752309771,
+          "bound_error_at_fixed_k100_best_layer": 0.16752212977643166
+        },
+        "50": {
+          "argmax_J_layer": 28,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 1.301745964207481,
+          "bound_at_argmax_layer": 0.7900996307413433,
+          "probe_auroc_at_argmax_layer": 0.534280303030303,
+          "bound_error_at_argmax_layer": 0.2558193277110402,
+          "J_at_fixed_k100_best_layer": 1.0924563952045871,
+          "bound_at_fixed_k100_best_layer": 0.7700685203960946,
+          "bound_error_at_fixed_k100_best_layer": 0.2308639749415492
+        },
+        "100": {
+          "argmax_J_layer": 28,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 2.136268719006888,
+          "bound_at_argmax_layer": 0.8493163848440508,
+          "probe_auroc_at_argmax_layer": 0.534280303030303,
+          "bound_error_at_argmax_layer": 0.31503608181374776,
+          "J_at_fixed_k100_best_layer": 2.0719169476017956,
+          "bound_at_fixed_k100_best_layer": 0.8456183547860961,
+          "bound_error_at_fixed_k100_best_layer": 0.3064138093315507
+        },
+        "200": {
+          "argmax_J_layer": 22,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 5.175908540341389,
+          "bound_at_argmax_layer": 0.9461603337026092,
+          "probe_auroc_at_argmax_layer": 0.5392045454545454,
+          "bound_error_at_argmax_layer": 0.4069557882480638,
+          "J_at_fixed_k100_best_layer": 5.175908540341389,
+          "bound_at_fixed_k100_best_layer": 0.9461603337026092,
+          "bound_error_at_fixed_k100_best_layer": 0.4069557882480638
+        }
+      }
+    },
+    "qwen_3b": {
+      "n_layers": 37,
+      "d": 2048,
+      "n_samples": 500,
+      "n_correct": 95,
+      "paper_reference_k100": {
+        "best_J_layer": 36,
+        "J": 1.997407491645803,
+        "bound": 0.8411878165770847,
+        "probe_auroc_at_that_layer": 0.5043794671864847,
+        "bound_error": 0.3368083493906
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 30,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 0.473236679357247,
+          "bound_at_argmax_layer": 0.6866703659040984,
+          "probe_auroc_at_argmax_layer": 0.5017543859649123,
+          "bound_error_at_argmax_layer": 0.18491597993918607,
+          "J_at_fixed_k100_best_layer": 0.34286821196380657,
+          "bound_at_fixed_k100_best_layer": 0.6605797976131214,
+          "bound_error_at_fixed_k100_best_layer": 0.1562003304266366
+        },
+        "50": {
+          "argmax_J_layer": 26,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 0.9837629782059225,
+          "bound_at_argmax_layer": 0.7584553931903102,
+          "probe_auroc_at_argmax_layer": 0.5179467186484731,
+          "bound_error_at_argmax_layer": 0.2405086745418371,
+          "J_at_fixed_k100_best_layer": 0.9673751960466079,
+          "bound_at_fixed_k100_best_layer": 0.7566216414015389,
+          "bound_error_at_fixed_k100_best_layer": 0.2522421742150541
+        },
+        "100": {
+          "argmax_J_layer": 36,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 1.9771309503589107,
+          "bound_at_argmax_layer": 0.839953381098535,
+          "probe_auroc_at_argmax_layer": 0.5043794671864847,
+          "bound_error_at_argmax_layer": 0.33557391391205027,
+          "J_at_fixed_k100_best_layer": 1.9771309503589107,
+          "bound_at_fixed_k100_best_layer": 0.839953381098535,
+          "bound_error_at_fixed_k100_best_layer": 0.33557391391205027
+        },
+        "200": {
+          "argmax_J_layer": 36,
+          "layer_matches_k100_argmax": true,
+          "J_at_argmax_layer": 5.066467800021191,
+          "bound_at_argmax_layer": 0.9442642255232285,
+          "probe_auroc_at_argmax_layer": 0.5043794671864847,
+          "bound_error_at_argmax_layer": 0.4398847583367438,
+          "J_at_fixed_k100_best_layer": 5.066467800021191,
+          "bound_at_fixed_k100_best_layer": 0.9442642255232285,
+          "bound_error_at_fixed_k100_best_layer": 0.4398847583367438
+        }
+      }
+    },
+    "qwen_7b": {
+      "n_layers": 29,
+      "d": 3584,
+      "n_samples": 500,
+      "n_correct": 103,
+      "paper_reference_k100": {
+        "best_J_layer": 24,
+        "J": 1.6328103085277283,
+        "bound": 0.8168833424455144,
+        "probe_auroc_at_that_layer": 0.48443422758064125,
+        "bound_error": 0.33244911486487316
+      },
+      "sweep": {
+        "25": {
+          "argmax_J_layer": 6,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 0.40330827921074364,
+          "bound_at_argmax_layer": 0.6733055139469266,
+          "probe_auroc_at_argmax_layer": 0.4432515712503974,
+          "bound_error_at_argmax_layer": 0.23005394269652923,
+          "J_at_fixed_k100_best_layer": 0.35511491263932254,
+          "bound_at_fixed_k100_best_layer": 0.6632596092156375,
+          "bound_error_at_fixed_k100_best_layer": 0.17882538163499628
+        },
+        "50": {
+          "argmax_J_layer": 5,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 0.7825306761209252,
+          "bound_at_argmax_layer": 0.734182482387346,
+          "probe_auroc_at_argmax_layer": 0.43906972194370397,
+          "bound_error_at_argmax_layer": 0.295112760443642,
+          "J_at_fixed_k100_best_layer": 0.7395941017223595,
+          "bound_at_fixed_k100_best_layer": 0.728442543208269,
+          "bound_error_at_fixed_k100_best_layer": 0.2440083156276277
+        },
+        "100": {
+          "argmax_J_layer": 25,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 1.806092751536968,
+          "bound_at_argmax_layer": 0.8290169114568067,
+          "probe_auroc_at_argmax_layer": 0.4949988995133403,
+          "bound_error_at_argmax_layer": 0.33401801194346636,
+          "J_at_fixed_k100_best_layer": 1.6773710988580925,
+          "bound_at_fixed_k100_best_layer": 0.8201135124467325,
+          "bound_error_at_fixed_k100_best_layer": 0.3356792848660912
+        },
+        "200": {
+          "argmax_J_layer": 25,
+          "layer_matches_k100_argmax": false,
+          "J_at_argmax_layer": 4.173414277362847,
+          "bound_at_argmax_layer": 0.9257069827575322,
+          "probe_auroc_at_argmax_layer": 0.4949988995133403,
+          "bound_error_at_argmax_layer": 0.43070808324419185,
+          "J_at_fixed_k100_best_layer": 4.109945208961852,
+          "bound_at_fixed_k100_best_layer": 0.9241450083353129,
+          "bound_error_at_fixed_k100_best_layer": 0.4397107807546716
+        }
+      }
+    }
+  },
+  "analysis_2_exp26_27_split_consistency_P1_2": {
+    "root_cause": "Exp 26's reported in_dist_auroc (0.5719) is a 5-fold OOF cross-validated AUROC over all 500 HaluEval samples (from best_layer_probe(), used for layer selection), while its ood_auroc (0.6086) is the held-out performance of a SEPARATE probe trained on a single fixed 75% split (RandomState(42) permutation of 500, tr_idx=idx[:375]). These are two different estimators on different data partitions, not a single consistent train/test split. Exp 27 does not repair this: it introduces a THIRD, independently-seeded 80/20 split (different permutation call, different train fraction) and reports a bootstrap CI centered on ITS OWN point estimate (in-dist=0.5838, ood=0.6477, gap=+0.0639), which is why Exp 27's point estimate does not match Exp 26's reported +0.037 gap.",
+    "exp26_reported": {
+      "in_dist_auroc_5fold_oof": 0.5718778427550357,
+      "ood_auroc_single_split_probe": 0.6085745614035089,
+      "gap_as_reported_in_paper": 0.036696718648473126
+    },
+    "exp27_reported": {
+      "in_dist_auroc_own_8020_split": 0.5837500000000001,
+      "ood_auroc_own_8020_split": 0.6476535087719298,
+      "gap": 0.06390350877192974,
+      "bootstrap_gap_ci95": [
+        -0.1809673185141488,
+        0.24398582188398388
+      ]
+    },
+    "reconstructed_exp26_split_verification": {
+      "ood_auroc_reproduced": 0.6085745614035087,
+      "ood_auroc_paper_reported": 0.6085745614035089,
+      "matches": true
+    },
+    "fixed_point_estimate_same_split_both_arms": {
+      "description": "Same deployed probe (trained on Exp 26's tr_idx, 375 samples), evaluated in-dist on Exp 26's own held-out 25% calibration split (cal_idx, 125 samples) instead of the 5-fold-OOF number, and on NQ-open (500 samples) for OOD -- both numbers now come from the exact same fitted classifier and the exact same split Exp 26 used.",
+      "in_dist_auroc": 0.5962643678160919,
+      "ood_auroc": 0.6085745614035087,
+      "gap": 0.012310193587416807
+    },
+    "bootstrap_anchored_on_exp26_exact_split": {
+      "n_bootstrap_requested": 1000,
+      "n_bootstrap_valid": 1000,
+      "n_skipped_degenerate": 0,
+      "in_dist_auroc_mean": 0.5783374649860802,
+      "in_dist_auroc_ci95": [
+        0.4249072671275749,
+        0.7242626356707834
+      ],
+      "ood_auroc_mean": 0.5774257959619138,
+      "ood_auroc_ci95": [
+        0.4605966875333031,
+        0.6850143636363636
+      ],
+      "gap_mean": -0.0009116690241663925,
+      "gap_ci95": [
+        -0.18342602085213258,
+        0.17943004379018918
+      ],
+      "fraction_ood_greater_than_indist": 0.491,
+      "ci_includes_paper_original_point_estimate_gap": true,
+      "ci_includes_zero": true
+    }
+  },
+  "analysis_3_holm_bonferroni_correction_P1_4": {
+    "family_size": 38,
+    "alpha": 0.05,
+    "recomputed_full_precision": {
+      "hall_rate_vs_scale": {
+        "rho": -0.942857142857143,
+        "p": 0.004804664723032055
+      },
+      "best_J_vs_scale_asymptotic": {
+        "rho": -1.0,
+        "p_asymptotic_scipy": 0.0,
+        "p_exact_permutation_paper_reported": 0.002777777777777778
+      },
+      "bound_error_vs_scale": {
+        "rho": -0.7714285714285715,
+        "p": 0.07239650145772594
+      }
+    },
+    "excluded_from_family": [
+      "Bures W2 / Sliced-Wasserstein SW2 vs Fisher correlations (rho=0.828/0.821/0.458/-0.241/-0.237/0.395, Exp.08) -- reported as point-estimate rho only, no p-value or bootstrap CI given in the paper, explicitly flagged in-text as unvalidated (n=2 architectures); cannot Holm-correct a rho with no attached significance test.",
+      "Cohen's kappa label-agreement statistics (kappa=-0.010, kappa~0-0.14) -- agreement coefficients, not p-value hypothesis tests.",
+      "Bootstrap 95% CIs reported without an accompanying p-value (e.g. Exp.27 gap CI [-0.181,+0.244], in-dist CI [0.386,0.747]) -- interval estimates, not p-value tests."
+    ],
+    "tests": [
+      {
+        "rank": 1,
+        "label": "SAE best-feature Mann-Whitney p (Exp.25; already the min of an internally BH-FDR q=0.05-corrected family of 24,576 tests)",
+        "p_raw": 4.758427470226433e-11,
+        "source": "results/logs/25_sae_feature_causal_clamp.json",
+        "holm_threshold": 0.0013157894736842105,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": true
+      },
+      {
+        "rank": 2,
+        "label": "D'Agostino-Pearson normality, hallucinated class, qwen_0.5b (Exp.22)",
+        "p_raw": 1e-06,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0013513513513513514,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": true
+      },
+      {
+        "rank": 3,
+        "label": "D'Agostino-Pearson normality, hallucinated class, gpt2_117m (Exp.22)",
+        "p_raw": 4.2e-05,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.001388888888888889,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": true
+      },
+      {
+        "rank": 4,
+        "label": "Pipeline-A length-classifier permutation test (Exp.18)",
+        "p_raw": 0.001996007984031936,
+        "source": "results/18_pipeline_a_surface_confound_check.json",
+        "holm_threshold": 0.0014285714285714286,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 5,
+        "label": "D'Agostino-Pearson normality, hallucinated class, qwen_7b (Exp.22)",
+        "p_raw": 0.002285,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0014705882352941176,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 6,
+        "label": "Fisher J monotonic-with-scale, exact permutation test (retracted claim)",
+        "p_raw": 0.002777777777777778,
+        "source": "paper text (Spearman rho=-1.0, exact permutation p=1/360, n=6); recomputed asymptotic scipy p=0.000000 for reference",
+        "holm_threshold": 0.0015151515151515152,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 7,
+        "label": "Hallucination rate vs scale, Spearman (Exp.15 data, recomputed)",
+        "p_raw": 0.004804664723032055,
+        "source": "recomputed from results/logs/15_result_*.json",
+        "holm_threshold": 0.0015625,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 8,
+        "label": "D'Agostino-Pearson normality, correct class, qwen_7b (Exp.22)",
+        "p_raw": 0.012568,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0016129032258064516,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 9,
+        "label": "D'Agostino-Pearson normality, correct class, qwen_3b (Exp.22)",
+        "p_raw": 0.040792,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0016666666666666668,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 10,
+        "label": "Matched-n=24 bound-error vs scale, Spearman (Exp.16)",
+        "p_raw": 0.0416,
+        "source": "results/logs/16_minority_class_matched_check.txt",
+        "holm_threshold": 0.001724137931034483,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 11,
+        "label": "D'Agostino-Pearson normality, hallucinated class, qwen_3b (Exp.22)",
+        "p_raw": 0.045064,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0017857142857142859,
+        "significant_uncorrected_at_0.05": true,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 12,
+        "label": "D'Agostino-Pearson normality, correct class, gpt2_medium (Exp.22)",
+        "p_raw": 0.070953,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.001851851851851852,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 13,
+        "label": "Same-layer bound-error vs scale, Spearman (Exp.15 data, recomputed)",
+        "p_raw": 0.07239650145772594,
+        "source": "recomputed from results/logs/15_result_*.json",
+        "holm_threshold": 0.0019230769230769232,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 14,
+        "label": "D'Agostino-Pearson normality, correct class, qwen_0.5b (Exp.22)",
+        "p_raw": 0.102009,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.002,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 15,
+        "label": "Gated-protocol steering McNemar, eta=10 (Exp.23)",
+        "p_raw": 0.21875,
+        "source": "results/logs/23_gated_causal_intervention.json",
+        "holm_threshold": 0.0020833333333333333,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 16,
+        "label": "D'Agostino-Pearson normality, correct class, qwen_1.5b (Exp.22)",
+        "p_raw": 0.241074,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.002173913043478261,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 17,
+        "label": "Qwen2.5-14B steering replication McNemar, eta=10 (Exp.21)",
+        "p_raw": 0.25,
+        "source": "results/logs/21_qwen14b_causal_intervention.json",
+        "holm_threshold": 0.002272727272727273,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 18,
+        "label": "Matched-n=24 J vs scale, Spearman (Exp.16, retraction test)",
+        "p_raw": 0.2657,
+        "source": "results/logs/16_minority_class_matched_check.txt",
+        "holm_threshold": 0.002380952380952381,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 19,
+        "label": "Surface-length Mann-Whitney (flipped vs non-flipped), eta=40 (Exp.28)",
+        "p_raw": 0.26954648222817046,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.0025,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 20,
+        "label": "Gated-protocol steering McNemar, eta=20 (Exp.23)",
+        "p_raw": 0.375,
+        "source": "results/logs/23_gated_causal_intervention.json",
+        "holm_threshold": 0.002631578947368421,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 21,
+        "label": "D'Agostino-Pearson normality, hallucinated class, gpt2_medium (Exp.22)",
+        "p_raw": 0.380505,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.002777777777777778,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 22,
+        "label": "Non-Gaussianity score vs same-layer bound error, Spearman (Exp.22)",
+        "p_raw": 0.3965,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.0029411764705882353,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 23,
+        "label": "Surface-length Wilcoxon (found vs random length), eta=10 (Exp.28)",
+        "p_raw": 0.4441290380847156,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.003125,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 24,
+        "label": "Surface-length Mann-Whitney (flipped vs non-flipped), eta=20 (Exp.28)",
+        "p_raw": 0.44928413247857324,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.0033333333333333335,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 25,
+        "label": "GPT-2 117M unconditional steering McNemar, eta=20 (Exp.19)",
+        "p_raw": 0.453125,
+        "source": "results/19_active_control_causal_intervention.json",
+        "holm_threshold": 0.0035714285714285718,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 26,
+        "label": "SAE feature-clamp steering McNemar, eta=20 (Exp.25)",
+        "p_raw": 0.5078125,
+        "source": "results/logs/25_sae_feature_causal_clamp.json",
+        "holm_threshold": 0.0038461538461538464,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 27,
+        "label": "D'Agostino-Pearson normality, correct class, gpt2_117m (Exp.22)",
+        "p_raw": 0.510743,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.004166666666666667,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 28,
+        "label": "Surface-length Wilcoxon (found vs random length), eta=20 (Exp.28)",
+        "p_raw": 0.5809645068082863,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.004545454545454546,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 29,
+        "label": "D'Agostino-Pearson normality, hallucinated class, qwen_1.5b (Exp.22)",
+        "p_raw": 0.583088,
+        "source": "results/logs/22_why_bound_is_loose.json",
+        "holm_threshold": 0.005,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 30,
+        "label": "Gated-protocol steering McNemar, eta=40 (Exp.23)",
+        "p_raw": 0.625,
+        "source": "results/logs/23_gated_causal_intervention.json",
+        "holm_threshold": 0.005555555555555556,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 31,
+        "label": "Surface-length Mann-Whitney (flipped vs non-flipped), eta=10 (Exp.28)",
+        "p_raw": 0.7433998900677279,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.00625,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 32,
+        "label": "Surface-length Wilcoxon (found vs random length), eta=40 (Exp.28)",
+        "p_raw": 0.9374128369010464,
+        "source": "results/logs/28_surface_length_control_causal_steering.json",
+        "holm_threshold": 0.0071428571428571435,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 33,
+        "label": "GPT-2 117M unconditional steering McNemar, eta=10 (Exp.19)",
+        "p_raw": 1.0,
+        "source": "results/19_active_control_causal_intervention.json",
+        "holm_threshold": 0.008333333333333333,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 34,
+        "label": "GPT-2 117M unconditional steering McNemar, eta=40 (Exp.19)",
+        "p_raw": 1.0,
+        "source": "results/19_active_control_causal_intervention.json",
+        "holm_threshold": 0.01,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 35,
+        "label": "Qwen2.5-14B steering replication McNemar, eta=20 (Exp.21)",
+        "p_raw": 1.0,
+        "source": "results/logs/21_qwen14b_causal_intervention.json",
+        "holm_threshold": 0.0125,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 36,
+        "label": "Qwen2.5-14B steering replication McNemar, eta=40 (Exp.21)",
+        "p_raw": 1.0,
+        "source": "results/logs/21_qwen14b_causal_intervention.json",
+        "holm_threshold": 0.016666666666666666,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 37,
+        "label": "SAE feature-clamp steering McNemar, eta=10 (Exp.25)",
+        "p_raw": 1.0,
+        "source": "results/logs/25_sae_feature_causal_clamp.json",
+        "holm_threshold": 0.025,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      },
+      {
+        "rank": 38,
+        "label": "SAE feature-clamp steering McNemar, eta=40 (Exp.25)",
+        "p_raw": 1.0,
+        "source": "results/logs/25_sae_feature_causal_clamp.json",
+        "holm_threshold": 0.05,
+        "significant_uncorrected_at_0.05": false,
+        "significant_holm_corrected": false
+      }
+    ],
+    "summary": {
+      "n_significant_uncorrected": 11,
+      "n_significant_holm_corrected": 3,
+      "tests_that_flip": [
+        {
+          "label": "Pipeline-A length-classifier permutation test (Exp.18)",
+          "p_raw": 0.001996007984031936,
+          "holm_threshold": 0.0014285714285714286
+        },
+        {
+          "label": "D'Agostino-Pearson normality, hallucinated class, qwen_7b (Exp.22)",
+          "p_raw": 0.002285,
+          "holm_threshold": 0.0014705882352941176
+        },
+        {
+          "label": "Fisher J monotonic-with-scale, exact permutation test (retracted claim)",
+          "p_raw": 0.002777777777777778,
+          "holm_threshold": 0.0015151515151515152
+        },
+        {
+          "label": "Hallucination rate vs scale, Spearman (Exp.15 data, recomputed)",
+          "p_raw": 0.004804664723032055,
+          "holm_threshold": 0.0015625
+        },
+        {
+          "label": "D'Agostino-Pearson normality, correct class, qwen_7b (Exp.22)",
+          "p_raw": 0.012568,
+          "holm_threshold": 0.0016129032258064516
+        },
+        {
+          "label": "D'Agostino-Pearson normality, correct class, qwen_3b (Exp.22)",
+          "p_raw": 0.040792,
+          "holm_threshold": 0.0016666666666666668
+        },
+        {
+          "label": "Matched-n=24 bound-error vs scale, Spearman (Exp.16)",
+          "p_raw": 0.0416,
+          "holm_threshold": 0.001724137931034483
+        },
+        {
+          "label": "D'Agostino-Pearson normality, hallucinated class, qwen_3b (Exp.22)",
+          "p_raw": 0.045064,
+          "holm_threshold": 0.0017857142857142859
+        }
+      ]
+    }
+  },
+  "analysis_4_probe_hyperparameter_sensitivity_P2_2": {
+    "gpt2_117m": {
+      "best_J_layer": 8,
+      "best_probe_layer_original": 7,
+      "hall_rate": 0.952,
+      "n_correct": 24,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.5639005602240896,
+      "original_bound_error": 0.40983007676190475,
+      "bound_at_best_J_layer": 0.9737306369859944,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.6261379551820728,
+          "bound_error": 0.34759268180392155
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5975140056022409,
+          "bound_error": 0.3762166313837535
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5647759103641457,
+          "bound_error": 0.40895472662184873
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5626750700280112,
+          "bound_error": 0.4110555669579832
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5147058823529411,
+          "bound_error": 0.45902475463305326
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5261729691876751,
+          "bound_error": 0.4475576677983193
+        }
+      },
+      "auroc_range_across_configs": 0.1114320728291317,
+      "auroc_min": 0.5147058823529411,
+      "auroc_max": 0.6261379551820728
+    },
+    "gpt2_medium": {
+      "best_J_layer": 20,
+      "best_probe_layer_original": 18,
+      "hall_rate": 0.9,
+      "n_correct": 50,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.5611555555555555,
+      "original_bound_error": 0.35951849532816127,
+      "bound_at_best_J_layer": 0.9206740508837168,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.6452888888888888,
+          "bound_error": 0.275385161994828
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.6326666666666667,
+          "bound_error": 0.2880073842170501
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.561111111111111,
+          "bound_error": 0.3595629397726058
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5524444444444444,
+          "bound_error": 0.3682296064392724
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5079555555555556,
+          "bound_error": 0.4127184953281612
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5162222222222222,
+          "bound_error": 0.40445182866149454
+        }
+      },
+      "auroc_range_across_configs": 0.1373333333333332,
+      "auroc_min": 0.5079555555555556,
+      "auroc_max": 0.6452888888888888
+    },
+    "qwen_0.5b": {
+      "best_J_layer": 24,
+      "best_probe_layer_original": 15,
+      "hall_rate": 0.906,
+      "n_correct": 47,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.5507491428303039,
+      "original_bound_error": 0.3621246977365181,
+      "bound_at_best_J_layer": 0.912873840566822,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5563853271335306,
+          "bound_error": 0.35648851343329135
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5322436710347095,
+          "bound_error": 0.3806301695321125
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5508430792353577,
+          "bound_error": 0.3620307613314643
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5559626133107887,
+          "bound_error": 0.3569112272560333
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5660138086515429,
+          "bound_error": 0.34686003191527903
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5705227560941242,
+          "bound_error": 0.3423510844726978
+        }
+      },
+      "auroc_range_across_configs": 0.038279085059414686,
+      "auroc_min": 0.5322436710347095,
+      "auroc_max": 0.5705227560941242
+    },
+    "qwen_1.5b": {
+      "best_J_layer": 22,
+      "best_probe_layer_original": 3,
+      "hall_rate": 0.88,
+      "n_correct": 60,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.5392045454545454,
+      "original_bound_error": 0.31641823561997084,
+      "bound_at_best_J_layer": 0.8556227810745163,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5525757575757576,
+          "bound_error": 0.30304702349875867
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5401893939393938,
+          "bound_error": 0.3154333871351225
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5390909090909091,
+          "bound_error": 0.3165318719836072
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5385227272727273,
+          "bound_error": 0.31710005380178896
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5427651515151515,
+          "bound_error": 0.3128576295593648
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5430303030303031,
+          "bound_error": 0.3125924780442132
+        }
+      },
+      "auroc_range_across_configs": 0.01405303030303029,
+      "auroc_min": 0.5385227272727273,
+      "auroc_max": 0.5525757575757576
+    },
+    "qwen_3b": {
+      "best_J_layer": 36,
+      "best_probe_layer_original": 24,
+      "hall_rate": 0.81,
+      "n_correct": 95,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.5043794671864847,
+      "original_bound_error": 0.3368083493906,
+      "bound_at_best_J_layer": 0.8411878165770847,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5232228719948019,
+          "bound_error": 0.31796494458228286
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5160753736192333,
+          "bound_error": 0.32511244295785147
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5043794671864847,
+          "bound_error": 0.3368083493906
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.5061208576998051,
+          "bound_error": 0.33506695887727966
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.5036257309941521,
+          "bound_error": 0.33756208558293266
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.50588693957115,
+          "bound_error": 0.3353008770059347
+        }
+      },
+      "auroc_range_across_configs": 0.019597141000649798,
+      "auroc_min": 0.5036257309941521,
+      "auroc_max": 0.5232228719948019
+    },
+    "qwen_7b": {
+      "best_J_layer": 24,
+      "best_probe_layer_original": 19,
+      "hall_rate": 0.794,
+      "n_correct": 103,
+      "n_total": 500,
+      "original_probe_auroc_at_best_J_layer": 0.48443422758064125,
+      "original_bound_error": 0.33244911486487316,
+      "bound_at_best_J_layer": 0.8168833424455144,
+      "configs": {
+        "C=0.01_class_weight=None": {
+          "C": 0.01,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.48211097796581154,
+          "bound_error": 0.3347723644797029
+        },
+        "C=0.01_class_weight=balanced": {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.4871243060820229,
+          "bound_error": 0.3297590363634915
+        },
+        "C=1.0_class_weight=None": {
+          "C": 1.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.48450759335795157,
+          "bound_error": 0.33237574908756284
+        },
+        "C=1.0_class_weight=balanced": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.4885671663691277,
+          "bound_error": 0.3283161760763867
+        },
+        "C=100.0_class_weight=None": {
+          "C": 100.0,
+          "class_weight": null,
+          "probe_auroc_at_best_J_layer": 0.48392066713946835,
+          "bound_error": 0.33296267530604606
+        },
+        "C=100.0_class_weight=balanced": {
+          "C": 100.0,
+          "class_weight": "balanced",
+          "probe_auroc_at_best_J_layer": 0.48947201095595605,
+          "bound_error": 0.32741133148955837
+        }
+      },
+      "auroc_range_across_configs": 0.0073610329901445115,
+      "auroc_min": 0.48211097796581154,
+      "auroc_max": 0.48947201095595605
+    }
+  }
+}

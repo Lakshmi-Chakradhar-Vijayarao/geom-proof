@@ -13,7 +13,7 @@ Causal Fisher (Park et al. ICML 2024 — causal inner product):
   This weights hidden-state dimensions by their actual contribution to output logits —
   the theoretically correct geometry for LLM probing.
 
-AUROC_bound(L) = Phi(sqrt(J(L)) / 2)
+AUROC_bound(L) = Phi(sqrt(J(L) / 2))   [binormal ROC identity; see auroc_bound() docstring]
 
 Two estimation methods:
   - "lda": Ledoit-Wolf shrinkage on full d-dimensional covariance (more principled)
@@ -115,12 +115,21 @@ def auroc_bound(J: float) -> float:
     """
     Convert Fisher ratio to AUROC bound.
 
-    Under Gaussian equal-covariance assumption:
-      AUROC_bound = Phi(sqrt(J) / 2)
+    Under the Gaussian equal-covariance assumption, projecting onto the Fisher
+    direction gives two unit-variance-normalized Gaussians separated by
+    d' = sqrt(J) (the standard signal-detection-theory effect size). The
+    binormal ROC identity (Green & Swets 1966; Bamber 1975; Hanley & McNeil
+    1982) is then:
 
-    where Phi is the standard normal CDF.
+      AUROC_bound = Phi(d' / sqrt(2)) = Phi(sqrt(J) / sqrt(2)) = Phi(sqrt(J / 2))
+
+    NOTE: an earlier version of this function used Phi(sqrt(J) / 2), which is
+    the equal-prior Bayes *accuracy* formula (Phi(-Mahalanobis_distance / 2)
+    with Mahalanobis distance = sqrt(J)), not the AUROC. That is a distinct
+    quantity from the binormal AUROC and was a genuine bug -- Phi(sqrt(J)/2)
+    != Phi(sqrt(J)/sqrt(2)) since 2 != sqrt(2). Fixed throughout.
     """
-    return float(norm.cdf(np.sqrt(max(0.0, J)) / 2))
+    return float(norm.cdf(np.sqrt(max(0.0, J) / 2)))
 
 
 def causal_fisher_ratio(

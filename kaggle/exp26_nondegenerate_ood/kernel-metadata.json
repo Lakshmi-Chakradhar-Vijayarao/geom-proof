@@ -1,0 +1,17 @@
+{
+  "id": "chakrivijayarao/exp26-ood-test",
+  "title": "exp26-ood-test",
+  "code_file": "exp26_nondegenerate_ood_transfer.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "chakrivijayarao/exp26-halueval-qwen3b-cache"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

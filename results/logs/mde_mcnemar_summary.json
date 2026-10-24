@@ -1,0 +1,106 @@
+{
+  "exp19_gpt2_dense": [
+    {
+      "alpha": 10.0,
+      "n_valid": 60,
+      "b": 4,
+      "c": 3,
+      "n_discordant": 7,
+      "needed_for_sig": 7
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 57,
+      "b": 5,
+      "c": 2,
+      "n_discordant": 7,
+      "needed_for_sig": 7
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 36,
+      "b": 5,
+      "c": 4,
+      "n_discordant": 9,
+      "needed_for_sig": 8
+    }
+  ],
+  "exp21_qwen14b": [
+    {
+      "alpha": 10.0,
+      "n_valid": 30,
+      "b": 0,
+      "c": 3,
+      "n_discordant": 3,
+      "needed_for_sig": null
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 27,
+      "b": 2,
+      "c": 3,
+      "n_discordant": 5,
+      "needed_for_sig": null
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 28,
+      "b": 2,
+      "c": 3,
+      "n_discordant": 5,
+      "needed_for_sig": null
+    }
+  ],
+  "exp23_gated": [
+    {
+      "alpha": 10.0,
+      "n_valid": 62,
+      "b": 5,
+      "c": 1,
+      "n_discordant": 6,
+      "needed_for_sig": 6
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 60,
+      "b": 4,
+      "c": 1,
+      "n_discordant": 5,
+      "needed_for_sig": null
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 53,
+      "b": 3,
+      "c": 1,
+      "n_discordant": 4,
+      "needed_for_sig": null
+    }
+  ],
+  "exp25_sae_clamp_paper4": [
+    {
+      "alpha": 10.0,
+      "n_valid": 56,
+      "b": 3,
+      "c": 3,
+      "n_discordant": 6,
+      "needed_for_sig": 6
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 49,
+      "b": 6,
+      "c": 3,
+      "n_discordant": 9,
+      "needed_for_sig": 8
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 29,
+      "b": 4,
+      "c": 5,
+      "n_discordant": 9,
+      "needed_for_sig": 8
+    }
+  ]
+}

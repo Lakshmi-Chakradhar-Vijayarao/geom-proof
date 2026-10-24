@@ -1,4 +1,25 @@
+# Streamlit demo app dependencies (original contents of this file)
 streamlit>=1.32.0
 numpy>=1.24.0
 pandas>=2.0.0
 matplotlib>=3.7.0
+
+# Added post-final-audit: the experiments/ and src/ scripts depend on a
+# much larger set of libraries than this file previously listed --
+# notably including the exact versions relevant to the four-round
+# Kaggle GPU-placement bug this paper narrates in detail (Exp 20/21,
+# on-the-fly bitsandbytes quantization failing, resolved by switching to
+# a pre-quantized AWQ checkpoint loaded via gptqmodel). Versions below
+# are what was actually used (local Apple Silicon runs verified via
+# `import <pkg>; print(pkg.__version__)`); gptqmodel/bitsandbytes are
+# Kaggle-only (installed at runtime inside the Kaggle kernel scripts
+# themselves, e.g. kaggle/exp20_notebook/, kaggle/exp21_notebook/) --
+# no local pin verified for either.
+scipy==1.15.1
+scikit-learn==1.6.1
+torch==2.11.0
+transformers==5.2.0
+datasets==4.8.5
+rouge-score  # installed at runtime on Kaggle; no local pin verified
+gptqmodel    # installed at runtime on Kaggle (kaggle/exp20_notebook/, exp21_notebook/); no local pin verified
+bitsandbytes  # installed at runtime on Kaggle (early exp20 attempts, later abandoned for gptqmodel); no local pin verified

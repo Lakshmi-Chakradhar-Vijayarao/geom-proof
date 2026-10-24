@@ -1,0 +1,66 @@
+{
+  "model": "gpt2",
+  "array_layer": 8,
+  "hook_block_idx": 7,
+  "n_test_prompts": 150,
+  "alphas": [
+    10.0,
+    20.0,
+    40.0
+  ],
+  "tau_s": 0.09504849578411168,
+  "mean_s_correct_cal": 0.2665436041908765,
+  "mean_s_hall_cal": -0.07644661262265319,
+  "n_direction_fit": 250,
+  "n_calibration": 250,
+  "results_per_alpha": [
+    {
+      "alpha": 10.0,
+      "n_valid": 62,
+      "found_flip_rate": 0.08064516129032258,
+      "random_flip_rate": 0.016129032258064516,
+      "mcnemar_b_found_only": 5,
+      "mcnemar_c_random_only": 1,
+      "mcnemar_p": 0.21875,
+      "mean_gate_rate_found": 0.7085,
+      "mean_gate_rate_random": 0.7193333333333333,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.4227156162261965,
+      "capability_random_ll": -3.4227156162261965,
+      "capability_drop_found": 0.0,
+      "capability_drop_random": 0.0
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 60,
+      "found_flip_rate": 0.06666666666666667,
+      "random_flip_rate": 0.016666666666666666,
+      "mcnemar_b_found_only": 4,
+      "mcnemar_c_random_only": 1,
+      "mcnemar_p": 0.375,
+      "mean_gate_rate_found": 0.7036666666666667,
+      "mean_gate_rate_random": 0.6981666666666666,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.4227156162261965,
+      "capability_random_ll": -3.4227156162261965,
+      "capability_drop_found": 0.0,
+      "capability_drop_random": 0.0
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 53,
+      "found_flip_rate": 0.05660377358490566,
+      "random_flip_rate": 0.018867924528301886,
+      "mcnemar_b_found_only": 3,
+      "mcnemar_c_random_only": 1,
+      "mcnemar_p": 0.625,
+      "mean_gate_rate_found": 0.6951666666666667,
+      "mean_gate_rate_random": 0.7011666666666666,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.4227156162261965,
+      "capability_random_ll": -3.4227156162261965,
+      "capability_drop_found": 0.0,
+      "capability_drop_random": 0.0
+    }
+  ]
+}

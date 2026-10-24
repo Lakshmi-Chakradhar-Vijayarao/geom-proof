@@ -1,0 +1,28 @@
+{
+  "best_layer": 24,
+  "n_bootstrap_requested": 1000,
+  "n_bootstrap_valid": 1000,
+  "point_estimate": {
+    "in_dist_auroc": 0.5837500000000001,
+    "ood_auroc": 0.6476535087719298,
+    "gap": 0.06390350877192974
+  },
+  "bootstrap": {
+    "in_dist_auroc_mean": 0.5697644818326115,
+    "in_dist_auroc_ci95": [
+      0.38625088589652734,
+      0.7469165752923975
+    ],
+    "ood_auroc_mean": 0.5931579892486449,
+    "ood_auroc_ci95": [
+      0.4736861605474022,
+      0.6901804127206768
+    ],
+    "gap_mean": 0.0233935074160335,
+    "gap_ci95": [
+      -0.1809673185141488,
+      0.24398582188398388
+    ],
+    "fraction_ood_greater_than_indist": 0.577
+  }
+}

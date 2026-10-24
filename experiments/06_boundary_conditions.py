@@ -44,8 +44,8 @@ MODEL_META = {
 
 
 def theoretical_curve(J_range: np.ndarray) -> np.ndarray:
-    """AUROC_bound = Phi(sqrt(J)/2)."""
-    return norm.cdf(np.sqrt(np.maximum(0, J_range)) / 2)
+    """AUROC_bound = Phi(sqrt(J/2)) -- corrected binormal ROC identity (was Phi(sqrt(J)/2), a bug)."""
+    return norm.cdf(np.sqrt(np.maximum(0, J_range) / 2))
 
 
 def run() -> dict:

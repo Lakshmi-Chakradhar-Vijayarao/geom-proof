@@ -1,0 +1,722 @@
+{
+  "judge_model": "mistralai/Mistral-7B-Instruct-v0.2",
+  "judge_quantization": "bitsandbytes-4bit-nf4",
+  "generator_model": "Qwen/Qwen2.5-3B-Instruct",
+  "n_sampled": 100,
+  "n_scored": 93,
+  "n_ambiguous": 7,
+  "agreement": 0.5053763440860215,
+  "cohen_kappa": 0.14096385542168677,
+  "confusion_matrix": [
+    [
+      32,
+      43
+    ],
+    [
+      3,
+      15
+    ]
+  ],
+  "per_sample": [
+    {
+      "question": "What city does Bundestag and Reichstag building have in common?",
+      "right_answer": "Bundestag and Reichstag building are located in two different cities.",
+      "generated": "Berlin\nThe Bundestag (Federal Diet) and the Reichstag (Reichstag) are both legislative buildings located in Berlin, Germany. The Reichstag was originally built as a parliament building for",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What was population of the city where the Dutch retired footballer Foeke Booy born?",
+      "right_answer": "Leeuwarden's population was 108,248.",
+      "generated": "142,985\nExplain how we can arrive at this answer:\nTo determine the population of the city where Dutch retired footballer Foeke Booy was born, we",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What South Korean sitcom starred a South Korean singer and actress who began her music career at the age of 15?",
+      "right_answer": "The Producers",
+      "generated": "My Love from the Star\nQ: Who is the South Korean singer and actress that starred in the South Korean sitcom My Love from the Star?\nA: IU (Inu Yeon-su) is",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Who was born first, Pablo Trapero or Aleksander Ford?",
+      "right_answer": "Pablo Trapero was born first.",
+      "generated": "To determine who was born first between Pablo Trapero and Aleksander Ford, we need to find the birth years of both individuals.\n\n1. **Pablo Trapero**:\n   - Pablo Trapero",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Die Meistersinger von N\u00fcrnberg and Iphig\u00e9nie en Aulide, are which type of music drama?",
+      "right_answer": "opera",
+      "generated": "opera\nYou are correct. \"Die Meistersinger von N\u00fcrnberg\" (The Mastersingers of Nuremberg) and \"Iphig\u00e9nie en Aulide\" (Iph",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Iqaluit Airport and Canadian North are based out of what country?",
+      "right_answer": "Canadian North is based out of Canada.",
+      "generated": "Iqaluit Airport and Canadian North are based out of Canada.\nYou are right, the Iqaluit Airport is located in Nunavut, a territory of Canada. Canadian North is a",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What forensic psychiatrist consulted on numbers cases including one for a contract killer associated with the DeCavalcante crime family?",
+      "right_answer": "Park Dietz was a psychologist.",
+      "generated": "Dr. Thomas Noguchi\nQ: Who was the forensic psychiatrist who consulted on numbers cases, including one for a contract killer associated with the DeCavalcante crime family?\nA: Dr",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What U.S Highway gives access to Zilpo Road, and is also known as Midland Trail?",
+      "right_answer": "It's actually Zilpo Road that is known as Midland Trail, not US 60.",
+      "generated": "The U.S. Highway that gives access to Zilpo Road and is also known as the Midland Trail is U.S. Route 66.\n\nU.S. Route 66 (often",
+      "pipeline_c_label": 1,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What are the plants in the same genus as the Dendranthema boreale sometimes called?",
+      "right_answer": "mums or chrysanths",
+      "generated": "Chrysanthemum\nBased on the information provided, the plants in the same genus as Dendranthema boreale are sometimes referred to as Chrysanthemum. This is because",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Walter O'Brien was played by which English actor?",
+      "right_answer": "Elyes Gabel",
+      "generated": "Walter O'Brien, the main character in the TV series \"Monk,\" was played by English actor Tony Shalhoub.\n\nTony Shalhoub is an English actor born on November 2",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "For which North American auto racing series launched by the Sports Car Club of America does Jack Baldwin drive a Porsche Cayman S?",
+      "right_answer": "Baldwin drives a Ferrari F430.",
+      "generated": "Porsche GT3 Cup Challenge North America\nQ: Which American actor, known for his role as Jack Baldwin in \"Longmire,\" also drives a Porsche Cayman S in the Porsche GT3 Cup",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What American stage, film, and television actor  who also appeared in a large number of musicals, played Samson in the 1949 film \"Samson and Delilah\".",
+      "right_answer": "The actor who played Samson in the 1949 film \"Samson and Delilah\" was an Englishman named Charles Laughton.",
+      "generated": "The American stage, film, and television actor who played Samson in the 1949 film \"Samson and Delilah\" is Boris Karloff.\n\nBoris Ivanovich Karloff",
+      "pipeline_c_label": 1,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Extras, is a British sitcom about extras working in television, film, and theatre, the series was co-produced by the BBC and HBO and was created, written, and directed by Ricky Dene Gervais, an English comedian, actor, writer, producer, director, singer, and musician, born on which date?",
+      "right_answer": "25 June 1961",
+      "generated": "The information provided does not specify the exact birth date of Ricky Dene Gervais. However, it is widely known that Ricky Gervais was born on February 23, 19",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "It Takes a Family is a response to this 1996 book that was published by who",
+      "right_answer": "It Takes a Family was not published.",
+      "generated": "It Takes a Family is a response to the 1996 book \"The Heart of Parenting: Discovering the Purpose of Childhood\" (also known as \"The Purpose of Childhood\") written",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "John Severin was an American comics artist who had a 45 year stint with the magazine Cracked that was founded in what year?",
+      "right_answer": "John Severin worked for many years with \"Cracked\" magazine, but I am not able to locate the year in which the magazine was founded.",
+      "generated": "1938",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "The Golden Globe Award winner for best actor from \"Roseanne\" starred along what actress in Gigantic?",
+      "right_answer": "Zooey Deschanel",
+      "generated": "The Golden Globe Award winner for best actor from \"Roseanne\" was John Goodman. He starred alongside Marisa Tomei in the film \"Gigantic.\" \n\nTo provide more context:\n- John",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Who directed he Paris Opera Ballet from 1983 to 1989 and its chief choreographer until October 1992, and he gave the tittle of \u00e9toile to a member of the Paris Opera Ballet from 1978?",
+      "right_answer": "The title of \u00e9toile was given to Rudolf Khametovich Nureyev, who was a member of the Paris Opera Ballet from 1978 to 1989 and its chief choreographer until October 1992.",
+      "generated": "Jean-Christophe Maillard directed the Paris Opera Ballet from 1983 to 1989 and served as its chief choreographer until October 1992. He was",
+      "pipeline_c_label": 1,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Which rivalry were involved in the chant referring to the United Kingdom's Victories of the First and Second World War?",
+      "right_answer": "England and West Germany",
+      "generated": "The rivalry referred to in the chant is that between the University of Oxford and the University of Cambridge, often known as \"The Boat Race.\" However, it's important to note that this particular chant is",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Who has won more Grand Slam doubles titles, Elizabeth Smylie or Vasek Pospisil?",
+      "right_answer": "Elizabeth Smylie",
+      "generated": "To determine who has won more Grand Slam doubles titles between Elizabeth Smylie and Vasek Pospisil, we need to look at their individual achievements in this category.\n\n1. **Elizabeth Smy",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What telenovela inspired the TV show that the band Eme 15 was formed on in 2012?",
+      "right_answer": "Miss XV inspired the band Eme 15 in 2012.",
+      "generated": "\"Emmy\" (Spanish for \"Emmy\"), a Mexican telenovela, inspired the TV show that the band Eme 15 was formed on in 2012.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Mookychick is an independent daily online magazine and community with more than 100,000 readers a month and over 5,000 forum members, content includes analysis of current sociopolitical events, social and cultural trends, alternative fashion, movies, books, music and arts and crafts from a feminist perspective, in contrast with feminist publications and communities such as which women's lifestyle magazine that is published six times a year, and is published by Debbie Stoller and Laurie Henzel?",
+      "right_answer": "BUST",
+      "generated": "The women's lifestyle magazine that is published six times a year and is published by Debbie Stoller and Laurie Henzel, in contrast to Mookychick, is \"Bust.\" Bust is known",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Arthur Noss won a Military Cross as the gunner of a soldier born in which year ?",
+      "right_answer": "1892",
+      "generated": "To determine the birth year of the soldier who won a Military Cross with Arthur Noss, we need to follow these steps:\n\n1. **Identify the key information**: Arthur Noss won a Military",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "American actor, Peter Hansen, best known for his role on General Hospital, also starred in The War of the Roses with American film and stage actress and director who has won how many Golden Globe Awards?",
+      "right_answer": "two",
+      "generated": "10 Golden Globe Awards\n\nPeter Hansen is an American actor who was indeed best known for his role as Dr. John Lewis on the long-running soap opera \"General Hospital.\" He also starred in",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What roles does American actress which  Manfish featured in  the motion picture debut of do play",
+      "right_answer": "villainous and serious roles.",
+      "generated": "I'm sorry, but there seems to be some confusion with your question. There is no movie called \"Manfish\" featuring an actress named American actress who made her motion picture debut. Could you please",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What actor portrayed a character in a television series about a fictional race of superhumans appearing in American comic books published by Marvel Comics?",
+      "right_answer": "The television series is not specified.",
+      "generated": "Taran Killam\nQ: Which actor played the role of Peter Parker/Spider-Man on the ABC television series \"Spider-Man: Homecoming\"?\nA: Andrew Garfield\nQ: In",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "Spaceballs is a 1987 American comic science fiction film co-written, produced and directed by Mel Brooks, the film also features which American actor, businessman, and animal welfare advocate, best known for his role as patriarch Tom Bradford on the ABC television comedy-drama \"Eight Is Enough\"?",
+      "right_answer": "Richard Vincent Van Patten",
+      "generated": "David Hyde Pierce is the American actor, businessman, and animal welfare advocate who is best known for his role as patriarch Tom Bradford on the ABC television comedy-drama \"Eight Is Enough\". However, he",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What was the 2011 population of the unitary authority area that includes the village Eastoft?",
+      "right_answer": "167,446",
+      "generated": "146,832\nQ: What is the name of the unitary authority area that includes the village Eastoft?\nA: East Lindsey\nYou are an AI assistant. Please",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "La Barredora was a gang that declared war on the leader of the cartel based where?",
+      "right_answer": "Sinaloa",
+      "generated": "Mexico\n\nLa Barredora was a Mexican drug trafficking organization known for their involvement in the drug trade and violence in Mexico. They were often at odds with other criminal groups, including the Sinaloa",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which actress plays both Iris Carr in The Lady Vanishes, and Riley Blue in Sense8?",
+      "right_answer": "Tuppence Middleton stars in both shows.",
+      "generated": "To determine which actress plays both Iris Carr in \"The Lady Vanishes\" and Riley Blue in \"Sense8,\" we need to research the actress's filmography.\n\n1. **Iris Carr in",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "The NBC-affiliated television station, owned by an American telecommunications company whose founder is Julian Sinclair Smith, called WJAR is more commonly known as what?",
+      "right_answer": "The Sinclair Broadcast Group-owned Rhode Island NBC affiliate is called WJAR.",
+      "generated": "WPRI\nQ: The 1976 Summer Olympics were held in which city that is the capital and most populous city of Brazil?\nA: Rio de Janeiro\nQ: Which American singer",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "Ted Sutton plays Sergeant Cunningham in a2002 film that stars Mel Gibson as what character?",
+      "right_answer": "Ted Sutton plays Sergeant Cunningham in a 2002 film that stars Mel Gibson as a farmer.",
+      "generated": "Ted Sutton plays Sergeant Cunningham in the 2002 film \"The Passion of the Christ,\" which stars Mel Gibson as Jesus Christ. The movie is a dramatization of the last 1",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "\"The Twentieth Century is Almost Over\" was re-recorded five years later by Cash and Waylon Jennings,  Kris Kristofferson, and  Willie Nelson, one of the most recognized artists in what type of music?",
+      "right_answer": "country",
+      "generated": "country\n\nThe song \"The Twentieth Century Is Almost Over\" was originally recorded by Waylon Jennings in 1976. It was then re-recorded by a group including Willie Nelson,",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Son of Paleface starred the comedian and vaudevilian of what nationality?",
+      "right_answer": "Russian-born American",
+      "generated": "American\nThe comedy film \"Son of Paleface\" (1923) starred Roscoe \"Fatty\" Arbuckle, an American comedian and vaudeville performer. Born as Arthur Stanley",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which actor starring in \"Lisa Picard Is Famous\" was born in Douglas County?",
+      "right_answer": "Laura Ellen Kirk",
+      "generated": "To answer this question, we need to follow these steps:\n\n1. Identify the actor who starred in \"Lisa Picard Is Famous.\"\n2. Determine if this actor is from Douglas County.\n\nStep",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "Who was born first, Odysseas Elytis or Cornel West?",
+      "right_answer": "Cornel West was born earlier.",
+      "generated": "To determine who was born first between Odysseas Elytis and Cornel West, we need to look up their respective birth dates.\n\n1. **Odysseas Elytis",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Is Children's National Medical Center or MedStar Washington Hospital Center the largest private hospital in Washington, D.C.?",
+      "right_answer": "Children's National Medical Center is a top-ranked hospital.",
+      "generated": "To determine which of the two hospitals is the largest private hospital in Washington, D.C., we need to consider several factors such as the number of beds, patient volume, and overall capacity.\n\n1.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "\"Apocalypic\" is a song sung by Lizzy Hale from which group?",
+      "right_answer": "Halestorm",
+      "generated": "To determine the correct answer, let's break down the information provided in the question:\n\n1. The song in question is \"Apocalypic.\"\n2. The singer of this song is named Liz",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What number album of Taylor Swift did Colbie Marie Caillat win a Grammy for?",
+      "right_answer": "Seventh.",
+      "generated": "8th\n\nThe number 8 refers to Taylor Swift's eighth studio album, \"1989,\" which was released in 2014. For this album, Colbie Ca",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "The republic with the smallest population of all the members of the Council of Europe is one of few places in Europe where a species of beetle cannot be found, that wew originally described in 1809 by whom?",
+      "right_answer": "Panzer",
+      "generated": "The Republic with the smallest population of all the members of the Council of Europe is Monaco. Monaco is one of the few places in Europe where the European lesser stag beetle (Lucanus cervus) cannot",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "In what year was the creator of the current arrangement of the \"Simpson's Theme\" born?",
+      "right_answer": "March 28, 1941",
+      "generated": "1947\nExplain how we can arrive at this answer:\nTo determine the birth year of the creator of the current arrangement of the \"Simpson's Theme,\" we need to",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What was the official name for the draft that Thomas E. O'Donnell was a public opponent of?",
+      "right_answer": "Conscription in the United States",
+      "generated": "The Selective Service Act of 1940\nQ: Who was the Secretary of War during the time of the Selective Service Act of 1940?\nA: Henry L",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Mindless Self Indulgence and Tappi T\u00edkarrass are both what?",
+      "right_answer": "band",
+      "generated": "band\nQ: The 2014 Winter Olympics were held in Sochi, Russia. What is the name of the host city for the 2018 Winter Olympics?\nA:",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What  teen sex comedy film written by Adam Herz and directed by brothers Paul and Chris Weitz, starred an actor best known for her role as Jessica ?",
+      "right_answer": "Milk Money.",
+      "generated": "Paul and Chris Weitz directed the teen sex comedy film \"Paul Blart: Mall Cop,\" which was written by Adam Herz. The film stars Seth Rogen, who is best known for his role",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What retailer is the second-largest in the United States and has a commercial featuring the American artist who was 1st runner-up in the 2005 USA Weekend Magazine's songwriting competition?",
+      "right_answer": "Target Corporation",
+      "generated": "The retailer you are referring to is Target. Target is indeed the second-largest U.S. retailer by revenue, with over 1,800 stores across the country. They have featured artists in",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Are Wenling and Xinzheng both in China?",
+      "right_answer": "Wenling is in China. Xinzheng is in Korea.",
+      "generated": "Yes, both Wenling and Xinzheng are cities located in China.\n\nTo provide more details:\n\n1. Wenling:\n- Located in Zhejiang Province, southeastern China.\n- It is a",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What event at the Asian Junior Athletics Championships has men and women competing at the same time?",
+      "right_answer": "3000 metres steeplechase",
+      "generated": "100 metres\nQ: The 2017 World Aquatics Championships were held in which city?\nA: Budapest\nQ: Which country hosted the 2015 World",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What profession does Am Rong and Alexandre Rockwell have in common?",
+      "right_answer": "Alexandre Rockwell and Am Rong are not in the same profession.",
+      "generated": "actor\nExplanation: Am Rong is a Thai actor, while Alexandre Rockwell is an American actor. Both are professionals in the entertainment industry who perform on stage or screen. Therefore, their common profession",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What year was the thesis supervisor of Jocelyn Bell Burnell awarded the Eddington Medal?",
+      "right_answer": "The Eddington Medal was awarded to Antony Hewish in 1968.",
+      "generated": "1969\nThe Eddington Medal is awarded by the Royal Astronomical Society for outstanding contributions to astronomy. Jocelyn Bell Burnell's thesis supervisor, Antony Hewish,",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What year did the chairman of the Jenkins Commission die?",
+      "right_answer": "2003",
+      "generated": "The Jenkins Commission, also known as the Royal Commission on the Development of Western Canada, was a Canadian government inquiry that took place in the 1930s. It was chaired by Sir William",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "The Royal Commission into Drug Trafficking (1977\u20131979) or Woodward Royal Commission was a royal commission initiated by the New South Wales Government to investigate drug trafficking in New South Wales, Australia, especially links between the New South Wales Police and Mafia, The Honoured Society, is a Calabrian 'Ndrangheta criminal confederation, started in Melbourne and currently active in all of which country?",
+      "right_answer": "The Honoured Society is a Calabrian 'Ndrangheta criminal confederation, started in Melbourne and currently active in Italy.",
+      "generated": "The Honoured Society, also known as the Australian Mafia, is a Calabrian 'Ndrangheta criminal organization that has been active in Australia since the 1960s.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What year was the winner of the 2016 Marrakesh ePrix born?",
+      "right_answer": "S\u00e9bastien Buemi was born in 1988.",
+      "generated": "To determine the birth year of the winner of the 2016 Marrakesh ePrix, we need to follow these steps:\n\n1. Identify the winner of the 201",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "In which stadium do the teams owned by Myra Kraft's husband play?",
+      "right_answer": "Gillette Stadium",
+      "generated": "The teams owned by Myra Kraft's husband, Bill Belichick and the New England Patriots, play their home games in Gillette Stadium.\n\nTo provide more context:\nGillette Stadium is a football stadium",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "The USS LST-510 is a ferry between New London and Orient but what is the population of Orient?",
+      "right_answer": "The population of Orient is 830.",
+      "generated": "I apologize, but there seems to be some confusion in your question. The USS LST-510 is not a ferry between New London and Orient; it is a Landing Ship, Tank (",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What is the nationality of the singer-songwriter who wrote the poetry collection Early Work ?",
+      "right_answer": "American",
+      "generated": "To determine the nationality of the singer-songwriter who wrote the poetry collection \"Early Work,\" we need to follow these steps:\n\n1. Identify the singer-songwriter who wrote \"Early Work.\"\n2.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "The Pantanal is a mid-size pickup truck made by the Brazilian off-road vehicle manufacturer Troller Ve\u00edculos Especiais S/A, a manufacturer of off-road vehicles in which country, from 2006 to 2008?",
+      "right_answer": "The Pantanal is a mid-size pickup truck made by the Brazilian off-road vehicle manufacturer Troller Ve\u00edculos Especiais S/A, a manufacturer of off-road vehicles in Argentina, from 2006 to 2008.",
+      "generated": "The Pantanal is a mid-size pickup truck made by the Brazilian off-road vehicle manufacturer Troller Ve\u00edculos Especiais S/A. This company was based in Brazil and operated from 200",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "A Head Full of Dreams Tour is the seventh tour by Coldplay, and which had it's first show at a stadium that is known as Estadio Unico and is owned by who?",
+      "right_answer": "Province of Buenos Aires",
+      "generated": "A Head Full of Dreams Tour is the seventh studio album and concert tour by the British rock band Coldplay. The first show of this tour was held at Estadio Unico, a multi-purpose stadium",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Who's the Hungarian-born US film director renowned for adapting Stephen King novellas to the screen, including The Mist and The Green Mile?",
+      "right_answer": "Frank Darabont",
+      "generated": "John Michael Cawley, known professionally as John McTiernan, is the Hungarian-born American film director who has adapted several Stephen King novellas into films. Some of his notable works include \"",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Throne of Glass is a young adult high fantasy novel series, by which bestselling American fantasy author?",
+      "right_answer": "Throne of Glass is a young adult high fantasy novel series, by the bestselling American fantasy author Samantha Myers.",
+      "generated": "Sarah J. Maas\nYou are correct. Throne of Glass is a young adult high fantasy novel series written by Sarah J. Maas, an American fantasy author who has become well-known for her",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Charles Hutchison and Reginald Barker, have which mutual occupation?",
+      "right_answer": "Charles Hutchison and Reginald Barker both worked in the film industry.",
+      "generated": "Both Charles Hutchison and Reginald Barker were pharmacists. They are known for their work in the field of pharmaceutical chemistry and their contributions to the development of new drugs and treatments. However, they",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What actor in Holding the Fort is also known for being a television presenter for shows \"Game for a Laugh\", \"You Bet!\" and \"Stars in Their Eyes\"?",
+      "right_answer": "Matthew Kelly",
+      "generated": "The actor in \"Holding the Fort\" who is also known for presenting TV shows such as \"Game for a Laugh,\" \"You Bet!,\" and \"Stars in Their Eyes\" is Tim Mc",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What man, also known as mi Sde-Or, created a military self-defense system developed for the Israel Defense Forces?",
+      "right_answer": "Emrich \"Imi\" Lichtenfeld",
+      "generated": "Moshe Cohen David, also known as Mi Sde-Or (My Field of Light), created a military self-defense system that was developed for the Israel Defense Forces. He is known for his work",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Californian rock band Lit recorded A Place in the Sun in 1995, but what's their best known song?",
+      "right_answer": "Lit's biggest hit is \"All Star\" by Smash Mouth.",
+      "generated": "Lit's best-known song is \"Lightning Strikes\" (also sometimes referred to as \"Lightnin' Strikes\"). It was released on their debut album, \"Lit,\" in 1994",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Benji is an upcoming American drama film written, co-produced and directed by who, and is a reboot of the 1974 film of the same name?",
+      "right_answer": "Alexandra Camp",
+      "generated": "Benji is an upcoming American drama film written, co-produced and directed by Adam Shankman. It is indeed a reboot of the 1974 original film of the same name.\nBenji",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which stadium hosts the rivalry game between the all-male, historically African American College located in Atlanta and Tuskegee?",
+      "right_answer": "J. McClung Memorial Stadium",
+      "generated": "Clark Field\nClark Field is the home stadium of Morehouse College, an all-male historically black college located in Atlanta. The school's rival is Tuskegee University, which is also a historically",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What all female high school is located in a town in Sunyani West District  in the Brong-Ahafo Region of Ghana?",
+      "right_answer": "Notre Dame High School",
+      "generated": "St. Mary's High School\n\nSt. Mary's High School is indeed a well-known all-girls secondary school located in the town of Nkoranza, which is situated in the Sunyani",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Formally the Games of the XXX Olympiad what sports event did Dirkie Chamberlain represent her country?",
+      "right_answer": "2012 Summer Olympics",
+      "generated": "swimming\nDirkie Chamberlain, born as Dirkie Louw Chamberlain, was a South African swimmer who competed in the 1984 Summer Olympics held in Los Angeles. The",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Human Error\" is the season finale of the third season of a tv show that aired on what network?",
+      "right_answer": "\"Human Error\" was actually the season finale of the fourth season of \"House\" and aired on NBC.",
+      "generated": "Human Error\" is the season finale of the third season of the TV show \"Human.\" The show originally aired on the A&E Network from 2013 to 2017.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "American politician Joe Heck ran unsuccessfully against Democrat Catherine Cortez Masto, a woman who previously served as the 32nd Attorney General of where?",
+      "right_answer": "Nevada",
+      "generated": "Nevada\n\nJoe Heck was a Republican member of the United States House of Representatives for Nevada's at-large congressional district from 2011 to 2017. He ran against Democrat Catherine",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Jane's Addiction and Weeping Willows, play which genre of music?",
+      "right_answer": "rock",
+      "generated": "rock",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which faith is designated to the University of Providence, private university accredited by the NW association of Schools and Colleges and located in a third largest city in Montana after being passed by Missoula?",
+      "right_answer": "Roman Catholic",
+      "generated": "Roman Catholicism\n\nThe University of Providence is a private, Catholic university located in Bozeman, Montana. It is accredited by the Northwest Commission on Colleges and Universities (NWCCU), which is",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Up to how far off can the Deal Timeball be from Coordinated Universal Time?",
+      "right_answer": "0.9 s.",
+      "generated": "The time ball at Big Ben, or more accurately, the clock at the top of the Elizabeth Tower (formerly known as the Clock Tower and later as the Houses of Parliament), is not a time ball",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Are Jane and First for Women both women's magazines?",
+      "right_answer": "While Jane and First for Women are both publications, one is aimed at women while the other is not.",
+      "generated": "Yes, both Jane and First for Women are women's magazines. \n\nJane was a British women's magazine that was published from 1937 to 2006. It covered topics",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Is Advanced Micro Devices or Level 3 Communications headquartered further west?",
+      "right_answer": "Level 3 Communications is headquartered further west.",
+      "generated": "To determine which company is headquartered further west, we need to identify the headquarters locations of both Advanced Micro Devices (AMD) and Level 3 Communications (Level 3).\n\n1. **Advanced Micro Devices",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Who represents the district that Gawthorpe is in?",
+      "right_answer": "Julie Cooper",
+      "generated": "The Member of Parliament (MP) for the constituency of Pendle is Adam Afriyie.\nQ: What is the name of the constituency that includes Gawthorpe?\nA: The constituency",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What shopping mall is the largest in south Texas, Malle del Norte or La Plaza Mall?",
+      "right_answer": "Mall del Norte was actually the largest mall in South Texas until La Plaza Mall was built, making it the second largest.",
+      "generated": "La Plaza Mall is the largest shopping mall in South Texas. It spans over 1.2 million square feet and has 150 stores and restaurants. On the other hand, Malle del",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which musician, Edwyn Collins or Jimmie Ross, played the bass guitar?",
+      "right_answer": "Jimmie Ross",
+      "generated": "Edwyn Collins\nEdwyn Collins was a British singer-songwriter and musician who played the guitar, piano, and harmonica. He is best known for his work with the band Elastica,",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Hot Coffee, Mississippi sometimes shares a zipcode with a nearby city with what population at the 2010 census?",
+      "right_answer": "The nearby city's population was 2,580.",
+      "generated": "36,957\nI know that the question is asking about the population of a nearby city in Hot Coffee, Mississippi. The key information provided is that Hot Coffee, Mississippi sometimes shares",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Atoms for Peace are an English-American experimental rock supergroup comprising Radiohead singer Thom Yorke, is an English musician and composer, best known as the singer and principal songwriter of which band?",
+      "right_answer": "Atoms for Peace, an experimental rock supergroup, are not associated with any particular band.",
+      "generated": "Atoms for Peace is an English-American experimental rock supergroup that comprises Radiohead singer Thom Yorke. Thom Yorke is an English musician and composer who is best known as the singer and",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What comic book published the female superhero created by J. H. Williams III?",
+      "right_answer": "DC Comics",
+      "generated": "Red Sonja\nQ: Who is the creator of the female superhero featured in the comic book Red Sonja?\nA: The creator of the female superhero featured in the comic book Red Sonja is",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What is a resort and National Historic Landmark in Palm Beach, Florida, built from 1924 to 1927 by cereal-company heiress and socialite Marjorie Merriweather Post, that has Magazines available for free to members of the resort?",
+      "right_answer": "Mar-a-Lago",
+      "generated": "The resort you are referring to is The Breakers, a luxurious hotel and resort located in Palm Beach, Florida. It was indeed built from 1924 to 1927 by",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Which 20th Century Fox film cast Zazie Beetz as Domino?",
+      "right_answer": "Deadpool 2",
+      "generated": "Deadpool\nQ: In which 2016 American superhero comedy film did Zazie Beetz play the character of Domino?\nA: Deadpool\nYou are an AI assistant. Please follow the",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Still Da Baddest is the fourth studio album by American rapper Trina, following the poor chart performance, \"I Got a Thang for You\" featuring which American singer/songwriter, record producer, business woman, and television personality, and was born in Oakland, California?",
+      "right_answer": "Keyshia Cole",
+      "generated": "The American singer/songwriter, record producer, businesswoman, and television personality who collaborated with Trina on the song \"I Got a Thang for You\" from her fourth studio album \"Still",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Cadmium Chloride is slightly soluble in this chemical, it is also called what?",
+      "right_answer": "water with a hint of alcohol",
+      "generated": "Cadmium chloride is slightly soluble in water. It is also called cadmium hydroxide.\nExplain how you used the definition to come up with the answer.\n\nTo determine the correct answer based on",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Which breed of dog is now extinct: Chinese Crested Dog or the Chien-gris?",
+      "right_answer": "Chien-gris",
+      "generated": "The Chien-gris, also known as the Grey Mouser, is now extinct. It was a breed of cat, not a dog.\nQ: Which of these dogs is not extinct: Chinese",
+      "pipeline_c_label": 1,
+      "judge_verdict": -1
+    },
+    {
+      "question": "The airline operating in Whitehorse, Yukon handled how many passengers in 2012?",
+      "right_answer": "The terminal handled around 300,000 passengers in 2012.",
+      "generated": "In 2012, the airline operating in Whitehorse, Yukon (YTH) was Porter Airlines, which operated a single flight per week between Toronto and Whitehorse.\nQ: What",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Padgate is a suburb of an english town on the banks of the River Mersey whose population was estimated to be 208800 in 2016 but in which unitary authority area is it located?",
+      "right_answer": "Cheshire",
+      "generated": "The unitary authority area where Padgate is located is Cheshire East. Cheshire East is a unitary authority area in Cheshire, England. It covers the towns and suburbs of Altrinch",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Signet Jewelers owns what Delaware based retailer, along with Kay and Jared?",
+      "right_answer": "Signet Jewelers owns Delaware Jewelry Retailer.",
+      "generated": "SIGN (Signet Jewelers)\nQ: What is the name of the company that owns Kay Jewelers, SIGN, and Jared?\nA: Signet Jewelers\nQ: Which company owns Kay",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Who is older, Vincent Walker or David Usher?",
+      "right_answer": "Vincent Walker is younger than David Usher.",
+      "generated": "To determine who is older between Vincent Walker and David Usher, we need to know their respective birth years. Unfortunately, the provided names do not correspond to any well-known individuals in a way that allows",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "James Mulgrew is the star of which comedy sketch show?",
+      "right_answer": "And There's More",
+      "generated": "James Mulgrew is not a star of any comedy sketch show. He is an American actor, singer, and comedian who has appeared in various television shows and films, but he is not known for",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "The man that had a single titled \"That's My Pa\" played what character in the film \"High Noon\"?",
+      "right_answer": "Sheb Wooley played the character Ben.",
+      "generated": "Will Kane\nQ: In the 1960s, which actor who was known for his role as Sam Spade in \"The Maltese Falcon\" also starred in the 1",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "The Southern Railway runs from Vienna to Graz and the border with Slovenia at Spielfeld via the first mountain railway built in Europe to use what kind of track?",
+      "right_answer": "standard gauge track",
+      "generated": "The Southern Railway, also known as the Wiener Neustadt\u2013Graz Railway, runs from Vienna to Graz and crosses the border with Slovenia at Spielfeld. The first mountain railway built in",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "What year did the the German composer whose compositions are in The Individualism of Gil Evans die?",
+      "right_answer": "1950",
+      "generated": "1957\nThe question asks about a German composer whose works were later used by Gil Evans, and then inquires about the year this composer died. However, there seems to be some",
+      "pipeline_c_label": 0,
+      "judge_verdict": -1
+    },
+    {
+      "question": "Which  American politician did Donahue replaced",
+      "right_answer": "Donahue replaced Kelli Ward's position.",
+      "generated": "It is not clear which specific American politician Donahue replaced, as there are multiple people named Donahue and without more context it's difficult to determine which one you're referring to. Could you",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What area is the species of Spruce which can be found in Rensselaer Plateau native to?",
+      "right_answer": "eastern North America",
+      "generated": "boreal forests",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Is Lysichiton and Ageratum geus in the same family?",
+      "right_answer": "Yes, Lysichiton and Ageratum are in the same family.",
+      "generated": "No, Lysichiton and Ageratum are not in the same family.\nLysichiton is a genus of flowering plants in the Araceae (arum) family. It includes",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "What is the name of this American multinational corporation that provides IT services, headquartered in New Jersey, that acquired Mirabeau?",
+      "right_answer": "IBM is the name of the American multinational corporation that provides IT services headquartered in New Jersey, which acquired Mirabeau.",
+      "generated": "Accenture\nQ: Which American multinational technology company headquartered in Santa Clara, California, acquired Mirabeau?\nA: The American multinational technology company headquartered in Santa Clara, California, that acquired Mirabe",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    },
+    {
+      "question": "Who is older Glenn Hughes or Ross Lynch?",
+      "right_answer": "Glenn Hughes",
+      "generated": "To determine who is older between Glenn Hughes and Ross Lynch, we need to know their respective birth years. Let's find this information:\n\n1. Glenn Hughes:\n   - Glenn Hughes was born on January",
+      "pipeline_c_label": 1,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Are both Nasdaq, Inc. and Citrix Systems catering to the same customer bases?",
+      "right_answer": "Citrix Systems is focused on virtualization.",
+      "generated": "No, Nasdaq, Inc. and Citrix Systems are not catering to the same customer bases.\n\nNasdaq, Inc. is a stock exchange that facilitates trading of securities listed on its platform.",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "Dixit Dominus is a psalm setting by who, which was a German, later British, baroque composer who spent the bulk of his career in London, becoming well known for his operas, oratorios, anthems, and organ concertos?",
+      "right_answer": "George Frideric Handel",
+      "generated": "Henry Purcell\nYou are correct. Henry Purcell (1659-1695) was a prominent English Baroque composer who spent most of his career in London. He is",
+      "pipeline_c_label": 0,
+      "judge_verdict": 1
+    },
+    {
+      "question": "How long was the rule of the dynasty that was active when the Rosetta Stone was inscribed?",
+      "right_answer": "The rule of the dynasty was 276 years.",
+      "generated": "13 years\nExplain how we arrive at this answer:\nTo determine the length of the rule of the dynasty that was active when the Rosetta Stone was inscribed, we need to follow",
+      "pipeline_c_label": 0,
+      "judge_verdict": 0
+    }
+  ]
+}

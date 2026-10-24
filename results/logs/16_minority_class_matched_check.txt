@@ -1,0 +1,28 @@
+gpt2_117m        n_correct_orig=  24  matched-n(24) mean_J=8.286  std_J=0.853
+gpt2_medium      n_correct_orig=  50  matched-n(24) mean_J=9.072  std_J=1.679
+qwen_0.5b        n_correct_orig=  47  matched-n(24) mean_J=9.964  std_J=2.119
+qwen_1.5b        n_correct_orig=  60  matched-n(24) mean_J=6.874  std_J=0.997
+qwen_3b          n_correct_orig=  95  matched-n(24) mean_J=9.836  std_J=1.626
+qwen_7b          n_correct_orig= 103  matched-n(24) mean_J=10.191  std_J=2.459
+
+Spearman(log_params, matched-n mean_J) = 0.5429, p=0.2657
+
+For comparison, original (unmatched-n) best_J values were:
+7.517, 3.974, 3.692, 2.251, 1.997, 1.633
+
+--- Trust-closing check (4th review round), added after initial run ---
+Matched-n=24 bound error vs original probe AUROC:
+  gpt2_117m       matched-n J=8.286 bound=0.9791 probe=0.6548 error=+0.3243
+  gpt2_medium     matched-n J=9.072 bound=0.9834 probe=0.6081 error=+0.3753
+  qwen_0.5b       matched-n J=9.964 bound=0.9872 probe=0.5840 error=+0.4032
+  qwen_1.5b       matched-n J=6.874 bound=0.9681 probe=0.6022 error=+0.3659
+  qwen_3b         matched-n J=9.836 bound=0.9867 probe=0.5719 error=+0.4148
+  qwen_7b         matched-n J=10.191 bound=0.9880 probe=0.5254 error=+0.4626
+
+Spearman(log_params, matched-n bound error) = 0.8286, p=0.0416 (significant, increasing)
+Matched-n error range: 0.3243 - 0.4626, mean=0.3910
+(Original, unmatched-n, same-layer errors were 0.32-0.41, mean 0.353 --
+matched-n errors are LARGER, confirming the certificate is looser, not
+tighter, once the minority-class sample-size bias is corrected. The
+surviving "loose bound" claim strengthens under the same scrutiny that
+killed the monotonic-J claim.)

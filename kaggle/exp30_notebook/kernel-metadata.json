@@ -1,0 +1,15 @@
+{
+  "id": "chakrivijayarao/geom-proof-exp30-label-audit",
+  "title": "geom-proof-exp30-label-audit",
+  "code_file": "exp30_pipeline_c_label_audit.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": ["chakrivijayarao/exp30-qwen3b-generations"],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

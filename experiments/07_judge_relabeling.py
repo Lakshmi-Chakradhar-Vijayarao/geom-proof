@@ -24,6 +24,7 @@ Hardware: CPU/MacBook (~2–3 hours for 700 samples).
 """
 
 import json
+import os
 import re
 import subprocess
 import numpy as np
@@ -36,7 +37,23 @@ from sklearn.metrics import cohen_kappa_score, confusion_matrix
 RESULTS_DIR = Path(__file__).parent.parent / "results" / "logs"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-HARP_DIR = Path("/Users/chakrivijayarao/Desktop/harp")
+# Fixed post-final-audit: was hardcoded to a personal absolute path to
+# the harp sibling project (this loads real HaRP-generated responses, a
+# genuine external data dependency -- not vendored here). A second audit
+# pass flagged the first fix (silent env-var-or-personal-path fallback)
+# as inconsistent with how other cross-repo dependencies in this project
+# are handled -- switched to the same pattern used elsewhere (e.g.
+# code/01_scaled_pipeline_generation.py's FAIL_CHAIN_ROOT in the
+# companion paper3 project): explicit error if not found, rather than a
+# default that silently resolves to a nonexistent/wrong directory on any
+# other machine.
+HARP_DIR = Path(os.environ.get("HARP_ROOT", Path(__file__).resolve().parent.parent.parent / "harp"))
+if not HARP_DIR.exists():
+    raise FileNotFoundError(
+        f"harp sibling project not found at {HARP_DIR}. Set the HARP_ROOT "
+        "environment variable to its location (this script loads real "
+        "HaRP-generated responses/labels and does not vendor a copy)."
+    )
 HARP_RESPONSES_CSV = HARP_DIR / "results" / "responses.csv"  # generated in HaRP Exp 01
 HARP_LABELS_NPY = HARP_DIR / "results" / "labels.npy"
 

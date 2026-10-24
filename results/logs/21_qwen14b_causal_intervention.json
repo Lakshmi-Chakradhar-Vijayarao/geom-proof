@@ -1,0 +1,56 @@
+{
+  "model": "Qwen/Qwen2.5-14B-Instruct-AWQ",
+  "array_layer": 30,
+  "hook_block_idx": 29,
+  "n_test_prompts": 150,
+  "alphas": [
+    10.0,
+    20.0,
+    40.0
+  ],
+  "baseline_hall_rate": 0.3142857142857143,
+  "results_per_alpha": [
+    {
+      "alpha": 10.0,
+      "n_valid": 30,
+      "found_flip_rate": 0.03333333333333333,
+      "random_flip_rate": 0.13333333333333333,
+      "mcnemar_b_found_only": 0,
+      "mcnemar_c_random_only": 3,
+      "mcnemar_p": 0.25,
+      "capability_baseline_ll": -1.9678412365913391,
+      "capability_found_ll": -1.9623091292381287,
+      "capability_random_ll": -1.9738398063182832,
+      "capability_drop_found": -0.005532107353210414,
+      "capability_drop_random": 0.005998569726944014
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 27,
+      "found_flip_rate": 0.07407407407407407,
+      "random_flip_rate": 0.1111111111111111,
+      "mcnemar_b_found_only": 2,
+      "mcnemar_c_random_only": 3,
+      "mcnemar_p": 1.0,
+      "capability_baseline_ll": -1.9680592441558837,
+      "capability_found_ll": -1.9656567966938019,
+      "capability_random_ll": -1.9865656363964082,
+      "capability_drop_found": -0.002402447462081847,
+      "capability_drop_random": 0.018506392240524416
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 28,
+      "found_flip_rate": 0.10714285714285714,
+      "random_flip_rate": 0.14285714285714285,
+      "mcnemar_b_found_only": 2,
+      "mcnemar_c_random_only": 3,
+      "mcnemar_p": 1.0,
+      "capability_baseline_ll": -1.9680674123764037,
+      "capability_found_ll": -2.0060217332839967,
+      "capability_random_ll": -2.0338043785095214,
+      "capability_drop_found": 0.03795432090759299,
+      "capability_drop_random": 0.06573696613311775
+    }
+  ]
+}

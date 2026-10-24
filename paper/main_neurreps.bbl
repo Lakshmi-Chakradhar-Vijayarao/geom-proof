@@ -1,0 +1,229 @@
+\begin{thebibliography}{34}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abbasi-Yadkori et~al.(2024)]{abbasi2024conformal}
+Yasin Abbasi-Yadkori et~al.
+\newblock Conformal abstention for {LLMs}.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem[Angelopoulos and Bates(2022)]{angelopoulos2022}
+Anastasios~N. Angelopoulos and Stephen Bates.
+\newblock A gentle introduction to conformal prediction and distribution-free
+  uncertainty quantification.
+\newblock \emph{arXiv preprint arXiv:2107.07511}, 2022.
+
+\bibitem[Azaria and Mitchell(2023)]{azaria2023internal}
+Amos Azaria and Tom Mitchell.
+\newblock The internal state of an llm knows when it's lying.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP}, 2023.
+
+\bibitem[Bamber(1975)]{bamber1975area}
+Donald Bamber.
+\newblock The area above the ordinal dominance graph and the area below the
+  receiver operating characteristic graph.
+\newblock \emph{Journal of Mathematical Psychology}, 12\penalty0 (4):\penalty0
+  387--415, 1975.
+
+\bibitem[Bao et~al.(2025)Bao, Zhang, Du, Zhao, Feng, Peng, and
+  Yin]{bao2025probing}
+Yuntai Bao, Xuhong Zhang, Tianyu Du, Xinkui Zhao, Zhengwen Feng, Hao Peng, and
+  Jianwei Yin.
+\newblock Probing the geometry of truth: Consistency and generalization of
+  truth directions in {LLMs} across logical transformations and question
+  answering tasks.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL}, 2025.
+
+\bibitem[Belrose et~al.(2023)Belrose, Furman, Smith, Halawi, Ostrovsky,
+  McKinney, Biderman, and Steinhardt]{belrose2023eliciting}
+Nora Belrose, Zach Furman, Logan Smith, Danny Halawi, Igor Ostrovsky, Lev
+  McKinney, Stella Biderman, and Jacob Steinhardt.
+\newblock Eliciting latent predictions from transformers with the tuned lens.
+\newblock In \emph{arXiv preprint arXiv:2303.08112}, 2023.
+
+\bibitem[Bickel and Levina(2004)]{bickel2004some}
+Peter~J. Bickel and Elizaveta Levina.
+\newblock Some theory for fisher's linear discriminant function, `naive bayes',
+  and some alternatives when there are many more variables than observations.
+\newblock \emph{Bernoulli}, 10\penalty0 (6):\penalty0 989--1010, 2004.
+
+\bibitem[Burns et~al.(2022)Burns, Ye, Klein, and
+  Steinhardt]{burns2022discovering}
+Collin Burns, Haotian Ye, Dan Klein, and Jacob Steinhardt.
+\newblock Discovering latent knowledge in language models without supervision.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem[Chen et~al.(2024)Chen, Liu, Chen, Gu, Wu, Tao, Fu, and
+  Ye]{chen2024inside}
+Chao Chen, Kai Liu, Ze~Chen, Yi~Gu, Jin Wu, Chengwei Tao, Zhihang Fu, and
+  Jieping Ye.
+\newblock {INSIDE}: {LLMs}' internal states retain the power of hallucination
+  detection.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Davis and Kahan(1970)]{davis1970rotation}
+Chandler Davis and William~M. Kahan.
+\newblock The rotation of eigenvectors by a perturbation. iii.
+\newblock \emph{SIAM Journal on Numerical Analysis}, 7\penalty0 (1):\penalty0
+  1--46, 1970.
+
+\bibitem[Di~Sipio(2025)]{disipio2025fisher}
+Riccardo Di~Sipio.
+\newblock Rethinking {LLM} training through information geometry and quantum
+  metrics.
+\newblock \emph{arXiv preprint arXiv:2506.15830}, 2025.
+
+\bibitem[Du et~al.(2024)Du, Xiao, and Li]{du2024haloscope}
+Xuefeng Du, Chaowei Xiao, and Yixuan Li.
+\newblock {HaloScope}: Harnessing unlabeled {LLM} generations for hallucination
+  detection.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem[Dubanowska et~al.(2025)Dubanowska, {\.Z}elaszczyk, Brzozowski,
+  Mandica, and Karpowicz]{dubanowska2025ood}
+Zuzanna Dubanowska, Maciej {\.Z}elaszczyk, Micha{\l} Brzozowski, Paolo Mandica,
+  and Micha{\l} Karpowicz.
+\newblock Representation-based broad hallucination detectors fail to generalize
+  out of distribution.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP}, 2025.
+
+\bibitem[Fan and Fan(2008)]{fan2008high}
+Jianqing Fan and Yingying Fan.
+\newblock High-dimensional classification using features annealed independence
+  rules.
+\newblock \emph{Annals of Statistics}, 36\penalty0 (6):\penalty0 2605--2637,
+  2008.
+
+\bibitem[Fisher(1936)]{fisher1936use}
+Ronald~Aylmer Fisher.
+\newblock The use of multiple measurements in taxonomic problems.
+\newblock \emph{Annals of Eugenics}, 7\penalty0 (2):\penalty0 179--188, 1936.
+
+\bibitem[Green and Swets(1966)]{green1966signal}
+David~M. Green and John~A. Swets.
+\newblock \emph{Signal Detection Theory and Psychophysics}.
+\newblock Wiley, 1966.
+
+\bibitem[Hanley and McNeil(1982)]{hanley1982meaning}
+James~A. Hanley and Barbara~J. McNeil.
+\newblock The meaning and use of the area under a receiver operating
+  characteristic (roc) curve.
+\newblock \emph{Radiology}, 143\penalty0 (1):\penalty0 29--36, 1982.
+
+\bibitem[Kolouri et~al.(2019)Kolouri, Nadjahi, Simsekli, Badeau, and
+  Rohde]{kolouri2019}
+Soheil Kolouri, Kimia Nadjahi, Umut Simsekli, Roland Badeau, and Gustavo Rohde.
+\newblock Generalized sliced {Wasserstein} distances.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2019.
+
+\bibitem[Kornblith et~al.(2019)Kornblith, Norouzi, Lee, and
+  Hinton]{kornblith2019similarity}
+Simon Kornblith, Mohammad Norouzi, Honglak Lee, and Geoffrey Hinton.
+\newblock Similarity of neural network representations revisited.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2019.
+
+\bibitem[Kossen et~al.(2024)Kossen, Han, Razzak, Schut, Gal, and
+  Farquhar]{kossen2024semantic}
+Jannik Kossen, Jiatong Han, Muhammed Razzak, Lisa Schut, Yarin Gal, and
+  Sebastian Farquhar.
+\newblock Semantic entropy probes: Robust and cheap hallucination detection in
+  {LLM}s.
+\newblock In \emph{International Conference on Machine Learning}, 2024.
+
+\bibitem[Ledoit and Wolf(2004)]{ledoit2004}
+Olivier Ledoit and Michael Wolf.
+\newblock A well-conditioned estimator for large-dimensional covariance
+  matrices.
+\newblock \emph{Journal of Multivariate Analysis}, 88\penalty0 (2):\penalty0
+  365--411, 2004.
+
+\bibitem[Li et~al.(2023)Li, Cheng, Zhao, Nie, and Wen]{li2023halueval}
+Junyi Li, Xiaoxue Cheng, Wayne~Xin Zhao, Jian-Yun Nie, and Ji-Rong Wen.
+\newblock {HaluEval}: A large-scale hallucination evaluation benchmark for
+  large language models.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing}, 2023.
+
+\bibitem[Lin et~al.(2022)Lin, Hilton, and Evans]{lin2022truthfulqa}
+Stephanie Lin, Jacob Hilton, and Owain Evans.
+\newblock {TruthfulQA}: Measuring how models mimic human falsehoods.
+\newblock In \emph{Proceedings of the Annual Meeting of the Association for
+  Computational Linguistics}, 2022.
+
+\bibitem[Manakul et~al.(2023)Manakul, Azaria, and
+  Gales]{manakul2023selfcheckgpt}
+Potsawee Manakul, Amos Azaria, and Mark Gales.
+\newblock {SelfCheckGPT}: Zero-resource black-box hallucination detection for
+  generative large language models.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing}, 2023.
+
+\bibitem[Marchenko and Pastur(1967)]{marchenko1967distribution}
+Vladimir~A. Marchenko and Leonid~A. Pastur.
+\newblock Distribution of eigenvalues for some sets of random matrices.
+\newblock \emph{Matematicheskii Sbornik}, 114\penalty0 (4):\penalty0 507--536,
+  1967.
+
+\bibitem[Marks and Tegmark(2024)]{marks2024geometry}
+Samuel Marks and Max Tegmark.
+\newblock The geometry of truth: Emergent linear structure in large language
+  model representations of true/{False} datasets.
+\newblock In \emph{Conference on Language Modeling}, 2024.
+
+\bibitem[Raghu et~al.(2017)Raghu, Gilmer, Yosinski, and
+  Sohl-Dickstein]{raghu2017svcca}
+Maithra Raghu, Justin Gilmer, Jason Yosinski, and Jascha Sohl-Dickstein.
+\newblock {SVCCA}: Singular vector canonical correlation analysis for deep
+  learning dynamics and interpretability.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2017.
+
+\bibitem[Ricco et~al.(2026)Ricco, Onofri, Cima, Cresci, and
+  Di~Pietro]{ricco2026geometric}
+Emanuele Ricco, Elia Onofri, Lorenzo Cima, Stefano Cresci, and Roberto
+  Di~Pietro.
+\newblock A geometric analysis of small-sized language model hallucinations.
+\newblock \emph{arXiv preprint arXiv:2602.14778}, 2026.
+
+\bibitem[Sugiyama(2007)]{sugiyama2007}
+Masashi Sugiyama.
+\newblock Dimensionality reduction of multimodal labeled data by local fisher
+  discriminant analysis.
+\newblock \emph{Journal of Machine Learning Research}, 8, 2007.
+
+\bibitem[Sun et~al.(2022)Sun, Ming, Zhu, and Li]{sun2022ood}
+Yiyou Sun, Yifei Ming, Xiaojin Zhu, and Yixuan Li.
+\newblock Out-of-distribution detection with deep nearest neighbors.
+\newblock In \emph{International Conference on Machine Learning}, 2022.
+
+\bibitem[Tibshirani et~al.(2019)Tibshirani, Barber, Candes, and
+  Ramdas]{tibshirani2019conformal}
+Ryan~J. Tibshirani, Rina~Foygel Barber, Emmanuel Candes, and Aaditya Ramdas.
+\newblock Conformal prediction under covariate shift.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2019.
+
+\bibitem[Williams et~al.(2021)Williams, Kunz, Kornblith, and
+  Linderman]{williams2021shape}
+Alex~H. Williams, Erin Kunz, Simon Kornblith, and Scott~W. Linderman.
+\newblock Generalized shape metrics on neural representations.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2021.
+
+\bibitem[Yin et~al.(2024)Yin, Srinivasa, and Chang]{yin2024characterizing}
+Fan Yin, Jayanth Srinivasa, and Kai-Wei Chang.
+\newblock Characterizing truthfulness in large language model generations with
+  local intrinsic dimension.
+\newblock In \emph{International Conference on Machine Learning}, 2024.
+
+\bibitem[Ying et~al.(2026)Ying, Hase, and Kriegeskorte]{ying2026comparing}
+Zhuofan~Josh Ying, Peter Hase, and Nikolaus Kriegeskorte.
+\newblock Comparing linear probes with mahalanobis cosine similarity.
+\newblock \emph{arXiv preprint arXiv:2606.19603}, 2026.
+
+\end{thebibliography}

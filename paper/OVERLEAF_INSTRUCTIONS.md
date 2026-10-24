@@ -14,7 +14,9 @@ figures/
   08_ot_certificates.png
   10_conformal_coverage.png
   11_qwen_scale_curve.png
-  12_mlp_probe_comparison.png   ← NEW (Exp 12, added in final version)
+  12_mlp_probe_comparison.png   ← Exp 12
+  13_qwen7b_certificate.png     ← Exp 13: Qwen 7B validation
+  14_ood_transfer.png           ← Exp 14: OOD collapse (Qwen 7B, AUROC→0.384, 14.2× violation)
 ```
 
 ## Compiler setting

@@ -1,0 +1,7 @@
+{
+  "n": 2000,
+  "surface_auroc_mean": 0.9773425,
+  "surface_auroc_std": 0.0059511217429994165,
+  "permutation_p_value": 0.001996007984031936,
+  "permutation_mean": 0.499760615
+}

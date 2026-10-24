@@ -1,0 +1,200 @@
+{
+  "gpt2_117m": {
+    "layer": 8,
+    "per_k": {
+      "25": {
+        "J_observed": 1.5896411315943397,
+        "bound_observed": 0.8136767695191107,
+        "J_null_mean": 1.0694244059549904,
+        "bound_from_null_mean": 0.7676837695248486,
+        "empirical_p": 0.07
+      },
+      "50": {
+        "J_observed": 3.4797595826457663,
+        "bound_observed": 0.9064229706524434,
+        "J_null_mean": 2.2810950977304225,
+        "bound_from_null_mean": 0.8572316712874726,
+        "empirical_p": 0.03
+      },
+      "100": {
+        "J_observed": 7.319128874987154,
+        "bound_observed": 0.9721258974425564,
+        "J_null_mean": 4.7848612567095605,
+        "bound_from_null_mean": 0.9390380370161842,
+        "empirical_p": 0.04
+      },
+      "200": {
+        "J_observed": 16.260796109160214,
+        "bound_observed": 0.9978235405264099,
+        "J_null_mean": 10.792230681325599,
+        "bound_from_null_mean": 0.9899091884526809,
+        "empirical_p": 0.03
+      }
+    }
+  },
+  "gpt2_medium": {
+    "layer": 20,
+    "per_k": {
+      "25": {
+        "J_observed": 0.7422389669870231,
+        "bound_observed": 0.7288026573818919,
+        "J_null_mean": 0.5682013308645321,
+        "bound_from_null_mean": 0.7029869974004749,
+        "empirical_p": 0.14
+      },
+      "50": {
+        "J_observed": 1.5971114985220574,
+        "bound_observed": 0.8142372360874716,
+        "J_null_mean": 1.178615571476116,
+        "bound_from_null_mean": 0.778656540714117,
+        "empirical_p": 0.04
+      },
+      "100": {
+        "J_observed": 4.1470500470312,
+        "bound_observed": 0.9250626176651315,
+        "J_null_mean": 2.5442512412418017,
+        "bound_from_null_mean": 0.8703158533046487,
+        "empirical_p": 0.0
+      },
+      "200": {
+        "J_observed": 7.510407828414504,
+        "bound_observed": 0.9736783128873143,
+        "J_null_mean": 5.95461636240585,
+        "bound_from_null_mean": 0.9577802005957816,
+        "empirical_p": 0.03
+      }
+    }
+  },
+  "qwen_0.5b": {
+    "layer": 23,
+    "per_k": {
+      "25": {
+        "J_observed": 0.805698253501926,
+        "bound_observed": 0.7371892473146795,
+        "J_null_mean": 0.5926279944223068,
+        "bound_from_null_mean": 0.7068987527148382,
+        "empirical_p": 0.11
+      },
+      "50": {
+        "J_observed": 1.6464758579225423,
+        "bound_observed": 0.8178824153742454,
+        "J_null_mean": 1.297559999383624,
+        "bound_from_null_mean": 0.7897254002799505,
+        "empirical_p": 0.13
+      },
+      "100": {
+        "J_observed": 3.9154555747134077,
+        "bound_observed": 0.919121731942672,
+        "J_null_mean": 2.9255686179420843,
+        "bound_from_null_mean": 0.8867561864102388,
+        "empirical_p": 0.05
+      },
+      "200": {
+        "J_observed": 8.464578453840394,
+        "bound_observed": 0.9801690441716444,
+        "J_null_mean": 7.733766254908031,
+        "bound_from_null_mean": 0.9753760504744436,
+        "empirical_p": 0.27
+      }
+    }
+  },
+  "qwen_1.5b": {
+    "layer": 28,
+    "per_k": {
+      "25": {
+        "J_observed": 0.770814260610509,
+        "bound_observed": 0.7326382282137032,
+        "J_null_mean": 0.48669840197224123,
+        "bound_from_null_mean": 0.6891012292899867,
+        "empirical_p": 0.04
+      },
+      "50": {
+        "J_observed": 1.3314209617862136,
+        "bound_observed": 0.7927244309405339,
+        "J_null_mean": 1.0137967498241942,
+        "bound_from_null_mean": 0.761757691410301,
+        "empirical_p": 0.1
+      },
+      "100": {
+        "J_observed": 2.333688302293887,
+        "bound_observed": 0.8599746837148923,
+        "J_null_mean": 2.275021996560448,
+        "bound_from_null_mean": 0.8569105594654131,
+        "empirical_p": 0.42
+      },
+      "200": {
+        "J_observed": 5.14709434267879,
+        "bound_observed": 0.9456680870540263,
+        "J_null_mean": 5.750248939975418,
+        "bound_from_null_mean": 0.9550209903190036,
+        "empirical_p": 0.76
+      }
+    }
+  },
+  "qwen_3b": {
+    "layer": 36,
+    "per_k": {
+      "25": {
+        "J_observed": 0.34514319795727266,
+        "bound_observed": 0.6610818068401483,
+        "J_null_mean": 0.33074792142841053,
+        "bound_from_null_mean": 0.6578718634216124,
+        "empirical_p": 0.42
+      },
+      "50": {
+        "J_observed": 1.0512730694036625,
+        "bound_observed": 0.7657764248825731,
+        "J_null_mean": 0.7154474101543756,
+        "bound_from_null_mean": 0.7251134213820163,
+        "empirical_p": 0.01
+      },
+      "100": {
+        "J_observed": 2.060557184523173,
+        "bound_observed": 0.8449533783260128,
+        "J_null_mean": 1.6003640221342064,
+        "bound_from_null_mean": 0.8144805216098253,
+        "empirical_p": 0.02
+      },
+      "200": {
+        "J_observed": 4.816963916143797,
+        "bound_observed": 0.9396603293731706,
+        "J_null_mean": 4.074713798298533,
+        "bound_from_null_mean": 0.923261939498122,
+        "empirical_p": 0.11
+      }
+    }
+  },
+  "qwen_7b": {
+    "layer": 25,
+    "per_k": {
+      "25": {
+        "J_observed": 0.31674806145452206,
+        "bound_observed": 0.6546710299851353,
+        "J_null_mean": 0.314264298008572,
+        "bound_from_null_mean": 0.6540946396940613,
+        "empirical_p": 0.42
+      },
+      "50": {
+        "J_observed": 0.5357378319550342,
+        "bound_observed": 0.6976175414687249,
+        "J_null_mean": 0.6558582686637456,
+        "bound_from_null_mean": 0.7165594796629453,
+        "empirical_p": 0.81
+      },
+      "100": {
+        "J_observed": 1.6523106637825058,
+        "bound_observed": 0.8183066919730491,
+        "J_null_mean": 1.468696842399682,
+        "bound_from_null_mean": 0.8042613415328633,
+        "empirical_p": 0.18
+      },
+      "200": {
+        "J_observed": 4.155856977725253,
+        "bound_observed": 0.9252785667941239,
+        "J_null_mean": 3.9752536803743292,
+        "bound_from_null_mean": 0.920705382295372,
+        "empirical_p": 0.37
+      }
+    }
+  }
+}

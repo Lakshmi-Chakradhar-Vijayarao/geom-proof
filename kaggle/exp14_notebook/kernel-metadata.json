@@ -1,0 +1,16 @@
+{
+  "id": "chakradharvijayarao/geom-proof-exp14-ood-transfer",
+  "title": "geom-proof-exp14-ood-transfer",
+  "code_file": "exp14_ood_transfer.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [
+    "chakradharvijayarao/geom-proof-exp13-qwen7b"
+  ]
+}

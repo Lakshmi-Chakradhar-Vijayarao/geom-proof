@@ -1,0 +1,18 @@
+{
+  "GPT-2 Medium": {
+    "model": "GPT-2 Medium",
+    "best_layer": 8,
+    "in_dist_auroc": 0.9859175,
+    "alpha_star": 0.07,
+    "in_dist_accept_rate": 0.524,
+    "in_dist_emp_hall": 0.06870229007633588,
+    "ood_auroc": 0.5561868686868687,
+    "ood_emp_hall": 0.99,
+    "ood_accept_rate": 1.0,
+    "violation_factor": 14.14285714285714,
+    "ood_collapse": true,
+    "auroc_drop": 0.4297306313131313,
+    "ood_n_positive": 4,
+    "ood_n_total": 400
+  }
+}

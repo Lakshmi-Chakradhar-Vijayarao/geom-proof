@@ -1,0 +1,51 @@
+{
+  "model": "gpt2",
+  "array_layer": 8,
+  "n_test_prompts": 150,
+  "alphas": [
+    10.0,
+    20.0,
+    40.0
+  ],
+  "results_per_alpha": [
+    {
+      "alpha": 10.0,
+      "n_valid": 60,
+      "mean_length_baseline": 31.766666666666666,
+      "mean_length_found": 32.18333333333333,
+      "mean_length_random": 32.05,
+      "wilcoxon_p_found_vs_random_length": 0.4441290380847156,
+      "n_flipped_found": 4,
+      "n_not_flipped_found": 56,
+      "mean_length_flipped_found": 31.75,
+      "mean_length_not_flipped_found": 32.214285714285715,
+      "mannwhitney_p_flip_vs_noflip_length_found": 0.7433998900677279
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 57,
+      "mean_length_baseline": 31.771929824561404,
+      "mean_length_found": 32.08771929824562,
+      "mean_length_random": 32.26315789473684,
+      "wilcoxon_p_found_vs_random_length": 0.5809645068082863,
+      "n_flipped_found": 7,
+      "n_not_flipped_found": 50,
+      "mean_length_flipped_found": 31.285714285714285,
+      "mean_length_not_flipped_found": 32.2,
+      "mannwhitney_p_flip_vs_noflip_length_found": 0.44928413247857324
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 36,
+      "mean_length_baseline": 32.05555555555556,
+      "mean_length_found": 32.166666666666664,
+      "mean_length_random": 32.27777777777778,
+      "wilcoxon_p_found_vs_random_length": 0.9374128369010464,
+      "n_flipped_found": 7,
+      "n_not_flipped_found": 29,
+      "mean_length_flipped_found": 30.428571428571427,
+      "mean_length_not_flipped_found": 32.58620689655172,
+      "mannwhitney_p_flip_vs_noflip_length_found": 0.26954648222817046
+    }
+  ]
+}

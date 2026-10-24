@@ -1,0 +1,55 @@
+{
+  "model": "gpt2",
+  "array_layer": 8,
+  "hook_block_idx": 7,
+  "n_test_prompts": 150,
+  "alphas": [
+    10.0,
+    20.0,
+    40.0
+  ],
+  "results_per_alpha": [
+    {
+      "alpha": 10.0,
+      "n_valid": 60,
+      "found_flip_rate": 0.06666666666666667,
+      "random_flip_rate": 0.05,
+      "mcnemar_b_found_only": 4,
+      "mcnemar_c_random_only": 3,
+      "mcnemar_p": 1.0,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.434617977142334,
+      "capability_random_ll": -3.4379260206222533,
+      "capability_drop_found": 0.0119023609161375,
+      "capability_drop_random": 0.01521040439605681
+    },
+    {
+      "alpha": 20.0,
+      "n_valid": 57,
+      "found_flip_rate": 0.12280701754385964,
+      "random_flip_rate": 0.07017543859649122,
+      "mcnemar_b_found_only": 5,
+      "mcnemar_c_random_only": 2,
+      "mcnemar_p": 0.453125,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.4852368688583373,
+      "capability_random_ll": -3.4870972490310668,
+      "capability_drop_found": 0.06252125263214081,
+      "capability_drop_random": 0.0643816328048703
+    },
+    {
+      "alpha": 40.0,
+      "n_valid": 36,
+      "found_flip_rate": 0.19444444444444445,
+      "random_flip_rate": 0.16666666666666666,
+      "mcnemar_b_found_only": 5,
+      "mcnemar_c_random_only": 4,
+      "mcnemar_p": 1.0,
+      "capability_baseline_ll": -3.4227156162261965,
+      "capability_found_ll": -3.7287886190414428,
+      "capability_random_ll": -3.704896583557129,
+      "capability_drop_found": 0.3060730028152463,
+      "capability_drop_random": 0.28218096733093256
+    }
+  ]
+}

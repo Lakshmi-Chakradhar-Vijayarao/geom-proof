@@ -44,7 +44,9 @@ HS_DIR = ROOT / "results" / "hidden_states"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 HS_DIR.mkdir(parents=True, exist_ok=True)
 
-HARP_DIR = Path("/Users/chakrivijayarao/Desktop/harp")
+# Fixed post-final-audit: HARP_DIR was hardcoded to a personal absolute
+# path but is unused elsewhere in this file (dead code) -- removed
+# rather than left as a misleading placeholder implying a live dependency.
 
 N_SAMPLES = 1000   # per class → 2000 total (perfectly balanced)
 

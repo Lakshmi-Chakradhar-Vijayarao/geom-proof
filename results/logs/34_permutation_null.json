@@ -1,0 +1,80 @@
+{
+  "gpt2_117m": {
+    "best_layer": 8,
+    "J_observed": 7.319128874987154,
+    "bound_observed": 0.9721258974425564,
+    "J_null_mean": 4.753693079922768,
+    "J_null_p95": 6.306378848548883,
+    "J_null_max": 9.371098880769502,
+    "bound_from_null_mean": 0.9384270456121194,
+    "bound_from_null_p95": 0.9621106439303485,
+    "empirical_p": 0.02,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.8160160541940273
+  },
+  "gpt2_medium": {
+    "best_layer": 20,
+    "J_observed": 4.1470500470312,
+    "bound_observed": 0.9250626176651315,
+    "J_null_mean": 2.53453731680698,
+    "J_null_p95": 3.2181613650779495,
+    "J_null_max": 3.8449460560168145,
+    "bound_from_null_mean": 0.8698601481223982,
+    "bound_from_null_p95": 0.8976894610228943,
+    "empirical_p": 0.0,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.25943852979468573
+  },
+  "qwen_0.5b": {
+    "best_layer": 23,
+    "J_observed": 3.9154555747134077,
+    "bound_observed": 0.919121731942672,
+    "J_null_mean": 2.8736323090127347,
+    "J_null_p95": 3.842949170171781,
+    "J_null_max": 5.211885403700161,
+    "bound_from_null_mean": 0.884672374256743,
+    "bound_from_null_p95": 0.9171529029510557,
+    "empirical_p": 0.045,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.5971506051041096
+  },
+  "qwen_1.5b": {
+    "best_layer": 28,
+    "J_observed": 2.333688302293887,
+    "bound_observed": 0.8599746837148923,
+    "J_null_mean": 2.2335454169766136,
+    "J_null_p95": 2.9818053697005706,
+    "J_null_max": 3.550805082708093,
+    "bound_from_null_mean": 0.8546927819827775,
+    "bound_from_null_p95": 0.8889617719959175,
+    "empirical_p": 0.38,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.30518967148376897
+  },
+  "qwen_3b": {
+    "best_layer": 36,
+    "J_observed": 2.060557184523173,
+    "bound_observed": 0.8449533783260128,
+    "J_null_mean": 1.5764893356505154,
+    "J_null_p95": 1.9852965490617593,
+    "J_null_max": 2.2592048886759373,
+    "bound_from_null_mean": 0.8126842861652159,
+    "bound_from_null_p95": 0.840452013328991,
+    "empirical_p": 0.025,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.1496210767637649
+  },
+  "qwen_7b": {
+    "best_layer": 25,
+    "J_observed": 1.6523106637825058,
+    "bound_observed": 0.8183066919730491,
+    "J_null_mean": 1.463477046232887,
+    "J_null_p95": 1.862410192726588,
+    "J_null_max": 2.2578580779921054,
+    "bound_from_null_mean": 0.803839877350296,
+    "bound_from_null_p95": 0.832725011392117,
+    "empirical_p": 0.195,
+    "n_perm": 200,
+    "shipped_estimator_nondeterminism_spread": 0.16229839611028507
+  }
+}

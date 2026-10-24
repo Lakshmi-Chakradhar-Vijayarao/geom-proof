@@ -1,0 +1,17 @@
+{
+  "Qwen 2.5 7B": {
+    "model": "Qwen 2.5 7B",
+    "best_layer": 24,
+    "in_dist_auroc": 0.9998119999999999,
+    "alpha_star": 0.07,
+    "in_dist_accept_rate": 0.528,
+    "in_dist_emp_hall": 0.06818181818181818,
+    "ood_auroc": 0.3837111670864819,
+    "ood_emp_hall": 0.9925,
+    "ood_accept_rate": 1.0,
+    "violation_factor": 14.178571428571427,
+    "ood_collapse": true,
+    "auroc_drop": 0.616100832913518
+  },
+  "total_runtime_min": 53.9
+}

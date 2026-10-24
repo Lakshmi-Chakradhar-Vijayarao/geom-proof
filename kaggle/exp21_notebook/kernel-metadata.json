@@ -1,0 +1,14 @@
+{
+  "id": "chakradharvijayarao/geom-proof-exp21-qwen14b-causal",
+  "title": "geom-proof-exp21-qwen14b-causal",
+  "code_file": "exp21_qwen14b_causal_intervention.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}

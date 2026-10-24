@@ -1,0 +1,14 @@
+{
+  "id": "chakradharvijayarao/geom-proof-exp13-qwen7b",
+  "title": "geom-proof-exp13-qwen7b",
+  "code_file": "exp13_qwen7b_full_analysis.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}

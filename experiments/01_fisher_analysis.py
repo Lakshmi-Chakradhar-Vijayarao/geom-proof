@@ -37,8 +37,13 @@ PLOTS_DIR = ROOT / "results" / "plots"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
-HARP_DIR = Path("/Users/chakrivijayarao/Desktop/harp")
-MECH_INT_DIR = Path("/Users/chakrivijayarao/Desktop/MECH-INT")
+# Fixed post-final-audit: HARP_DIR/MECH_INT_DIR were hardcoded to
+# personal absolute paths for two sibling projects, but were dead code --
+# unused anywhere else in this file (the GPT-2 117M "known_best_auroc"
+# value is a hand-transcribed constant in results/logs/01_fisher_analysis.json,
+# not loaded from either directory at runtime). Removed rather than left
+# as unused, misleading placeholders implying a live dependency that
+# does not exist in this script.
 
 # LLM-as-Judge labels (from Exp 07) override ROUGE labels if available
 JUDGE_LABELS_PATH = RESULTS_DIR / "07_judge_labels.npy"

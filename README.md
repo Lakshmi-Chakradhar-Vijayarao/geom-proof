@@ -1,3 +1,9 @@
+> **Status (October 2026): the results in this README are superseded.**
+> This README describes the project's original findings. A later audit under one matched pipeline found that the Fisher bound AUROC ≤ Φ(√(J/2)) is never violated across 91+ layer–model pairs, but over-predicts probe AUROC by 0.29–0.41, and that most of the gap is estimator bias: on random labels the estimator still "certifies" 0.87–0.94. The earlier "within 0.93%" and R² = 0.9996 results below came from a derivation error and a small-sample artefact.
+> Current paper: *A Loose Ceiling, Not a Certificate: Auditing Fisher-Separability Bounds on Hallucination Detectability* ([`paper/main.tex`](paper/main.tex)). The original text is kept below for the record.
+
+---
+
 # Can You Prove a Hallucination Detector Will Work Before Training It?
 ## GEOM-PROOF — Geometric Certificates for Hallucination Governance
 

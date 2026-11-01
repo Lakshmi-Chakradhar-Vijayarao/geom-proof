@@ -200,12 +200,14 @@ Every GEOM-PROOF finding mandates specific GUARDIAN design choices:
 
 ## What Holds Up vs What Needs Qualification
 
+*Original table, with statuses updated in October 2026.*
+
 | Claim | Status | Evidence |
 |-------|--------|---------|
-| Fisher J predicts AUROC within 1.5% (mean) | ✅ Solid | Exp 01, 06: mean 0.93%, max 2.7%, across all layers/models |
+| Fisher J predicts AUROC within 1.5% (mean) | ❌ Retracted (Oct 2026) | The 0.93% / 2.7% figures came from a derivation error (Φ(√J/2) instead of Φ(√(J/2))). Under one matched pipeline the bound over-predicts probe AUROC by 0.32–0.41; see the status note above |
 | Hallucination detectable at >50% depth (transformers) | ✅ Solid | Exp 05: both working models peak in upper half |
-| Within-family AUROC scales log-linearly with params | ✅ Solid | Exp 11: R²=0.9996, 3 Qwen models same setup |
-| SW₂ correlates better with AUROC than Fisher | ✅ Solid | Exp 08: Spearman 0.821 vs 0.458 |
+| Within-family AUROC scales log-linearly with params | ❌ Retracted (Oct 2026) | Exp 11's R²=0.9996 was a small-sample artefact (3 models) |
+| SW₂ correlates better with AUROC than Fisher | ⚠️ Withdrawn (Oct 2026) | Exp 08 rests on n=2 models; not supported by the later audit |
 | Conformal guarantee holds at α* = 0.07 | ✅ Solid | Exp 10: empirical rate 6.05%, acceptance 55.8% |
 | Depth universality claim (89% holds everywhere) | ❌ Refuted | Exp 05: GPT-2M 33%, Qwen 100%, Mamba 4% |
 | Conformal guarantee holds OOD | ❌ Breaks | TruthfulQA OOD AUROC = 0.485 — calibration collapses |

@@ -24,6 +24,15 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+st.warning(
+    "**Status (October 2026): the results in this demo are superseded.** "
+    "A later audit found the Fisher bound AUROC ≤ Φ(√(J/2)) is never violated but over-predicts "
+    "probe AUROC by 0.32–0.41, mostly from estimator bias. The '0.93% / 2.7% error' and "
+    "'R² = 0.9996' figures shown below came from a derivation error and a small-sample artefact. "
+    "Current paper: *A Loose Ceiling, Not a Certificate* — "
+    "https://doi.org/10.5281/zenodo.23625498"
+)
+
 # ── Shared style ───────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
